@@ -57,7 +57,7 @@ export default function Layout({ children }) {
       <footer className='site-footer'>
         <div className='container footer-grid'>
           <div>
-            <img src='/logo-az.png' alt='AZ Audio Solutions logo' className='footer-logo' />
+            <img src='/logo-az-transparent.png' alt='AZ Audio Solutions logo' className='footer-logo' />
             <p className='footer-copy'>
               Professional audio solutions for masjids, commercial spaces, homes, and events.
             </p>

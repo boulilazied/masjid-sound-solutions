@@ -1,0 +1,8 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 520 260'>
+  <defs><linearGradient id='gold' x1='0' y1='0' x2='1' y2='1'><stop stop-color='#f1c86a'/><stop offset='1' stop-color='#b8860b'/></linearGradient><linearGradient id='bg' x1='0' y1='0' x2='1' y2='1'><stop stop-color='#ffffff'/><stop offset='1' stop-color='#fbf7ee'/></linearGradient></defs>
+  <rect width='520' height='260' rx='26' fill='url(#bg)'/>
+  <rect x='88' y='48' width='48' height='170' rx='22' fill='#222831'/><rect x='384' y='48' width='48' height='170' rx='22' fill='#222831'/>
+  <g fill='#fff'><circle cx='112' cy='78' r='5'/><circle cx='112' cy='110' r='5'/><circle cx='112' cy='142' r='5'/><circle cx='112' cy='174' r='5'/><circle cx='408' cy='78' r='5'/><circle cx='408' cy='110' r='5'/><circle cx='408' cy='142' r='5'/><circle cx='408' cy='174' r='5'/></g>
+  <path d='M170 168c55-58 125-58 180 0' stroke='url(#gold)' stroke-width='10' fill='none' stroke-linecap='round'/>
+  <text x='260' y='230' text-anchor='middle' font-family='Arial' font-weight='800' font-size='22' fill='#1f2937'>Column + distributed speakers</text>
+</svg>

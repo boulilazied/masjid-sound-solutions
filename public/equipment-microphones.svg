@@ -1,0 +1,7 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 520 260'>
+  <defs><linearGradient id='gold' x1='0' y1='0' x2='1' y2='1'><stop stop-color='#f1c86a'/><stop offset='1' stop-color='#b8860b'/></linearGradient><linearGradient id='bg' x1='0' y1='0' x2='1' y2='1'><stop stop-color='#ffffff'/><stop offset='1' stop-color='#fbf7ee'/></linearGradient></defs>
+  <rect width='520' height='260' rx='26' fill='url(#bg)'/>
+  <path d='M150 190V88c0-26 21-47 47-47h20' stroke='#222831' stroke-width='10' fill='none' stroke-linecap='round'/><circle cx='220' cy='42' r='20' fill='url(#gold)'/>
+  <rect x='312' y='64' width='56' height='120' rx='28' fill='#222831'/><rect x='330' y='184' width='20' height='38' rx='10' fill='#222831'/><path d='M292 124c0 46 39 82 48 82s48-36 48-82' stroke='url(#gold)' stroke-width='8' fill='none' stroke-linecap='round'/>
+  <text x='260' y='238' text-anchor='middle' font-family='Arial' font-weight='800' font-size='22' fill='#1f2937'>Gooseneck + wireless microphones</text>
+</svg>

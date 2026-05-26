@@ -26,3 +26,13 @@ What happens:
 Production note:
 - This backend stores submissions locally in JSON.
 - For public deployment, you may later want to connect it to email, MongoDB, or another database.
+
+
+Latest update:
+- Kept the 4-division website architecture.
+- Updated only the Masjid Sound Solutions page with a premium black/gold landing-page experience.
+- Added Imam & Masjid Team control section near the top.
+- Added mobile/tablet zone volume control concept.
+- Added USB recording concept for salat, khutba, lessons, and events.
+- Removed public pricing from the Masjid division.
+- Preserved homepage division structure and navigation.
