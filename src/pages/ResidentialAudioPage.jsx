@@ -1,27 +1,51 @@
-import DivisionPage from '../components/DivisionPage'
+import StandardDivisionPage from '../components/StandardDivisionPage'
 
-const divisions = [
+const iconPath = 'm2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25'
+
+const services = [
   {
-    title: 'Residential Audio',
-    subtitle: 'Clean home audio systems designed to fit your space.',
-    logo: '/logo-az.png',
-    points: [
-      'In-ceiling and in-wall speaker installation',
-      'Media room and family room sound systems',
-      'Multi-room home audio',
-      'Smart audio control integration',
-      'Clean wiring, discreet installation, and practical training'
-    ]
+    title: 'In-Ceiling & In-Wall Speakers',
+    text: 'Flush-mounted speakers that blend into your home while delivering clear, natural sound in every room.'
+  },
+  {
+    title: 'Media Room & Home Theater',
+    text: 'Surround sound systems, subwoofer placement, and room calibration for an immersive movie and music experience.'
+  },
+  {
+    title: 'Outdoor Audio',
+    text: 'Weather-resistant speakers for patios, pools, and gardens — with the same quality sound you expect indoors.'
+  },
+  {
+    title: 'Whole-Home Multi-Room Audio',
+    text: 'Stream music everywhere or independently per room, controlled from your phone, tablet, or a wall panel.'
+  },
+  {
+    title: 'Smart Home Integration',
+    text: 'Connects with your existing smart home ecosystem for voice control, automation, and unified scene management.'
+  },
+  {
+    title: 'Clean Installation & Calibration',
+    text: 'No exposed wiring, professional-grade connections, and acoustic calibration tuned to your room\'s specific dimensions.'
   }
+]
+
+const whyUs = [
+  'No visible wiring — clean, discreet installation',
+  'Calibrated for your room\'s acoustics',
+  'Easy smart control or simple wall panels',
+  'Minimal disruption during the installation process',
+  'Post-install walkthrough and ongoing support'
 ]
 
 export default function ResidentialAudioPage() {
   return (
-    <DivisionPage
+    <StandardDivisionPage
       eyebrow='AZ Audio Division'
       title='Residential Audio'
-      text='Home audio installations that deliver clean sound, simple control, and a professional finish.'
-      divisions={divisions}
+      text='Home audio installations that deliver clean, natural sound with discreet installation and simple everyday control.'
+      iconPath={iconPath}
+      services={services}
+      whyUs={whyUs}
     />
   )
 }

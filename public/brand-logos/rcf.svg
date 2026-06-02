@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 92" role="img" aria-label="RCF logo">
-  <rect x="2" y="2" width="256" height="88" rx="18" fill="#ffffff" stroke="#e4d6bd"/>
-  <text x="130" y="56" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="900" letter-spacing="3" fill="#1b1b1b">RCF</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 64" role="img" aria-label="RCF">
+  <text x="80" y="32" text-anchor="middle" dominant-baseline="middle"
+    font-family="'Arial Black', Arial, Helvetica, sans-serif"
+    font-size="40" font-weight="900" fill="#E10016" letter-spacing="6">RCF</text>
 </svg>

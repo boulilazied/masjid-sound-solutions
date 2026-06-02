@@ -64,12 +64,12 @@ export default function QuoteForm() {
         </label>
 
         <label>
-          <span>Masjid / Organization</span>
+          <span>Organization / Masjid</span>
           <input
             name='masjid'
             value={form.masjid}
             onChange={handleChange}
-            placeholder='Masjid name'
+            placeholder='Organization or masjid name'
           />
         </label>
 
@@ -111,9 +111,12 @@ export default function QuoteForm() {
             <option value=''>Select one</option>
             <option value='New installation'>New installation</option>
             <option value='Upgrade existing system'>Upgrade existing system</option>
-            <option value='Echo and clarity issues'>Echo and clarity issues</option>
-            <option value='Streaming / recording'>Streaming / recording</option>
-            <option value='Maintenance support'>Maintenance support</option>
+            <option value='Masjid audio design'>Masjid audio design</option>
+            <option value='Commercial audio system'>Commercial audio system</option>
+            <option value='Residential / home audio'>Residential / home audio</option>
+            <option value='Event audio rental'>Event audio rental</option>
+            <option value='Streaming / recording setup'>Streaming / recording setup</option>
+            <option value='Troubleshooting / support'>Troubleshooting / support</option>
           </select>
         </label>
       </div>
@@ -125,7 +128,7 @@ export default function QuoteForm() {
           value={form.message}
           onChange={handleChange}
           rows='6'
-          placeholder='Tell us about the prayer hall, current issues, and what you would like to improve.'
+          placeholder='Tell us about your space, current issues, and what you would like to improve.'
           required
         />
       </label>
