@@ -15,12 +15,14 @@
 |---|---|
 | Frontend | React 18 SPA, React Router DOM v6 |
 | Build | Vite 5 |
-| Backend | Express 4 |
+| Backend (local) | Express 4 (`server/index.js`) — dev only |
+| Backend (production) | Vercel serverless function (`api/quote.js`) |
+| Email | `resend` package — sends quote submissions to contact@azaudios.com |
 | Icons | `lucide-react` — used across all pages; component refs stored in data arrays |
 | Dev runner | `concurrently` (client + server in parallel) |
 | Server hot-reload | `nodemon` |
 | CORS | `cors` package, env-var allowlist (`ALLOWED_ORIGINS`) |
-| Form storage | `server/submissions/quote-requests.json` (append-only local JSON) |
+| Form storage | `server/submissions/quote-requests.json` — local dev only, gitignored |
 
 **Dev commands:**
 - `npm run dev` — Vite (port 5173) + Express (port 3001)
@@ -28,6 +30,8 @@
 - `npm run preview` — preview build (port 4173)
 
 **Vite proxy:** `/api` → `http://localhost:3001` in dev.
+
+**Production form flow:** Browser → `/api/quote` → Vercel serverless (`api/quote.js`) → Resend email to contact@azaudios.com. Requires `RESEND_API_KEY` env var in Vercel dashboard.
 
 **CORS defaults:** `localhost:5173` and `localhost:4173`. Override with `ALLOWED_ORIGINS=https://yourdomain.com` in production.
 
@@ -54,29 +58,32 @@
 ## File structure
 
 ```
+api/
+  quote.js                        — Vercel serverless function; validates fields, sends email via Resend
+
 src/
   App.jsx                         — router root, NotFound component
-  styles.css                      — single CSS file (~2,950 lines)
+  styles.css                      — single CSS file (~3,250 lines)
   pages/
     HomePage.jsx                  — hero, stats strip, divisions grid, how-it-works, credentials, commitments, CTA band
     ServicesPage.jsx              — all four divisions via <DivisionPage>
-    MasjidSoundSolutionsPage.jsx  — rich standalone page, custom CSS, lucide-react icons
+    MasjidSoundSolutionsPage.jsx  — rich 13-section standalone page, lucide-react icons
     CommercialAudioPage.jsx       — full content via <StandardDivisionPage>
     ResidentialAudioPage.jsx      — full content via <StandardDivisionPage>
-    EventRentalServicesPage.jsx   — full content via <StandardDivisionPage>
+    EventRentalServicesPage.jsx   — rich 9-section standalone page (matches masjid page quality)
     AboutPage.jsx                 — company overview, all 4 divisions grid, values panel
     ContactPage.jsx               — SectionHeading + QuoteForm + contact card
   components/
     Layout.jsx                    — header (nav + hamburger menu), <main>, footer
-    DivisionPage.jsx              — used only by ServicesPage; supports icon (SVG path) or logo (img)
+    DivisionPage.jsx              — used only by ServicesPage; supports Icon (lucide) or logo (img)
     StandardDivisionPage.jsx      — reusable full-page template for Commercial/Residential/Event
     SectionHeading.jsx            — eyebrow + h2 + text, optional centered prop
-    QuoteForm.jsx                 — controlled form, POSTs to /api/quote
+    QuoteForm.jsx                 — controlled form, POSTs to /api/quote; graceful JSON-parse error handling
 
 server/
-  index.js                        — Express server, /api/health, /api/quote
+  index.js                        — Express server (local dev only), /api/health, /api/quote
   submissions/
-    quote-requests.json           — form submission storage
+    quote-requests.json           — local dev form storage (gitignored — may contain customer data)
 
 public/
   logo-az.png                     — main AZ Audio logo (wide)
@@ -191,8 +198,23 @@ Required: `name`, `email`, `message`. All others optional.
 | MasjidSoundSolutionsPage | **Complete** — 13-section standalone page: hero, key benefits strip, why-grid, mic section, zone layout, zone control options, rack, system architecture, signal flow, livestreaming & recording (with PTZ camera), process timeline, brands, CTA |
 | CommercialAudioPage | **Complete** — full content via `StandardDivisionPage` (6 services, 5 why-us points) |
 | ResidentialAudioPage | **Complete** — full content via `StandardDivisionPage` (6 services, 5 why-us points) |
-| EventRentalServicesPage | **Complete** — full content via `StandardDivisionPage` (6 services, 5 why-us points) |
+| EventRentalServicesPage | **Complete** — rich 9-section standalone page (hero, benefits strip, equipment grid, rental mockup card, event types, includes, 6-step process, brands, CTA) |
 | AboutPage | **Complete** — company overview, all 4 division cards, values checklist, dark CTA band |
+
+---
+
+## Deployment
+
+**Platform:** Vercel  
+**Deployed repo:** github.com/boulilazied/masjid-sound-solutions  
+**SPA routing:** `vercel.json` uses negative-lookahead rewrite `/((?!api/).*)` → `/index.html` so `/api/*` reaches the serverless function.
+
+**Vercel env vars required:**
+- `RESEND_API_KEY` — Resend API key for quote form emails (get from resend.com)
+
+**Quote form flow (production):**  
+Browser POST `/api/quote` → `api/quote.js` serverless function → Resend email to contact@azaudios.com  
+`from: onboarding@resend.dev` (change to `quotes@azaudios.com` once azaudios.com is verified in Resend)
 
 ---
 
@@ -200,5 +222,6 @@ Required: `name`, `email`, `message`. All others optional.
 
 - The `masjid` field is used in QuoteForm state, the POST body, and the server record. Renaming it to `organization` requires changing all three.
 - `public/masjid-real/` contains older layout PNGs from a case study — may or may not be actively used.
-- No admin view for form submissions — they are stored raw in `server/submissions/quote-requests.json`.
+- Local form submissions write to `server/submissions/quote-requests.json` (gitignored). Production submissions go to email via Resend — no local file is written on Vercel.
+- `api/quote.js` has no persistent storage — if email sending fails silently, the submission is lost. Add a database if submission logging is needed.
 - `nodemon --watch server` is intentional — do not remove the flag or nodemon will watch the whole project and restart on every file save.
