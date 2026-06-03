@@ -3091,3 +3091,269 @@ img {
     display: none;
   }
 }
+
+/* ── Event Rental Services Page ──────────────────────────────────── */
+
+.event-rental-page {
+  overflow-x: hidden;
+}
+
+/* Hero */
+.rental-hero {
+  background: linear-gradient(135deg, #0b1220 0%, #0f1f3d 55%, #1a1228 100%);
+  padding: 6rem 0 5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.rental-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% -20%, rgba(184, 134, 11, 0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.rental-hero-inner {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  text-align: center;
+}
+
+.rental-hero-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  background: rgba(184, 134, 11, 0.1);
+  border: 1.5px solid rgba(184, 134, 11, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  margin-bottom: 0.25rem;
+}
+
+.rental-hero h1 {
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  margin: 0;
+}
+
+.rental-hero p {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.7;
+  max-width: 580px;
+  margin: 0;
+}
+
+/* Process timeline — 6 steps override */
+.event-rental-page .process-timeline {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+/* Equipment card mockup */
+.rental-equipment-card {
+  background: #0f172a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.rental-eq-header {
+  margin-bottom: 0.25rem;
+}
+
+.rental-eq-badge {
+  display: inline-flex;
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: rgba(184, 134, 11, 0.1);
+  border: 1px solid rgba(184, 134, 11, 0.25);
+  padding: 0.25rem 0.8rem;
+  border-radius: 999px;
+}
+
+.rental-eq-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.65rem 0.9rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.rental-eq-row svg {
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.rental-eq-row span:nth-child(2) {
+  flex: 1;
+}
+
+.rental-eq-spec {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.rental-eq-note {
+  text-align: center;
+  font-size: 0.7rem;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.2);
+  padding-top: 0.25rem;
+}
+
+/* Event types grid */
+.rental-event-types-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+
+.rental-event-type-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 1.75rem 1.5rem;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.rental-event-type-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-3px);
+}
+
+.rental-event-type-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--primary-soft);
+  border: 1px solid rgba(184, 134, 11, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.rental-event-type-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 0.5rem;
+}
+
+.rental-event-type-card p {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* What's included — dark section */
+.rental-includes-section {
+  background: var(--cta-bg);
+  padding: 5rem 0;
+}
+
+.rental-includes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.rental-includes-heading .real-eyebrow {
+  color: var(--primary);
+}
+
+.rental-includes-heading h2 {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.03em;
+  margin: 0.5rem 0 1rem;
+  line-height: 1.1;
+}
+
+.rental-includes-heading p {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.rental-includes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.rental-includes-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.7rem 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.rental-includes-item svg {
+  color: var(--primary);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* Responsive */
+@media (max-width: 1080px) {
+  .event-rental-page .process-timeline {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .rental-event-types-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .rental-hero {
+    padding: 4rem 0 3rem;
+  }
+  .rental-hero h1 {
+    font-size: 2.2rem;
+  }
+  .event-rental-page .process-timeline {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .rental-event-types-grid {
+    grid-template-columns: 1fr;
+  }
+  .rental-includes-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
