@@ -430,11 +430,11 @@ export default function MasjidSoundSolutionsPage() {
             <h2>Reach your community beyond the prayer hall — with audio and video.</h2>
             <p>
               Your masjid audio system feeds a clean, balanced signal directly to a stream encoder.
-              Pair it with a PTZ camera and your community gets a complete, professional broadcast —
+              Pair it with a professional motorized camera and your community gets a complete broadcast —
               no second microphone setup, no degraded quality, no separate video crew.
             </p>
             <ul className='real-check-list'>
-              <li>PTZ camera covers the imam, mimbar, and prayer hall from a single mount point</li>
+              <li>Motorized camera covers the imam, mimbar, and prayer hall from a single mount point</li>
               <li>Remote pan, tilt, and zoom — no operator needed during salat</li>
               <li>Stream to YouTube, Facebook Live, or any RTMP platform</li>
               <li>Dedicated audio stream output — independent of room speaker levels</li>
@@ -448,18 +448,17 @@ export default function MasjidSoundSolutionsPage() {
               <span>LIVE</span>
             </div>
             <div className='stream-camera-preview'>
-              <div className='stream-camera-preview-inner'>
-                <Camera size={28} strokeWidth={1.25} />
-                <span>PTZ Camera</span>
+              <div className='stream-camera-photo-wrap'>
+                <img src='/ptz-camera.png' alt='PTZ camera for masjid livestreaming' className='stream-camera-img' />
               </div>
-              <div className='stream-camera-meta'>
+              <div className='stream-camera-caption'>
+                <strong>Directly connected to your sound system</strong>
                 <span className='stream-camera-badge'>1080p HD</span>
-                <span className='stream-camera-badge stream-camera-badge-ptz'>PTZ</span>
               </div>
             </div>
             <div className='stream-output-list'>
               {[
-                { Icon: Camera,  label: 'PTZ Camera Feed', active: true  },
+                { Icon: Camera,  label: 'Camera Feed',     active: true  },
                 { Icon: Globe,   label: 'YouTube Live',    active: true  },
                 { Icon: Globe,   label: 'Facebook Live',   active: true  },
                 { Icon: Video,   label: 'Local Recording', active: true  },

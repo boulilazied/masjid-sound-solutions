@@ -16,7 +16,7 @@
 | Frontend | React 18 SPA, React Router DOM v6 |
 | Build | Vite 5 |
 | Backend | Express 4 |
-| Icons | `lucide-react` — used in MasjidSoundSolutionsPage and StandardDivisionPage |
+| Icons | `lucide-react` — used across all pages; component refs stored in data arrays |
 | Dev runner | `concurrently` (client + server in parallel) |
 | Server hot-reload | `nodemon` |
 | CORS | `cors` package, env-var allowlist (`ALLOWED_ORIGINS`) |
@@ -56,9 +56,9 @@
 ```
 src/
   App.jsx                         — router root, NotFound component
-  styles.css                      — single CSS file (~2,159 lines)
+  styles.css                      — single CSS file (~2,950 lines)
   pages/
-    HomePage.jsx                  — hero, divisions grid, how-it-works, CTA band
+    HomePage.jsx                  — hero, stats strip, divisions grid, how-it-works, credentials, commitments, CTA band
     ServicesPage.jsx              — all four divisions via <DivisionPage>
     MasjidSoundSolutionsPage.jsx  — rich standalone page, custom CSS, lucide-react icons
     CommercialAudioPage.jsx       — full content via <StandardDivisionPage>
@@ -87,6 +87,7 @@ public/
   masjid-khutba-mics-new.png      — microphone section image
   masjid-rack-room-new.png        — equipment rack section image
   masjid-multi-zone-layout.png    — zone layout diagram
+  ptz-camera.png                  — PTZ camera product photo (Livestreaming & Recording section)
   brand-logos/                    — SVG logos for the partner brands section
     jbl.svg                       — real Simple Icons path (actual JBL mark)
     sennheiser.svg                — real Simple Icons path (actual Sennheiser mark)
@@ -131,14 +132,16 @@ Single `:root` block with gold/amber brand tokens:
 **MasjidSoundSolutionsPage** uses `.masjid-clean-page` as its root wrapper (not `<main>`, to avoid nesting inside Layout's `<main>`). It has its own design tokens defined inside that block: `--real-ink`, `--real-gold`, `--real-gold-dark: #9d7430`, `--real-border`, etc.
 
 Key component classes in the Masjid page:
+- `.masjid-benefits-strip` / `.masjid-benefits-inner` / `.masjid-benefits-tag` / `.masjid-benefits-list` / `.masjid-benefit-item` — dark navy key benefits bar immediately after hero (6 items: sound, control, zones, reliability, scalability, quality).
 - `.why-grid` / `.why-card` / `.why-icon` — 6-card grid for the "Why Specialized" section (3-col → 2-col → 1-col at breakpoints). Cards use **lucide-react** components (not inline SVG paths).
 - `.brand-grid-clean` / `.clean-brand-tile` — 4-col partner brand logo grid using SVG files from `public/brand-logos/`.
 - `.process-timeline` / `.process-step` / `.process-step-badge` / `.process-step-vline` / `.process-step-circle` / `.process-step-body` / `.process-commitment` — 7-step horizontal timeline with numbered badges, lucide icon circles, and a gold connecting line.
 - `.zone-control-grid` / `.zone-option-card` / `.zone-option-header` / `.phone-mockup` / `.phone-zone-row` / `.phone-nav` / `.wall-mockup` / `.wall-zone-led` / `.wall-knob` / `.wall-mute-btn` / `.zone-option-features` — two-card zone control options section (phone mockup + wall panel mockup).
-- `.signal-flow-diagram` / `.signal-sources` / `.signal-zones-output` / `.signal-node` / `.signal-node-icon` / `.signal-arrow` / `.signal-arrow-col` / `.signal-zone-badge` / `.signal-zone-output-item` / `.signal-col-label` — horizontal audio signal flow diagram (Sources → Mixer → DSP → Amplifier → 4 Zones).
-- `.stream-mockup-card` / `.stream-live-badge` / `.stream-live-dot` / `.stream-output-list` / `.stream-output-row` / `.stream-status-on` / `.stream-status-off` / `.stream-audio-wrap` / `.stream-audio-bars` / `.stream-audio-bar` — dark broadcast panel mockup for the Livestreaming & Recording section (section 8, after signal flow).
+- `.signal-flow-diagram` / `.signal-sources` / `.signal-zones-output` / `.signal-node` / `.signal-node-icon` / `.signal-arrow` / `.signal-arrow-col` / `.signal-zone-badge` / `.signal-zone-output-item` / `.signal-col-label` — horizontal audio signal flow diagram (Sources → Mixer → DSP → Amplifier → Zones).
+- `.sys-arch-grid` / `.sys-arch-components` / `.sys-arch-component` / `.sys-arch-badge` / `.sys-arch-comp-icon` / `.sys-rack-visual` / `.sys-rack-frame` / `.sys-rack-unit` / `.sys-rack-amp` / `.sys-rack-amp-zones` / `.sys-rack-amp-zone-more` / `.sys-arch-inputs` / `.sys-input-row` / `.sys-input-icon` / `.sys-input-arrow` — 3-column system architecture section (component list + CSS rack visual + audio inputs). Amplifier shown as multi-zone (not fixed at 4).
+- `.stream-mockup-card` / `.stream-live-badge` / `.stream-live-dot` / `.stream-output-list` / `.stream-output-row` / `.stream-status-on` / `.stream-status-off` / `.stream-audio-wrap` / `.stream-audio-bars` / `.stream-audio-bar` / `.stream-camera-preview` / `.stream-camera-photo-wrap` / `.stream-camera-img` / `.stream-camera-caption` / `.stream-camera-badge` — dark broadcast panel mockup for the Livestreaming & Recording section; includes PTZ camera photo (`ptz-camera.png`) in a white inset card above the output rows.
 
-**MasjidSoundSolutionsPage section order (11 sections):** Hero → Why Specialized → Microphones → Multi-zone layout → Zone Control Options → Rack & Infrastructure → Audio Signal Flow → Livestreaming & Recording → Process Timeline → Partner Brands → Final CTA
+**MasjidSoundSolutionsPage section order (13 sections):** Hero → Key Benefits Strip → Why Specialized → Microphones → Multi-zone layout → Zone Control Options → Rack & Infrastructure → System Architecture Overview → Audio Signal Flow → Livestreaming & Recording → Process Timeline → Partner Brands → Final CTA
 
 **StandardDivisionPage** classes:
 - `.std-hero` / `.std-hero-inner` / `.std-hero-icon` — dark gradient hero with gold icon box
@@ -185,7 +188,7 @@ Required: `name`, `email`, `message`. All others optional.
 
 | Page | Status |
 |---|---|
-| MasjidSoundSolutionsPage | **Complete** — rich standalone page: hero, why-grid, mic section, zone layout, zone control options, signal flow, rack, process timeline, brands, CTA |
+| MasjidSoundSolutionsPage | **Complete** — 13-section standalone page: hero, key benefits strip, why-grid, mic section, zone layout, zone control options, rack, system architecture, signal flow, livestreaming & recording (with PTZ camera), process timeline, brands, CTA |
 | CommercialAudioPage | **Complete** — full content via `StandardDivisionPage` (6 services, 5 why-us points) |
 | ResidentialAudioPage | **Complete** — full content via `StandardDivisionPage` (6 services, 5 why-us points) |
 | EventRentalServicesPage | **Complete** — full content via `StandardDivisionPage` (6 services, 5 why-us points) |
