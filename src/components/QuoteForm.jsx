@@ -34,10 +34,15 @@ export default function QuoteForm() {
         body: JSON.stringify(form)
       })
 
-      const data = await response.json()
+      let data
+      try {
+        data = await response.json()
+      } catch {
+        throw new Error('Server did not respond. Please try WhatsApp or email us directly.')
+      }
 
       if (!response.ok || !data.ok) {
-        throw new Error(data.error || 'Something went wrong.')
+        throw new Error(data.error || 'Something went wrong. Please try again.')
       }
 
       setStatus({
