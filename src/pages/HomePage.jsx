@@ -1,52 +1,70 @@
 import { Link } from 'react-router-dom'
+import { Volume2, Building2, Home, Mic2, ClipboardCheck, Receipt, Wrench, Headphones, GraduationCap, BookOpen } from 'lucide-react'
 import SectionHeading from '../components/SectionHeading'
-
-const ICON_MASJID = 'M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z'
-const ICON_COMMERCIAL = 'M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Z'
-const ICON_RESIDENTIAL = 'm2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25'
-const ICON_EVENT = 'M12 18.75a6 6 0 0 0 6-6v-1.5m-6 7.5a6 6 0 0 1-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 0 1-3-3V4.5a3 3 0 1 1 6 0v8.25a3 3 0 0 1-3 3Z'
 
 const divisions = [
   {
     title: 'Masjid Sound Solutions',
     path: '/masjid-sound-solutions',
-    iconPath: ICON_MASJID,
+    Icon: Volume2,
     text: 'Specialized masjid audio design, khutba intelligibility improvement, speaker coverage optimization, DSP tuning, and volunteer-friendly controls.'
   },
   {
     title: 'Commercial Audio',
     path: '/commercial-audio',
-    iconPath: ICON_COMMERCIAL,
+    Icon: Building2,
     text: 'Professional audio for offices, schools, retail, community centers, paging systems, background music, and conference spaces.'
   },
   {
     title: 'Residential Audio',
     path: '/residential-audio',
-    iconPath: ICON_RESIDENTIAL,
+    Icon: Home,
     text: 'Clean home audio installations, in-ceiling speakers, media room sound, multi-room audio, and smart control integration.'
   },
   {
     title: 'Event Rental Services',
     path: '/event-rental-services',
-    iconPath: ICON_EVENT,
+    Icon: Mic2,
     text: 'Portable PA systems, wireless microphones, mixers, speakers, and temporary audio support for events and gatherings.'
   }
 ]
 
-const steps = [
-  'Free consultation and needs assessment',
-  'System design and clear proposal',
-  'Professional installation or event setup',
-  'Final tuning, training, and follow-up support'
+const stats = [
+  { num: '4',        label: 'Specialized Divisions' },
+  { num: 'Free',     label: 'Initial Consultation' },
+  { num: 'USA & CA', label: 'Service Area' },
+  { num: '100%',     label: 'Transparent Pricing' },
 ]
 
-function DivisionIcon({ path }) {
-  return (
-    <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor'>
-      <path strokeLinecap='round' strokeLinejoin='round' d={path} />
-    </svg>
-  )
-}
+const steps = [
+  { num: '01', title: 'Consultation',      text: 'Site visit or call to assess your space, needs, and existing setup.' },
+  { num: '02', title: 'Design & Proposal', text: 'Custom system design with clear scope, equipment list, and transparent pricing.' },
+  { num: '03', title: 'Installation',      text: 'Professional installation with minimal disruption and clean cable management.' },
+  { num: '04', title: 'Tuning & Support',  text: 'DSP tuning, staff training, and ongoing support after handover.' },
+]
+
+const commitments = [
+  {
+    Icon: ClipboardCheck,
+    title: 'Honest Assessment',
+    text: 'We assess your real needs before recommending anything. No overselling, no equipment you do not need.',
+  },
+  {
+    Icon: Receipt,
+    title: 'Transparent Pricing',
+    text: 'Every proposal is itemized with a clear equipment list and scope. You know exactly what you are paying for.',
+  },
+  {
+    Icon: Wrench,
+    title: 'Clean Installation',
+    text: 'Professional cable management, organized rack build, and a system that looks as good as it sounds.',
+  },
+  {
+    Icon: Headphones,
+    title: 'Support After Handover',
+    text: 'We do not disappear after installation. Remote and on-site support is available whenever you need it.',
+  },
+]
 
 export default function HomePage() {
   return (
@@ -61,14 +79,9 @@ export default function HomePage() {
               We design, install, tune, and support reliable systems that sound clear and are easy
               to use.
             </p>
-
             <div className='hero-actions'>
-              <Link to='/contact' className='button button-primary'>
-                Request a Quote
-              </Link>
-              <a href='#divisions' className='button button-secondary'>
-                View Divisions
-              </a>
+              <Link to='/contact' className='button button-primary'>Request a Quote</Link>
+              <a href='#divisions' className='button button-secondary'>View Divisions</a>
             </div>
           </div>
 
@@ -78,7 +91,7 @@ export default function HomePage() {
                 {divisions.map((d) => (
                   <Link to={d.path} key={d.title} className='hero-div-chip'>
                     <div className='hero-div-chip-icon'>
-                      <DivisionIcon path={d.iconPath} />
+                      <d.Icon size={18} strokeWidth={1.5} />
                     </div>
                     <span>{d.title}</span>
                   </Link>
@@ -93,6 +106,22 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className='hp-stats-strip'>
+        <div className='container'>
+          <div className='hp-stats-row'>
+            {stats.map((s, i) => (
+              <div key={s.num} className='hp-stat-group'>
+                <div className='hp-stat'>
+                  <span className='hp-stat-num'>{s.num}</span>
+                  <span className='hp-stat-label'>{s.label}</span>
+                </div>
+                {i < stats.length - 1 && <div className='hp-stat-divider' />}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className='section surface-muted' id='divisions'>
         <div className='container'>
           <SectionHeading
@@ -101,15 +130,15 @@ export default function HomePage() {
             title='Choose the audio service you need'
             text='AZ Audio Solutions is organized into four clear sections so each customer quickly finds the right service.'
           />
-
           <div className='division-tabs'>
             {divisions.map((division) => (
               <Link to={division.path} className='division-tab' key={division.title}>
                 <div className='division-tab-icon'>
-                  <DivisionIcon path={division.iconPath} />
+                  <division.Icon size={26} strokeWidth={1.5} />
                 </div>
                 <h3>{division.title}</h3>
                 <p>{division.text}</p>
+                <span className='division-tab-cta'>Learn more →</span>
               </Link>
             ))}
           </div>
@@ -117,39 +146,79 @@ export default function HomePage() {
       </section>
 
       <section className='section'>
-        <div className='container split-layout'>
-          <div>
-            <SectionHeading
-              eyebrow='How It Works'
-              title='A simple process with professional results'
-              text='We keep the process clear from the first call to final tuning or event delivery.'
-            />
-            <div className='step-list'>
-              {steps.map((step, index) => (
-                <div className='step-card' key={step}>
-                  <div className='step-number'>{index + 1}</div>
-                  <div>{step}</div>
-                </div>
-              ))}
+        <div className='container'>
+          <SectionHeading
+            centered
+            eyebrow='How It Works'
+            title='From first call to final tuning'
+            text='A clear, predictable four-step process on every project — no surprises.'
+          />
+          <div className='hp-steps-row'>
+            {steps.map((step) => (
+              <div key={step.num} className='hp-step'>
+                <div className='hp-step-num'>{step.num}</div>
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className='hp-credentials'>
+        <div className='container'>
+          <div className='hp-cred-header'>
+            <div className='eyebrow eyebrow-light'>Our Expertise</div>
+            <h2>Two disciplines most AV companies don't have in-house.</h2>
+            <p>Engineering precision and deep masjid knowledge — both on every project.</p>
+          </div>
+          <div className='hp-cred-grid'>
+            <div className='hp-cred-card'>
+              <div className='hp-cred-icon'>
+                <GraduationCap size={28} strokeWidth={1.5} />
+              </div>
+              <div className='hp-cred-tag'>Signal Treatment Engineer</div>
+              <h3>Master's Degree in Signal Processing</h3>
+              <p>
+                Our lead engineer holds a master's degree in signal treatment. DSP configuration,
+                room analysis, speaker placement, and acoustic tuning are backed by technical
+                engineering — not trial and error.
+              </p>
+            </div>
+            <div className='hp-cred-card'>
+              <div className='hp-cred-icon'>
+                <BookOpen size={28} strokeWidth={1.5} />
+              </div>
+              <div className='hp-cred-tag'>In-House Masjid Expertise</div>
+              <h3>Imam with Deep Prayer Hall Knowledge</h3>
+              <p>
+                Our team includes a practicing imam who understands the real audio needs of khutba,
+                salat, and community events — from the person who actually leads the prayer, not
+                just someone who has measured a room.
+              </p>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className='value-panel'>
-            <div className='eyebrow'>Why Choose Us</div>
-            <h3>Professional audio with practical execution</h3>
-            <p>
-              We focus on clarity, reliability, clean installation, and systems that everyday users
-              can operate confidently.
-            </p>
-            <ul className='check-list'>
-              <li>Clear speech and balanced coverage</li>
-              <li>Reliable equipment and clean cabling</li>
-              <li>DSP tuning and feedback control</li>
-              <li>Solutions for permanent installs and temporary events</li>
-            </ul>
-            <Link to='/contact' className='button button-secondary' style={{ marginTop: '1.5rem', display: 'inline-flex' }}>
-              Start Your Project
-            </Link>
+      <section className='section surface-muted'>
+        <div className='container'>
+          <SectionHeading
+            centered
+            eyebrow='Our Standards'
+            title='What every project includes'
+            text='Clear communication, clean work, and accountability — on every job, regardless of size.'
+          />
+          <div className='hp-commitments'>
+            {commitments.map((c) => (
+              <div key={c.title} className='hp-commitment'>
+                <div className='hp-commitment-icon'>
+                  <c.Icon size={22} strokeWidth={1.5} />
+                </div>
+                <h3>{c.title}</h3>
+                <p>{c.text}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -164,9 +233,7 @@ export default function HomePage() {
               step and the right equipment direction.
             </p>
           </div>
-          <Link to='/contact' className='button button-primary button-light'>
-            Request a Quote
-          </Link>
+          <Link to='/contact' className='button button-primary button-light'>Request a Quote</Link>
         </div>
       </section>
     </>

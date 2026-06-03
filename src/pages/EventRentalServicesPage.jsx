@@ -1,6 +1,5 @@
+import { Mic2 } from 'lucide-react'
 import StandardDivisionPage from '../components/StandardDivisionPage'
-
-const iconPath = 'M12 18.75a6 6 0 0 0 6-6v-1.5m-6 7.5a6 6 0 0 1-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 0 1-3-3V4.5a3 3 0 1 1 6 0v8.25a3 3 0 0 1-3 3Z'
 
 const services = [
   {
@@ -43,7 +42,7 @@ export default function EventRentalServicesPage() {
       eyebrow='AZ Audio Division'
       title='Event Rental Services'
       text='Complete portable audio solutions for masjids, community centers, outdoor events, and private gatherings — delivered, set up, and ready to go.'
-      iconPath={iconPath}
+      Icon={Mic2}
       services={services}
       whyUs={whyUs}
     />

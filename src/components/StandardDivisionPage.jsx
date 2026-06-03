@@ -1,15 +1,13 @@
 import { Link } from 'react-router-dom'
 
-export default function StandardDivisionPage({ eyebrow, title, text, iconPath, services, whyUs }) {
+export default function StandardDivisionPage({ eyebrow, title, text, Icon, services, whyUs }) {
   return (
     <div>
       <section className='std-hero'>
         <div className='container std-hero-inner'>
-          {iconPath && (
+          {Icon && (
             <div className='std-hero-icon'>
-              <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor'>
-                <path strokeLinecap='round' strokeLinejoin='round' d={iconPath} />
-              </svg>
+              <Icon size={36} strokeWidth={1.5} />
             </div>
           )}
           <div className='eyebrow eyebrow-light'>{eyebrow}</div>

@@ -2,8 +2,33 @@ import { Link } from 'react-router-dom'
 import {
   Mic2, AudioWaveform, SlidersHorizontal, Network, TrendingUp, CircleDollarSign,
   PhoneCall, PenLine, ClipboardList, HardHat, Gauge, GraduationCap, ShieldCheck, BadgeCheck,
-  Smartphone, Mic, Music, Zap, Sliders
+  Smartphone, Mic, Music, Zap, Sliders, Globe, Video, Archive, Radio,
+  Volume2, Wifi, Power
 } from 'lucide-react'
+
+const keyBenefits = [
+  { Icon: Volume2,     title: 'Clear & Intelligible Sound',   text: 'Optimal for Khutba, Adhan, Quran & Daily Salah' },
+  { Icon: Smartphone,  title: 'Easy Control',                 text: 'Mobile App & Wall Controller for simple daily operation' },
+  { Icon: Network,     title: 'Independent Zone Management',  text: 'Adjust volume or mute any zone independently' },
+  { Icon: ShieldCheck, title: 'Reliable & Safe',              text: 'Professional 70V system with surge protection' },
+  { Icon: TrendingUp,  title: 'Future Scalable',              text: 'Easy to expand with additional zones or speakers' },
+  { Icon: BadgeCheck,  title: 'Professional Quality',         text: 'Designed for long-term durability and performance' },
+]
+
+const rackComponents = [
+  { n: 1, Icon: Wifi,              title: 'Wireless Microphone System',     desc: 'Imam & Lectern Mic' },
+  { n: 2, Icon: SlidersHorizontal, title: 'Digital Mixer (Integrated)',     desc: 'Audio Mixing & Source Control' },
+  { n: 3, Icon: AudioWaveform,     title: 'Integrated DSP Processor',       desc: 'EQ, Feedback Suppression, Delay, Crossover, Routing' },
+  { n: 4, Icon: Zap,               title: 'Multi-Zone 70V Power Amplifier', desc: 'Independent amplification — zones sized to your layout' },
+  { n: 5, Icon: Power,             title: 'Power Conditioner',              desc: 'Surge Protection & Power Management' },
+]
+
+const audioInputs = [
+  { Icon: Mic,        label: 'Wireless Mic (Imam)' },
+  { Icon: Mic2,       label: 'Lectern Mic' },
+  { Icon: Music,      label: 'Media / Quran Player' },
+  { Icon: Smartphone, label: 'AUX / Mobile Input' },
+]
 
 const processSteps = [
   { n: '1', title: 'Consultation',      text: 'Site visit or remote call to assess your layout, acoustics, congregation size, and existing equipment.', Icon: PhoneCall },
@@ -54,6 +79,27 @@ export default function MasjidSoundSolutionsPage() {
             <div className='real-actions'>
               <Link to='/contact' className='real-button real-button-gold'>Request Consultation</Link>
               <a href='https://wa.me/17248310196' className='real-button real-button-ghost'>WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className='masjid-benefits-strip'>
+        <div className='container'>
+          <div className='masjid-benefits-inner'>
+            <div className='masjid-benefits-tag'>
+              <span>KEY BENEFITS</span>
+            </div>
+            <div className='masjid-benefits-list'>
+              {keyBenefits.map((b) => (
+                <div key={b.title} className='masjid-benefit-item'>
+                  <b.Icon size={22} strokeWidth={1.5} />
+                  <div>
+                    <strong>{b.title}</strong>
+                    <p>{b.text}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -231,6 +277,95 @@ export default function MasjidSoundSolutionsPage() {
         </div>
       </section>
 
+      <section className='clean-section clean-soft'>
+        <div className='container'>
+          <div className='clean-section-intro centered'>
+            <div className='real-eyebrow'>System architecture overview</div>
+            <h2>A centralized system manages all audio processing, mixing, and amplification.</h2>
+            <p>All components mount in a standard 19&quot; rack cabinet. Zones are configured to your masjid layout — not limited to four.</p>
+          </div>
+          <div className='sys-arch-grid'>
+
+            <div className='sys-arch-components'>
+              {rackComponents.map((c) => (
+                <div key={c.title} className='sys-arch-component'>
+                  <div className='sys-arch-badge'>{c.n}</div>
+                  <div className='sys-arch-comp-icon'><c.Icon size={18} strokeWidth={1.5} /></div>
+                  <div>
+                    <strong>{c.title}</strong>
+                    <p>{c.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className='sys-rack-visual'>
+              <div className='sys-rack-frame'>
+                <div className='sys-rack-unit sys-rack-unit-sm'>
+                  <div className='sys-rack-unit-label'>
+                    <Wifi size={10} strokeWidth={1.5} /><span>WIRELESS MICROPHONE RECEIVER</span>
+                  </div>
+                  <div className='sys-rack-channel-display'>CH 12</div>
+                </div>
+                <div className='sys-rack-unit sys-rack-unit-md'>
+                  <div className='sys-rack-unit-label'>
+                    <SlidersHorizontal size={10} strokeWidth={1.5} /><span>DIGITAL MIXER / SOURCE SELECT</span>
+                  </div>
+                  <div className='sys-rack-faders'>
+                    {[60, 80, 55, 75, 65].map((h, i) => (
+                      <div key={i} className='sys-rack-fader' style={{ height: `${h}%` }} />
+                    ))}
+                  </div>
+                </div>
+                <div className='sys-rack-unit sys-rack-unit-sm'>
+                  <div className='sys-rack-unit-label'>
+                    <AudioWaveform size={10} strokeWidth={1.5} /><span>DSP PROCESSOR</span>
+                  </div>
+                  <div className='sys-rack-eq-bars'>
+                    {[40, 65, 80, 55, 75, 50, 70, 45].map((h, i) => (
+                      <div key={i} className='sys-rack-eq-bar' style={{ height: `${h}%` }} />
+                    ))}
+                  </div>
+                </div>
+                <div className='sys-rack-unit sys-rack-unit-lg sys-rack-amp'>
+                  <div className='sys-rack-unit-label'>
+                    <Zap size={10} strokeWidth={1.5} /><span>MULTI-ZONE 70V POWER AMPLIFIER</span>
+                  </div>
+                  <div className='sys-rack-amp-zones'>
+                    <div className='sys-rack-amp-zone'>ZONE 1</div>
+                    <div className='sys-rack-amp-zone'>ZONE 2</div>
+                    <div className='sys-rack-amp-zone'>ZONE 3</div>
+                    <div className='sys-rack-amp-zone sys-rack-amp-zone-more'>+ MORE</div>
+                  </div>
+                  <p className='sys-rack-amp-note'>Zones configured to your layout</p>
+                </div>
+                <div className='sys-rack-unit sys-rack-unit-sm'>
+                  <div className='sys-rack-unit-label'>
+                    <Power size={10} strokeWidth={1.5} /><span>POWER CONDITIONER</span>
+                  </div>
+                  <div className='sys-rack-outlets'>
+                    {[1,2,3,4].map(i => <div key={i} className='sys-rack-outlet' />)}
+                  </div>
+                </div>
+              </div>
+              <p className='sys-rack-caption'>19&quot; Rack Cabinet (12U)</p>
+            </div>
+
+            <div className='sys-arch-inputs'>
+              <div className='sys-inputs-header'>AUDIO INPUTS</div>
+              {audioInputs.map((inp) => (
+                <div key={inp.label} className='sys-input-row'>
+                  <div className='sys-input-icon'><inp.Icon size={20} strokeWidth={1.5} /></div>
+                  <div className='sys-input-arrow' />
+                  <span>{inp.label}</span>
+                </div>
+              ))}
+            </div>
+
+          </div>
+        </div>
+      </section>
+
       <section className='clean-section clean-white'>
         <div className='container'>
           <div className='clean-section-intro centered'>
@@ -284,6 +419,60 @@ export default function MasjidSoundSolutionsPage() {
               ))}
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      <section className='clean-section clean-soft'>
+        <div className='container two-column feature-photo-section'>
+          <div className='feature-copy'>
+            <div className='real-eyebrow'>Livestreaming &amp; recording</div>
+            <h2>Reach your community beyond the prayer hall.</h2>
+            <p>
+              Your masjid audio system can feed a clean, balanced signal directly to a stream
+              encoder — no second microphone setup, no degraded quality. Khutbas, prayers, and
+              community events can be broadcast live or recorded for your archive.
+            </p>
+            <ul className='real-check-list'>
+              <li>Stream to YouTube, Facebook Live, or any RTMP platform</li>
+              <li>Dedicated stream output — independent of room speaker levels</li>
+              <li>Local recording for khutba archives and lesson libraries</li>
+              <li>Pre-fader feed ensures consistent quality regardless of room adjustments</li>
+              <li>Remote community members hear the same clarity as those present</li>
+            </ul>
+          </div>
+          <div className='clean-photo-card stream-mockup-card'>
+            <div className='stream-live-badge'>
+              <span className='stream-live-dot' />
+              <span>LIVE</span>
+            </div>
+            <div className='stream-output-list'>
+              {[
+                { Icon: Globe,   label: 'YouTube Live',    active: true  },
+                { Icon: Globe,   label: 'Facebook Live',   active: true  },
+                { Icon: Video,   label: 'Local Recording', active: true  },
+                { Icon: Archive, label: 'Khutba Archive',  active: false },
+              ].map(({ Icon, label, active }) => (
+                <div key={label} className='stream-output-row'>
+                  <Icon size={14} strokeWidth={1.5} />
+                  <span>{label}</span>
+                  <span className={active ? 'stream-status-on' : 'stream-status-off'}>
+                    {active ? 'Active' : 'Standby'}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <div className='stream-audio-wrap'>
+              <div className='stream-audio-label'>
+                <Radio size={13} strokeWidth={1.5} />
+                <span>Audio Output Level</span>
+              </div>
+              <div className='stream-audio-bars'>
+                {[55, 75, 88, 70, 92, 68, 80, 60, 85, 72].map((h, i) => (
+                  <div key={i} className='stream-audio-bar' style={{ height: `${h}%` }} />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>

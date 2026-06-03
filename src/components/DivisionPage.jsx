@@ -10,11 +10,9 @@ export default function DivisionPage({ eyebrow, title, text, divisions }) {
         <div className='division-page-grid'>
           {divisions.map((division) => (
             <article className='division-detail-card' key={division.title}>
-              {division.icon ? (
+              {division.Icon ? (
                 <div className='division-detail-icon-box'>
-                  <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor'>
-                    <path strokeLinecap='round' strokeLinejoin='round' d={division.icon} />
-                  </svg>
+                  <division.Icon size={28} strokeWidth={1.5} />
                 </div>
               ) : (
                 <img src={division.logo} alt={`${division.title} logo`} className='division-detail-logo' />

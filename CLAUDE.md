@@ -136,6 +136,9 @@ Key component classes in the Masjid page:
 - `.process-timeline` / `.process-step` / `.process-step-badge` / `.process-step-vline` / `.process-step-circle` / `.process-step-body` / `.process-commitment` — 7-step horizontal timeline with numbered badges, lucide icon circles, and a gold connecting line.
 - `.zone-control-grid` / `.zone-option-card` / `.zone-option-header` / `.phone-mockup` / `.phone-zone-row` / `.phone-nav` / `.wall-mockup` / `.wall-zone-led` / `.wall-knob` / `.wall-mute-btn` / `.zone-option-features` — two-card zone control options section (phone mockup + wall panel mockup).
 - `.signal-flow-diagram` / `.signal-sources` / `.signal-zones-output` / `.signal-node` / `.signal-node-icon` / `.signal-arrow` / `.signal-arrow-col` / `.signal-zone-badge` / `.signal-zone-output-item` / `.signal-col-label` — horizontal audio signal flow diagram (Sources → Mixer → DSP → Amplifier → 4 Zones).
+- `.stream-mockup-card` / `.stream-live-badge` / `.stream-live-dot` / `.stream-output-list` / `.stream-output-row` / `.stream-status-on` / `.stream-status-off` / `.stream-audio-wrap` / `.stream-audio-bars` / `.stream-audio-bar` — dark broadcast panel mockup for the Livestreaming & Recording section (section 8, after signal flow).
+
+**MasjidSoundSolutionsPage section order (11 sections):** Hero → Why Specialized → Microphones → Multi-zone layout → Zone Control Options → Rack & Infrastructure → Audio Signal Flow → Livestreaming & Recording → Process Timeline → Partner Brands → Final CTA
 
 **StandardDivisionPage** classes:
 - `.std-hero` / `.std-hero-inner` / `.std-hero-icon` — dark gradient hero with gold icon box
