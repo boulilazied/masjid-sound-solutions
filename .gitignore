@@ -35,6 +35,9 @@ Thumbs.db
 # vercel
 .vercel/
 
+# form submissions (runtime data, may contain customer info)
+server/submissions/quote-requests.json
+
 # coverage
 coverage/
 
