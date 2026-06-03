@@ -3,7 +3,7 @@ import {
   Mic2, AudioWaveform, SlidersHorizontal, Network, TrendingUp, CircleDollarSign,
   PhoneCall, PenLine, ClipboardList, HardHat, Gauge, GraduationCap, ShieldCheck, BadgeCheck,
   Smartphone, Mic, Music, Zap, Sliders, Globe, Video, Archive, Radio,
-  Volume2, Wifi, Power
+  Volume2, Wifi, Power, Camera
 } from 'lucide-react'
 
 const keyBenefits = [
@@ -427,18 +427,19 @@ export default function MasjidSoundSolutionsPage() {
         <div className='container two-column feature-photo-section'>
           <div className='feature-copy'>
             <div className='real-eyebrow'>Livestreaming &amp; recording</div>
-            <h2>Reach your community beyond the prayer hall.</h2>
+            <h2>Reach your community beyond the prayer hall — with audio and video.</h2>
             <p>
-              Your masjid audio system can feed a clean, balanced signal directly to a stream
-              encoder — no second microphone setup, no degraded quality. Khutbas, prayers, and
-              community events can be broadcast live or recorded for your archive.
+              Your masjid audio system feeds a clean, balanced signal directly to a stream encoder.
+              Pair it with a PTZ camera and your community gets a complete, professional broadcast —
+              no second microphone setup, no degraded quality, no separate video crew.
             </p>
             <ul className='real-check-list'>
+              <li>PTZ camera covers the imam, mimbar, and prayer hall from a single mount point</li>
+              <li>Remote pan, tilt, and zoom — no operator needed during salat</li>
               <li>Stream to YouTube, Facebook Live, or any RTMP platform</li>
-              <li>Dedicated stream output — independent of room speaker levels</li>
+              <li>Dedicated audio stream output — independent of room speaker levels</li>
               <li>Local recording for khutba archives and lesson libraries</li>
-              <li>Pre-fader feed ensures consistent quality regardless of room adjustments</li>
-              <li>Remote community members hear the same clarity as those present</li>
+              <li>Remote community members see and hear the same quality as those present</li>
             </ul>
           </div>
           <div className='clean-photo-card stream-mockup-card'>
@@ -446,8 +447,19 @@ export default function MasjidSoundSolutionsPage() {
               <span className='stream-live-dot' />
               <span>LIVE</span>
             </div>
+            <div className='stream-camera-preview'>
+              <div className='stream-camera-preview-inner'>
+                <Camera size={28} strokeWidth={1.25} />
+                <span>PTZ Camera</span>
+              </div>
+              <div className='stream-camera-meta'>
+                <span className='stream-camera-badge'>1080p HD</span>
+                <span className='stream-camera-badge stream-camera-badge-ptz'>PTZ</span>
+              </div>
+            </div>
             <div className='stream-output-list'>
               {[
+                { Icon: Camera,  label: 'PTZ Camera Feed', active: true  },
                 { Icon: Globe,   label: 'YouTube Live',    active: true  },
                 { Icon: Globe,   label: 'Facebook Live',   active: true  },
                 { Icon: Video,   label: 'Local Recording', active: true  },
