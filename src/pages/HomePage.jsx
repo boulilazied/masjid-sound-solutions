@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom'
-import { Volume2, Building2, Home, Mic2, ClipboardCheck, Receipt, Wrench, Headphones, GraduationCap, BookOpen } from 'lucide-react'
+import { Building2, Home, Mic2, ClipboardCheck, Receipt, Wrench, Headphones, GraduationCap, BookOpen } from 'lucide-react'
 import SectionHeading from '../components/SectionHeading'
+import MasjidIcon from '../components/MasjidIcon'
 
 const divisions = [
   {
     title: 'Masjid Sound Solutions',
     path: '/masjid-sound-solutions',
-    Icon: Volume2,
+    Icon: MasjidIcon,
+    featured: true,
     text: 'Specialized masjid audio design, khutba intelligibility improvement, speaker coverage optimization, DSP tuning, and volunteer-friendly controls.'
   },
   {
@@ -107,9 +109,9 @@ export default function HomePage() {
             <div className='hero-visual-card'>
               <div className='hero-div-preview-grid'>
                 {divisions.map((d) => (
-                  <Link to={d.path} key={d.title} className='hero-div-chip'>
-                    <div className='hero-div-chip-icon'>
-                      <d.Icon size={18} strokeWidth={1.5} />
+                  <Link to={d.path} key={d.title} className={`hero-div-chip${d.featured ? ' hero-div-chip--featured' : ''}`}>
+                    <div className={`hero-div-chip-icon${d.featured ? ' hero-div-chip-icon--featured' : ''}`}>
+                      <d.Icon size={d.featured ? 22 : 18} strokeWidth={1.5} />
                     </div>
                     <span>{d.title}</span>
                   </Link>
