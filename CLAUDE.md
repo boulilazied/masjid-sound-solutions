@@ -17,7 +17,7 @@
 | Build | Vite 5 |
 | Backend (local) | Express 4 (`server/index.js`) — dev only |
 | Backend (production) | Vercel serverless function (`api/quote.js`) |
-| Email | `resend` package — sends quote submissions to contact@azaudios.com |
+| Email | `nodemailer` + Gmail SMTP (port 465/SSL) — sends quote submissions to contact@azaudios.com |
 | Icons | `lucide-react` — used across all pages; component refs stored in data arrays |
 | Dev runner | `concurrently` (client + server in parallel) |
 | Server hot-reload | `nodemon` |
@@ -31,7 +31,7 @@
 
 **Vite proxy:** `/api` → `http://localhost:3001` in dev.
 
-**Production form flow:** Browser → `/api/quote` → Vercel serverless (`api/quote.js`) → Resend email to contact@azaudios.com. Requires `RESEND_API_KEY` env var in Vercel dashboard.
+**Production form flow:** Browser → `/api/quote` → Vercel serverless (`api/quote.js`) → Gmail SMTP (port 465/SSL) → email delivered to contact@azaudios.com. Requires `EMAIL_USER` and `EMAIL_PASSWORD` env vars in Vercel dashboard. `replyTo` is set to the customer's email so replies go directly to them.
 
 **CORS defaults:** `localhost:5173` and `localhost:4173`. Override with `ALLOWED_ORIGINS=https://yourdomain.com` in production.
 
@@ -210,11 +210,15 @@ Required: `name`, `email`, `message`. All others optional.
 **SPA routing:** `vercel.json` uses negative-lookahead rewrite `/((?!api/).*)` → `/index.html` so `/api/*` reaches the serverless function.
 
 **Vercel env vars required:**
-- `RESEND_API_KEY` — Resend API key for quote form emails (get from resend.com)
+- `EMAIL_USER` — Gmail address used to send (e.g. `azaudiosolutions@gmail.com`)
+- `EMAIL_PASSWORD` — Gmail App Password (16-char, no spaces — generated at myaccount.google.com → Security → App passwords). **Not** the regular Gmail password.
+- `EMAIL_TO` — recipient address (defaults to `contact@azaudios.com` if not set)
 
 **Quote form flow (production):**  
-Browser POST `/api/quote` → `api/quote.js` serverless function → Resend email to contact@azaudios.com  
-`from: onboarding@resend.dev` (change to `quotes@azaudios.com` once azaudios.com is verified in Resend)
+Browser POST `/api/quote` → `api/quote.js` serverless function → Gmail SMTP port 465 (SSL) via nodemailer → email delivered to `EMAIL_TO`  
+`from` header is the Gmail account; `replyTo` is set to the customer's email so replies go directly to them.
+
+**Changing the Gmail account:** generate a new App Password for the new account, update `EMAIL_USER` and `EMAIL_PASSWORD` in Vercel, then redeploy.
 
 ---
 
@@ -222,6 +226,6 @@ Browser POST `/api/quote` → `api/quote.js` serverless function → Resend emai
 
 - The `masjid` field is used in QuoteForm state, the POST body, and the server record. Renaming it to `organization` requires changing all three.
 - `public/masjid-real/` contains older layout PNGs from a case study — may or may not be actively used.
-- Local form submissions write to `server/submissions/quote-requests.json` (gitignored). Production submissions go to email via Resend — no local file is written on Vercel.
+- Local form submissions write to `server/submissions/quote-requests.json` (gitignored). Production submissions go to email via Gmail SMTP — no local file is written on Vercel.
 - `api/quote.js` has no persistent storage — if email sending fails silently, the submission is lost. Add a database if submission logging is needed.
 - `nodemon --watch server` is intentional — do not remove the flag or nodemon will watch the whole project and restart on every file save.
