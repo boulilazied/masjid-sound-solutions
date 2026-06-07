@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Volume2, Building2, Home, Mic2 } from 'lucide-react'
+import { Volume2, Building2, Home, Mic2, GraduationCap, BookOpen } from 'lucide-react'
 import SectionHeading from '../components/SectionHeading'
 
 const aboutDivisions = [
@@ -27,6 +27,21 @@ const aboutDivisions = [
     Icon: Mic2,
     text: 'Portable PA systems, wireless microphones, and complete temporary audio support for events of all sizes.'
   }
+]
+
+const team = [
+  {
+    Icon: GraduationCap,
+    tag: 'Lead Engineer',
+    name: 'Signal Treatment Engineer',
+    bio: 'Holds a Master\'s degree in signal processing. Responsible for DSP configuration, acoustic analysis, speaker placement design, and system tuning on every project. Engineering-backed decisions — not guesswork.'
+  },
+  {
+    Icon: BookOpen,
+    tag: 'Masjid Specialist',
+    name: 'Practicing Imam',
+    bio: 'A practicing imam who understands khutba, salat, and community events from the inside. Ensures every masjid system is designed for real daily use — not just technical specs.'
+  },
 ]
 
 export default function AboutPage() {
@@ -66,7 +81,31 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Team section */}
       <section className='section'>
+        <div className='container'>
+          <SectionHeading
+            centered
+            eyebrow='Our Team'
+            title="Two disciplines most AV companies don't have in-house"
+            text='Engineering precision and deep masjid knowledge — both available on every project.'
+          />
+          <div className='hp-cred-grid'>
+            {team.map((member) => (
+              <div key={member.tag} className='hp-cred-card'>
+                <div className='hp-cred-icon'>
+                  <member.Icon size={28} strokeWidth={1.5} />
+                </div>
+                <div className='hp-cred-tag'>{member.tag}</div>
+                <h3>{member.name}</h3>
+                <p>{member.bio}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className='section surface-muted'>
         <div className='container split-layout'>
           <div>
             <SectionHeading
@@ -101,7 +140,7 @@ export default function AboutPage() {
             <div className='eyebrow eyebrow-light'>Let&apos;s work together</div>
             <h2>Tell us about your project</h2>
             <p>
-              Whether it's a new installation, an upgrade, or a one-time event — we'll
+              Whether it&apos;s a new installation, an upgrade, or a one-time event — we&apos;ll
               recommend a clear and practical path forward.
             </p>
           </div>

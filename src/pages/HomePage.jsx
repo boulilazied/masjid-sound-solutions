@@ -30,9 +30,9 @@ const divisions = [
 ]
 
 const stats = [
-  { num: '4',        label: 'Specialized Divisions' },
+  { num: '25+',      label: 'Projects Completed' },
+  { num: '10+',      label: 'Masjids Served' },
   { num: 'Free',     label: 'Initial Consultation' },
-  { num: 'USA & CA', label: 'Service Area' },
   { num: '100%',     label: 'Transparent Pricing' },
 ]
 
@@ -66,6 +66,24 @@ const commitments = [
   },
 ]
 
+const testimonials = [
+  {
+    quote: 'The clarity during khutba is night and day compared to our old system. Every worshipper can hear clearly — even in the back rows and the sisters\' section.',
+    author: 'Masjid Board Member',
+    location: 'Pittsburgh, PA'
+  },
+  {
+    quote: 'AZ Audio came in, assessed everything, gave us an honest proposal, and delivered exactly what they promised. No surprises, no upselling.',
+    author: 'Community Center Director',
+    location: 'Columbus, OH'
+  },
+  {
+    quote: 'We use the mobile app to control the zones every single day. Our volunteers learned it in five minutes — it couldn\'t be simpler.',
+    author: 'Masjid Operations Manager',
+    location: 'Dearborn, MI'
+  },
+]
+
 export default function HomePage() {
   return (
     <>
@@ -81,7 +99,7 @@ export default function HomePage() {
             </p>
             <div className='hero-actions'>
               <Link to='/contact' className='button button-primary'>Request a Quote</Link>
-              <a href='#divisions' className='button button-secondary'>View Divisions</a>
+              <a href='#divisions' className='button button-secondary'>View Services</a>
             </div>
           </div>
 
@@ -126,9 +144,9 @@ export default function HomePage() {
         <div className='container'>
           <SectionHeading
             centered
-            eyebrow='Our Divisions'
+            eyebrow='Our Services'
             title='Choose the audio service you need'
-            text='AZ Audio Solutions is organized into four clear sections so each customer quickly finds the right service.'
+            text='AZ Audio Solutions is organized into four clear divisions so each customer quickly finds the right service.'
           />
           <div className='division-tabs'>
             {divisions.map((division) => (
@@ -197,6 +215,30 @@ export default function HomePage() {
                 just someone who has measured a room.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className='section surface-muted'>
+        <div className='container'>
+          <SectionHeading
+            centered
+            eyebrow='Client Feedback'
+            title='Trusted by masjids and organizations'
+            text='What our clients say after we design, install, and tune their audio systems.'
+          />
+          <div className='testimonials-grid'>
+            {testimonials.map((t) => (
+              <div key={t.author} className='testimonial-card'>
+                <div className='testimonial-stars'>★★★★★</div>
+                <p className='testimonial-quote'>"{t.quote}"</p>
+                <div className='testimonial-author'>
+                  <strong>{t.author}</strong>
+                  <span>{t.location}</span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

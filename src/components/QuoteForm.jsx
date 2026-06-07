@@ -47,7 +47,7 @@ export default function QuoteForm() {
 
       setStatus({
         type: 'success',
-        message: 'Your quote request has been sent successfully.'
+        message: 'Your request has been sent. We will review your project and reply within 1 business day — check your inbox or WhatsApp for our response.'
       })
       setForm(initialState)
     } catch (error) {

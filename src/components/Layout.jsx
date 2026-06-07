@@ -1,13 +1,11 @@
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-const navItems = [
-  { to: '/', label: 'Home' },
+const serviceLinks = [
   { to: '/masjid-sound-solutions', label: 'Masjid Sound Solutions' },
-  { to: '/commercial-audio', label: 'Commercial Audio' },
-  { to: '/residential-audio', label: 'Residential Audio' },
-  { to: '/event-rental-services', label: 'Event Rental Services' },
-  { to: '/about', label: 'About' },
+  { to: '/commercial-audio',       label: 'Commercial Audio' },
+  { to: '/residential-audio',      label: 'Residential Audio' },
+  { to: '/event-rental-services',  label: 'Event Rental Services' },
 ]
 
 function HamburgerIcon() {
@@ -26,13 +24,37 @@ function CloseIcon() {
   )
 }
 
+function ChevronDown() {
+  return (
+    <svg width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2.5' strokeLinecap='round' strokeLinejoin='round' style={{ marginLeft: '3px', verticalAlign: 'middle' }}>
+      <path d='M6 9l6 6 6-6' />
+    </svg>
+  )
+}
+
 export default function Layout({ children }) {
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [menuOpen, setMenuOpen]       = useState(false)
+  const [servicesOpen, setServicesOpen] = useState(false)
   const location = useLocation()
+  const dropdownRef = useRef(null)
 
   useEffect(() => {
     setMenuOpen(false)
+    setServicesOpen(false)
   }, [location.pathname])
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClick(e) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setServicesOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [])
+
+  const isServiceActive = serviceLinks.some(s => location.pathname === s.to)
 
   return (
     <div className='site-shell'>
@@ -51,16 +73,54 @@ export default function Layout({ children }) {
           </button>
 
           <nav className={`main-nav ${menuOpen ? 'open' : ''}`}>
-            {navItems.map((item) => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                end={item.to === '/'}
-                className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
+            <NavLink to='/' end className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+              Home
+            </NavLink>
+
+            {/* Services dropdown — desktop */}
+            <div className='nav-dropdown-wrap' ref={dropdownRef}>
+              <button
+                className={`nav-link nav-dropdown-btn${isServiceActive ? ' active' : ''}`}
+                onClick={() => setServicesOpen(o => !o)}
+                aria-expanded={servicesOpen}
               >
-                {item.label}
-              </NavLink>
-            ))}
+                Services <ChevronDown />
+              </button>
+              {servicesOpen && (
+                <div className='nav-dropdown'>
+                  {serviceLinks.map(s => (
+                    <NavLink
+                      key={s.to}
+                      to={s.to}
+                      className={({ isActive }) => isActive ? 'nav-dropdown-item active' : 'nav-dropdown-item'}
+                    >
+                      {s.label}
+                    </NavLink>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Mobile: show all service links flat */}
+            <div className='nav-mobile-services'>
+              {serviceLinks.map(s => (
+                <NavLink
+                  key={s.to}
+                  to={s.to}
+                  className={({ isActive }) => isActive ? 'nav-link nav-link-sub active' : 'nav-link nav-link-sub'}
+                >
+                  {s.label}
+                </NavLink>
+              ))}
+            </div>
+
+            <NavLink to='/about' className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+              About
+            </NavLink>
+
+            {/* Phone number — desktop header */}
+            <a href='tel:+17248310196' className='nav-phone'>+1 724 831 0196</a>
+
             <Link to='/contact' className='button button-primary nav-cta'>
               Request a Quote
             </Link>
@@ -77,10 +137,30 @@ export default function Layout({ children }) {
             <p className='footer-copy'>
               Professional audio solutions for masjids, commercial spaces, homes, and events across the USA and Canada.
             </p>
+            <div className='footer-social'>
+              <a href='https://www.instagram.com/azaudiosolutions' target='_blank' rel='noreferrer' className='footer-social-link' aria-label='Instagram'>
+                <svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.8' strokeLinecap='round' strokeLinejoin='round'>
+                  <rect x='2' y='2' width='20' height='20' rx='5' ry='5'/>
+                  <circle cx='12' cy='12' r='4'/>
+                  <circle cx='17.5' cy='6.5' r='1' fill='currentColor' stroke='none'/>
+                </svg>
+              </a>
+              <a href='https://www.facebook.com/azaudiosolutions' target='_blank' rel='noreferrer' className='footer-social-link' aria-label='Facebook'>
+                <svg width='18' height='18' viewBox='0 0 24 24' fill='currentColor'>
+                  <path d='M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z'/>
+                </svg>
+              </a>
+              <a href='https://www.linkedin.com/company/azaudiosolutions' target='_blank' rel='noreferrer' className='footer-social-link' aria-label='LinkedIn'>
+                <svg width='18' height='18' viewBox='0 0 24 24' fill='currentColor'>
+                  <path d='M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z'/>
+                  <circle cx='4' cy='4' r='2'/>
+                </svg>
+              </a>
+            </div>
           </div>
 
           <div>
-            <div className='footer-heading'>Divisions</div>
+            <div className='footer-heading'>Services</div>
             <ul className='footer-list'>
               <li><Link to='/masjid-sound-solutions'>Masjid Sound Solutions</Link></li>
               <li><Link to='/commercial-audio'>Commercial Audio</Link></li>
@@ -93,16 +173,10 @@ export default function Layout({ children }) {
           <div>
             <div className='footer-heading'>Contact</div>
             <ul className='footer-list'>
-              <li>
-                <a href='mailto:contact@azaudios.com'>contact@azaudios.com</a>
-              </li>
-              <li>
-                <a href='tel:+17248310196'>+1 724 831 0196</a>
-              </li>
-              <li>
-                <a href='tel:+17244275661'>+1 724 427 5661</a>
-              </li>
-              <li>USA and Canada</li>
+              <li><a href='mailto:contact@azaudios.com'>contact@azaudios.com</a></li>
+              <li><a href='tel:+17248310196'>+1 724 831 0196</a></li>
+              <li><a href='tel:+17244275661'>+1 724 427 5661</a></li>
+              <li>Pittsburgh, PA — USA &amp; Canada</li>
             </ul>
             <div className='footer-contact-links'>
               <a

@@ -65,7 +65,7 @@ export default function MasjidSoundSolutionsPage() {
   return (
     <div className='masjid-clean-page'>
       <section className='clean-hero'>
-        <img src='/masjid-prayer-wide-new.png' alt='Real masjid prayer hall during salat' className='clean-hero-image' />
+        <img src='/masjid-prayer-wide-new.png' alt='Masjid prayer hall with professional audio installation' className='clean-hero-image' />
         <div className='clean-hero-overlay' />
         <div className='container clean-hero-inner'>
           <div className='clean-hero-panel'>
@@ -146,7 +146,7 @@ export default function MasjidSoundSolutionsPage() {
             </ul>
           </div>
           <div className='clean-photo-card'>
-            <img src='/masjid-khutba-mics-new.png' alt='Real masjid khutba and microphone setup' />
+            <img src='/masjid-khutba-mics-new.png' alt='Masjid khutba microphone and podium setup' loading='lazy' />
           </div>
         </div>
       </section>
@@ -162,7 +162,7 @@ export default function MasjidSoundSolutionsPage() {
             </p>
           </div>
           <div className='clean-poster-card zone-layout-card'>
-            <img src='/masjid-multi-zone-layout.png' alt='Example multi-zone masjid audio layout and control' />
+            <img src='/masjid-multi-zone-layout.png' alt='Multi-zone masjid audio layout diagram showing independent zone coverage' loading='lazy' />
           </div>
         </div>
       </section>
@@ -258,7 +258,7 @@ export default function MasjidSoundSolutionsPage() {
       <section className='clean-section clean-soft'>
         <div className='container two-column rack-clean-section'>
           <div className='clean-photo-card rack-card'>
-            <img src='/masjid-rack-room-new.png' alt='Professional masjid audio rack inside a dedicated equipment room' />
+            <img src='/masjid-rack-room-new.png' alt='Professional audio equipment rack inside a dedicated masjid AV room' loading='lazy' />
           </div>
           <div className='feature-copy'>
             <div className='real-eyebrow'>Rack & infrastructure</div>
@@ -449,7 +449,7 @@ export default function MasjidSoundSolutionsPage() {
             </div>
             <div className='stream-camera-preview'>
               <div className='stream-camera-photo-wrap'>
-                <img src='/ptz-camera.png' alt='PTZ camera for masjid livestreaming' className='stream-camera-img' />
+                <img src='/ptz-camera.png' alt='PTZ motorized camera for masjid livestreaming and recording' className='stream-camera-img' loading='lazy' />
               </div>
               <div className='stream-camera-caption'>
                 <strong>Directly connected to your sound system</strong>

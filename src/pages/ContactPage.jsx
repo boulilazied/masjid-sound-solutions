@@ -41,7 +41,7 @@ export default function ContactPage() {
             </div>
             <div className='contact-item'>
               <strong>Region</strong>
-              <span>USA and Canada</span>
+              <span>Based in Pittsburgh, PA — serving Pennsylvania, Ohio, West Virginia, Michigan, and projects across the USA and Canada.</span>
             </div>
           </div>
         </div>
