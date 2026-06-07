@@ -1,4 +1,4 @@
-import { Resend } from 'resend'
+import nodemailer from 'nodemailer'
 
 function escapeHtml(value = '') {
   return String(value)
@@ -63,11 +63,12 @@ export default async function handler(req, res) {
     })
   }
 
-  const resendKey = process.env.RESEND_API_KEY
+  const emailUser = process.env.EMAIL_USER
+  const emailPassword = process.env.EMAIL_PASSWORD
   const emailTo = process.env.EMAIL_TO || 'contact@azaudios.com'
 
-  if (!resendKey) {
-    console.error('RESEND_API_KEY is not set')
+  if (!emailUser || !emailPassword) {
+    console.error('EMAIL_USER or EMAIL_PASSWORD is not set')
     return res.status(500).json({
       ok: false,
       error: 'Email service is not configured. Please contact us via WhatsApp.'
@@ -75,10 +76,18 @@ export default async function handler(req, res) {
   }
 
   try {
-    const resend = new Resend(resendKey)
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
+      auth: {
+        user: emailUser,
+        pass: emailPassword
+      }
+    })
 
-    await resend.emails.send({
-      from: 'AZ Audio Solutions <onboarding@resend.dev>',
+    await transporter.sendMail({
+      from: `AZ Audio Solutions <${emailUser}>`,
       to: emailTo,
       replyTo: email,
       subject: `New Quote Request — ${name}${masjid ? ` / ${masjid}` : ''}`,
