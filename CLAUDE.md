@@ -222,6 +222,13 @@ Browser POST `/api/quote` → `api/quote.js` serverless function → Gmail SMTP 
 
 ---
 
+## Git workflow
+
+- **Use `main` only.** For this repository, commit and push directly to `main` — do **not** create feature branches or PRs. (The single deployed branch is `main`; Vercel auto-deploys from it.)
+- Push only when the user asks.
+
+---
+
 ## Known quirks
 
 - The `masjid` field is used in QuoteForm state, the POST body, and the server record. Renaming it to `organization` requires changing all three.
