@@ -59,13 +59,13 @@
 
 ```
 api/
-  quote.js                        — Vercel serverless function; validates fields, sends email via Resend
+  quote.js                        — Vercel serverless function; validates fields, sends email via nodemailer + Gmail SMTP
 
 src/
   App.jsx                         — router root, NotFound component
-  styles.css                      — single CSS file (~3,250 lines)
+  styles.css                      — single CSS file (~3,270 lines)
   pages/
-    HomePage.jsx                  — hero, stats strip, divisions grid, how-it-works, credentials, commitments, CTA band
+    HomePage.jsx                  — hero (H1 "AZ Audio Solutions", slogan "Premium Quality. Affordable Cost."), stats strip, divisions grid, About AZ Audio Solutions + brand-hierarchy section, how-it-works, credentials, commitments, CTA band
     ServicesPage.jsx              — all four divisions via <DivisionPage>
     MasjidSoundSolutionsPage.jsx  — rich 13-section standalone page, lucide-react icons
     CommercialAudioPage.jsx       — full content via <StandardDivisionPage>
@@ -74,7 +74,8 @@ src/
     AboutPage.jsx                 — company overview, all 4 divisions grid, values panel
     ContactPage.jsx               — SectionHeading + QuoteForm + contact card
   components/
-    Layout.jsx                    — header (nav + hamburger menu), <main>, footer
+    Layout.jsx                    — header (nav + hamburger menu), <main>, footer; mounts <RouteSeo /> once
+    Seo.jsx                       — RouteSeo: per-route <title>/description/canonical/OG/Twitter for the SPA (see SEO section)
     DivisionPage.jsx              — used only by ServicesPage; supports Icon (lucide) or logo (img)
     StandardDivisionPage.jsx      — reusable full-page template for Commercial/Residential/Event
     SectionHeading.jsx            — eyebrow + h2 + text, optional centered prop
@@ -219,6 +220,39 @@ Browser POST `/api/quote` → `api/quote.js` serverless function → Gmail SMTP 
 `from` header is the Gmail account; `replyTo` is set to the customer's email so replies go directly to them.
 
 **Changing the Gmail account:** generate a new App Password for the new account, update `EMAIL_USER` and `EMAIL_PASSWORD` in Vercel, then redeploy.
+
+---
+
+## SEO
+
+Goal: establish **AZ Audio Solutions** as the primary brand entity in Google while keeping the
+four divisions intact (Google had been showing "Masjid Sound Solutions" as the homepage title).
+
+**On-page / technical (in code):**
+- `index.html` — brand-first `<title>`, description, `keywords`, `robots`, `canonical`, Open Graph /
+  Twitter tags, and a **JSON-LD `@graph`**: `Organization` (`#organization`, `alternateName: azaudios`),
+  `WebSite`, `LocalBusiness` (Pittsburgh, PA), and 4× `Service` — each Service linked to the org via
+  `provider → @id` so search engines read AZ Audio Solutions as the parent and the four offerings as
+  service divisions. These are the homepage defaults.
+- `src/components/Seo.jsx` (`RouteSeo`) — mounted once in `Layout`. On every client-side route change it
+  rewrites `document.title`, meta description, `<link rel="canonical">`, and OG/Twitter tags from a
+  per-route `META` map. Division titles read **"… — A Division of AZ Audio Solutions"** to reinforce the
+  hierarchy. No per-page edits needed; it covers every route incl. `/services` and 404.
+- HomePage — exactly **one H1** ("AZ Audio Solutions") + subtitle; "About AZ Audio Solutions" section with
+  a visible parent → division hierarchy and internal links.
+- `public/robots.txt` and `public/sitemap.xml` already list all real routes.
+
+**Canonical routes** (use the real paths — NOT `/commercial`, `/residential`, `/events`):
+`/` · `/masjid-sound-solutions` · `/commercial-audio` · `/residential-audio` · `/event-rental-services` ·
+`/services` · `/about` · `/contact`.
+
+**Off-page (not code):** see [`MARKETING-SEO.md`](MARKETING-SEO.md) — Google Business Profile kit, NAP
+brand-consistency checklist, short bios, and Search Console steps. Brand ranking for "azaudios" / "AZ Audio"
+is hard because it collides with established Arizona ("AZ") audio companies; the levers are GBP + consistent
+citations + backlinks + time, not more code. Lead with the full name + "Pittsburgh, PA" everywhere.
+
+**SPA caveat:** SEO depends on Google rendering JS. If indexing stays weak, prerendering/SSR (static HTML
+per route) is the biggest available win — a build change, not a metadata tweak.
 
 ---
 
