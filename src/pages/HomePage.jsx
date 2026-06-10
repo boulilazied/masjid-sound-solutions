@@ -92,12 +92,16 @@ export default function HomePage() {
       <section className='hero'>
         <div className='container hero-grid'>
           <div className='hero-copy'>
-            <div className='eyebrow'>AZ Audio Solutions</div>
-            <h1>Sound. Clarity. Impact.</h1>
+            <div className='eyebrow'>Professional Audio Systems · USA &amp; Canada</div>
+            <h1>AZ Audio Solutions</h1>
+            <p className='hero-text hero-subtitle'>
+              Professional Audio Solutions for Masjids, Commercial Facilities, Events and
+              Residential Projects
+            </p>
             <p className='hero-text'>
-              Professional audio solutions for masjids, commercial buildings, homes, and events.
-              We design, install, tune, and support reliable systems that sound clear and are easy
-              to use.
+              Premium Quality. Affordable Cost. AZ Audio Solutions designs, installs, tunes, and
+              supports reliable audio systems for masjids, commercial buildings, homes, and events —
+              systems that sound clear and are easy to use.
             </p>
             <div className='hero-actions'>
               <Link to='/contact' className='button button-primary'>Request a Quote</Link>
@@ -162,6 +166,45 @@ export default function HomePage() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className='section' id='about-az'>
+        <div className='container'>
+          <SectionHeading
+            centered
+            eyebrow='About'
+            title='About AZ Audio Solutions'
+            text='AZ Audio Solutions specializes in professional audio system design, installation, DSP tuning, acoustic optimization, and multi-zone audio control. We serve masjids, schools, commercial facilities, event venues, and residential clients across North America. Our expertise includes speech intelligibility improvement, acoustic analysis, system commissioning, and long-term support for mission-critical audio environments.'
+          />
+
+          <p style={{ textAlign: 'center', color: 'var(--muted)', maxWidth: '760px', margin: '0 auto 1.5rem' }}>
+            <strong>AZ Audio Solutions</strong> is the parent company. Our work is organized into
+            four specialized service divisions:
+          </p>
+
+          <ul className='az-division-hierarchy'>
+            <li>
+              <Link to='/masjid-sound-solutions'><strong>Masjid Sound Solutions</strong></Link>
+              <span> — a service division of AZ Audio Solutions for masjid &amp; prayer-hall audio.</span>
+            </li>
+            <li>
+              <Link to='/commercial-audio'><strong>Commercial Audio Solutions</strong></Link>
+              <span> — a service division of AZ Audio Solutions for offices, schools &amp; facilities.</span>
+            </li>
+            <li>
+              <Link to='/residential-audio'><strong>Residential Audio Solutions</strong></Link>
+              <span> — a service division of AZ Audio Solutions for home &amp; multi-room audio.</span>
+            </li>
+            <li>
+              <Link to='/event-rental-services'><strong>Event Audio Solutions</strong></Link>
+              <span> — a service division of AZ Audio Solutions for events &amp; PA rental support.</span>
+            </li>
+          </ul>
+
+          <p style={{ textAlign: 'center', marginTop: '1.5rem' }}>
+            <Link to='/contact' className='button button-primary'>Contact AZ Audio Solutions</Link>
+          </p>
         </div>
       </section>
 

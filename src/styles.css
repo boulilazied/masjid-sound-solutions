@@ -3537,3 +3537,27 @@ img {
 @media (max-width: 640px) {
   .testimonials-grid { grid-template-columns: 1fr; }
 }
+
+/* SEO additions — hero subtitle + brand-hierarchy list (neutral, reuses existing tokens) */
+.hero-subtitle {
+  font-weight: 600;
+  color: var(--text);
+}
+.az-division-hierarchy {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 760px;
+  display: grid;
+  gap: 0.75rem;
+}
+.az-division-hierarchy li {
+  padding: 0.85rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--muted);
+  line-height: 1.5;
+}
+.az-division-hierarchy li a { color: var(--primary-dark); text-decoration: none; }
+.az-division-hierarchy li a:hover { text-decoration: underline; }

@@ -1,5 +1,6 @@
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
+import RouteSeo from './Seo'
 
 const serviceLinks = [
   { to: '/masjid-sound-solutions', label: 'Masjid Sound Solutions' },
@@ -58,6 +59,7 @@ export default function Layout({ children }) {
 
   return (
     <div className='site-shell'>
+      <RouteSeo />
       <header className='site-header'>
         <div className='container header-inner'>
           <Link to='/' className='brand'>
