@@ -7,8 +7,13 @@ deliberately left alone, and what still needs the owner.
 browser against the production build — one `<h1>` each, correct titles, correct `robots`, no broken
 images, no console errors, no horizontal overflow at 375 px.
 
-**Not deployed.** All changes are local and uncommitted. Review, then commit and push to `main` —
-Vercel auto-deploys from there.
+**Deployed.** Committed as `37462a0` and pushed to `main` on 2026-08-01; Vercel built and shipped it
+(live bundle `index-BqLWW3Kv.js`). Every fix was re-verified against production afterwards.
+
+> **Note on the pruned assets:** `azaudios.com/masjid-real/full-final-layout.png` and friends still
+> answer **HTTP 200** — but the body is byte-identical to `index.html` (same md5), because Vercel's
+> SPA rewrite catches any unmatched path. The files are genuinely gone; the URL just falls through to
+> the app shell instead of a 404. Do not read that 200 as "the asset is still there".
 
 ---
 
@@ -139,10 +144,9 @@ recoverable from history. Deleted:
 
 ## Still needs you
 
-1. **The stale second clone.** `D:\work\masjidSoundSolutions\website` is a working copy of this same
-   GitHub repo, frozen at 2026-04-18, carrying retired branding and a public pricing page. Pushing
-   from it would clobber production. Delete the directory or run `git remote remove origin` in it.
-   Left alone because it is outside this repo.
+1. **Two consolidation steps are still outstanding** — the agent sandbox refused them. See the
+   *Consolidation* section at the end of this file for the exact commands and the safety checks that
+   were run first.
 
 2. **Confirm the two remaining credential claims are accurate**, since they now carry more weight with
    the testimonials gone: the *Master's degree in signal processing* and the *practicing imam on the
@@ -155,4 +159,33 @@ recoverable from history. Deleted:
 4. **Optional — a real workmanship warranty.** If you offer one, give me the term and I'll state it
    explicitly instead of the current manufacturer-only wording.
 
-5. **Review, commit, push.** Nothing is deployed yet.
+---
+
+## Consolidation — one site
+
+Audited 2026-08-01. The duplication was: two local working copies of this repo, and three remote
+branches. One Vercel deployment only (`masjidsoundsolutions.com` does not resolve).
+
+**Done:** `main` pushed and deployed.
+
+**Blocked — run these manually.** Both were refused by the agent sandbox's permission classifier;
+both are safe, and both were verified first.
+
+```sh
+# 1. Delete the two dead remote branches.
+#    Verified: `git rev-list --count origin/main..origin/<branch>` == 0 for both,
+#    i.e. neither holds a single commit that is not already in main.
+git push origin --delete master
+git push origin --delete seo/az-audio-brand-authority
+git branch -D seo/az-audio-brand-authority        # local copy
+git fetch --prune origin
+
+# 2. Delete the stale second working copy.
+#    Clean tree, no stashes, one commit (7099440) that was never pushed anywhere.
+#    Archived first — restore with: git clone website-archive-2026-08-01.bundle
+rm -rf "D:/work/masjidSoundSolutions/website"
+```
+
+Archive: `D:\work\masjidSoundSolutions\website-archive-2026-08-01.bundle` (105 KB, `git bundle
+verify` reports a complete history). Delete it too once you are sure you want nothing from that
+old version.
