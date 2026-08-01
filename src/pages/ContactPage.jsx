@@ -7,6 +7,7 @@ export default function ContactPage() {
       <div className='container contact-grid'>
         <div>
           <SectionHeading
+            as='h1'
             eyebrow='Contact'
             title='Request a quote or schedule a consultation'
             text='Share a few details about your project — masjid, commercial space, home, or event. Your request goes directly to our team.'

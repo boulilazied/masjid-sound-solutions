@@ -4,8 +4,9 @@ import DivisionPage from '../components/DivisionPage'
 const divisions = [
   {
     title: 'Masjid Sound Solutions',
+    path: '/masjid-sound-solutions',
     subtitle: 'Dedicated AZ Audio division for masjid audio clarity',
-    logo: '/logo-masjid-division.png',
+    logo: '/az-masjid-audio-logo-clean.png',
     points: [
       'Prayer hall audio system design and upgrades',
       'Khutba intelligibility improvement',
@@ -15,7 +16,8 @@ const divisions = [
     ]
   },
   {
-    title: 'Commercial Audio',
+    title: 'Commercial Audio Solutions',
+    path: '/commercial-audio',
     subtitle: 'Reliable audio for professional and public spaces',
     Icon: Building2,
     points: [
@@ -27,7 +29,8 @@ const divisions = [
     ]
   },
   {
-    title: 'Residential Audio',
+    title: 'Residential Audio Solutions',
+    path: '/residential-audio',
     subtitle: 'Clean home audio installations and smart listening spaces',
     Icon: Home,
     points: [
@@ -40,6 +43,7 @@ const divisions = [
   },
   {
     title: 'Event Rental Services',
+    path: '/event-rental-services',
     subtitle: 'Temporary audio systems for events and gatherings',
     Icon: Mic2,
     points: [

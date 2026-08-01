@@ -12,13 +12,13 @@ const divisions = [
     text: 'Specialized masjid audio design, khutba intelligibility improvement, speaker coverage optimization, DSP tuning, and volunteer-friendly controls.'
   },
   {
-    title: 'Commercial Audio',
+    title: 'Commercial Audio Solutions',
     path: '/commercial-audio',
     Icon: Building2,
     text: 'Professional audio for offices, schools, retail, community centers, paging systems, background music, and conference spaces.'
   },
   {
-    title: 'Residential Audio',
+    title: 'Residential Audio Solutions',
     path: '/residential-audio',
     Icon: Home,
     text: 'Clean home audio installations, in-ceiling speakers, media room sound, multi-room audio, and smart control integration.'
@@ -31,11 +31,13 @@ const divisions = [
   }
 ]
 
+// Every item here must be verifiable from how we actually operate — no project
+// counts, no client counts, no figures we cannot substantiate on request.
 const stats = [
-  { num: '25+',      label: 'Projects Completed' },
-  { num: '10+',      label: 'Masjids Served' },
-  { num: 'Free',     label: 'Initial Consultation' },
-  { num: '100%',     label: 'Transparent Pricing' },
+  { num: '4',    label: 'Service Divisions' },
+  { num: 'Free', label: 'Initial Consultation' },
+  { num: 'MSc',  label: 'Signal Processing Engineer' },
+  { num: '100%', label: 'Itemized Proposals' },
 ]
 
 const steps = [
@@ -68,22 +70,17 @@ const commitments = [
   },
 ]
 
-const testimonials = [
-  {
-    quote: 'The clarity during khutba is night and day compared to our old system. Every worshipper can hear clearly — even in the back rows and the sisters\' section.',
-    author: 'Masjid Board Member',
-    location: 'Pittsburgh, PA'
-  },
-  {
-    quote: 'AZ Audio came in, assessed everything, gave us an honest proposal, and delivered exactly what they promised. No surprises, no upselling.',
-    author: 'Community Center Director',
-    location: 'Columbus, OH'
-  },
-  {
-    quote: 'We use the mobile app to control the zones every single day. Our volunteers learned it in five minutes — it couldn\'t be simpler.',
-    author: 'Masjid Operations Manager',
-    location: 'Dearborn, MI'
-  },
+// Manufacturers whose equipment we specify and install. This is a statement about
+// the equipment we build with — not a claim of dealer, partner, or reseller status.
+const brands = [
+  { name: 'JBL',        file: 'jbl.svg' },
+  { name: 'QSC',        file: 'qsc.svg' },
+  { name: 'Yamaha',     file: 'yamaha.svg' },
+  { name: 'Shure',      file: 'shure.svg' },
+  { name: 'Sennheiser', file: 'sennheiser.svg' },
+  { name: 'TOA',        file: 'toa.svg' },
+  { name: 'DBX',        file: 'dbx.svg' },
+  { name: 'Atlas IED',  file: 'atlasied.svg' },
 ]
 
 export default function HomePage() {
@@ -197,7 +194,7 @@ export default function HomePage() {
               <span> — a service division of AZ Audio Solutions for home &amp; multi-room audio.</span>
             </li>
             <li>
-              <Link to='/event-rental-services'><strong>Event Audio Solutions</strong></Link>
+              <Link to='/event-rental-services'><strong>Event Rental Services</strong></Link>
               <span> — a service division of AZ Audio Solutions for events &amp; PA rental support.</span>
             </li>
           </ul>
@@ -264,24 +261,19 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* Equipment standards */}
       <section className='section surface-muted'>
         <div className='container'>
           <SectionHeading
             centered
-            eyebrow='Client Feedback'
-            title='Trusted by masjids and organizations'
-            text='What our clients say after we design, install, and tune their audio systems.'
+            eyebrow='Equipment Standards'
+            title='Built with proven professional AV equipment'
+            text='We specify established manufacturer ecosystems rather than unbranded hardware — so replacement parts, firmware updates, and service remain available for the full life of your system.'
           />
-          <div className='testimonials-grid'>
-            {testimonials.map((t) => (
-              <div key={t.author} className='testimonial-card'>
-                <div className='testimonial-stars'>★★★★★</div>
-                <p className='testimonial-quote'>"{t.quote}"</p>
-                <div className='testimonial-author'>
-                  <strong>{t.author}</strong>
-                  <span>{t.location}</span>
-                </div>
+          <div className='brand-grid-clean'>
+            {brands.map((brand) => (
+              <div key={brand.name} className='clean-brand-tile'>
+                <img src={`/brand-logos/${brand.file}`} alt={`${brand.name} logo`} loading='lazy' />
               </div>
             ))}
           </div>

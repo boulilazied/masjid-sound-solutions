@@ -4,8 +4,32 @@
 
 **Company:** AZ Audio Solutions  
 **Rebranded from:** Masjid Sound Solutions (scope expanded beyond masjids — some legacy naming remains in the codebase)  
-**Four divisions:** Masjid Sound Solutions · Commercial Audio · Residential Audio · Event Rental Services  
+**Four divisions (canonical names — use these exact strings everywhere):** Masjid Sound Solutions · Commercial Audio Solutions · Residential Audio Solutions · Event Rental Services  
 **Contact:** contact@azaudios.com · WhatsApp +1 724 831 0196 · +1 724 427 5661 · USA and Canada
+
+---
+
+## Public claims policy
+
+Everything published on this site is a commercial representation by a real LLC. **Do not add copy
+that cannot be substantiated on request.** Specifically:
+
+- **No invented social proof.** No testimonials, quotes, star ratings, review counts, or named
+  clients unless the client actually said it and agreed to be quoted. A prior version of
+  `HomePage.jsx` shipped three fabricated testimonials with attributed roles and cities — they were
+  removed on 2026-08-01. Under FTC 16 CFR 255 a fabricated endorsement is an unfair or deceptive act.
+- **No invented metrics.** No project counts, client counts, years-in-business, or "X+ masjids
+  served" figures unless they are true and countable. The stats strip deliberately uses only
+  structural facts (division count, free consultation, engineer credential, itemized-proposal policy).
+- **No unearned status claims.** "Partner", "authorized dealer", "certified" and similar imply a
+  contractual relationship with the manufacturer. Brand logos are framed as *equipment we build with*,
+  never as partnership.
+- **No open-ended guarantees.** State the actual scope — "full manufacturer warranty coverage on
+  every component we supply", not "a full warranty".
+- Policy and capability statements ("transparent pricing", "free initial consultation") are fine —
+  those are commitments the business controls, not claims about past performance.
+
+When in doubt, ask the owner for the underlying fact rather than writing something plausible.
 
 ---
 
@@ -63,22 +87,23 @@ api/
 
 src/
   App.jsx                         — router root, NotFound component
-  styles.css                      — single CSS file (~3,270 lines)
+  styles.css                      — single CSS file (~3,500 lines)
   pages/
-    HomePage.jsx                  — hero (H1 "AZ Audio Solutions", slogan "Premium Quality. Affordable Cost."), stats strip, divisions grid, About AZ Audio Solutions + brand-hierarchy section, how-it-works, credentials, commitments, CTA band
+    HomePage.jsx                  — hero (H1 "AZ Audio Solutions", slogan "Premium Quality. Affordable Cost."), stats strip, divisions grid, About AZ Audio Solutions + brand-hierarchy section, how-it-works, credentials, equipment-standards brand grid, commitments, CTA band
     ServicesPage.jsx              — all four divisions via <DivisionPage>
     MasjidSoundSolutionsPage.jsx  — rich 13-section standalone page, lucide-react icons
     CommercialAudioPage.jsx       — full content via <StandardDivisionPage>
     ResidentialAudioPage.jsx      — full content via <StandardDivisionPage>
     EventRentalServicesPage.jsx   — rich 9-section standalone page (matches masjid page quality)
-    AboutPage.jsx                 — company overview, all 4 divisions grid, values panel
+    AboutPage.jsx                 — company overview, all 4 divisions grid, team section (reuses `.hp-cred-grid`), values panel
     ContactPage.jsx               — SectionHeading + QuoteForm + contact card
   components/
     Layout.jsx                    — header (nav + hamburger menu), <main>, footer; mounts <RouteSeo /> once
     Seo.jsx                       — RouteSeo: per-route <title>/description/canonical/OG/Twitter for the SPA (see SEO section)
     DivisionPage.jsx              — used only by ServicesPage; supports Icon (lucide) or logo (img)
     StandardDivisionPage.jsx      — reusable full-page template for Commercial/Residential/Event
-    SectionHeading.jsx            — eyebrow + h2 + text, optional centered prop
+    SectionHeading.jsx            — eyebrow + heading + text; `centered` prop, and `as` prop for heading level (defaults to h2; pages with no other page-level heading pass as='h1')
+    MasjidIcon.jsx                — custom inline masjid SVG; the featured division icon on HomePage
     QuoteForm.jsx                 — controlled form, POSTs to /api/quote; graceful JSON-parse error handling
 
 server/
@@ -108,19 +133,26 @@ public/
     atlasied.svg                  — two-line wordmark: ATLAS (#0058A5) / IED (#666)
 ```
 
-> The following public images are **superseded** — do not restore them:
-> - `masjid-why-specialized.png` — "Why Specialized" section is now a live HTML/CSS card grid
-> - `masjid-brands-real.png` — brands section uses individual SVG tiles from `brand-logos/`
-> - `masjid-process.png` — process section is now a 7-step HTML/CSS timeline
-> - `masjid-zone-control-new.png` — DSP/zone control section replaced by live Zone Control Options and Audio Signal Flow sections
+> `public/` was pruned from 57 files (47 MB) to 19 files (9.7 MB) — every unreferenced asset was
+> deleted. **Do not restore any of them.** Anything in `public/` is served publicly at
+> `azaudios.com/<filename>` whether or not the site links to it, so nothing goes in here unless a
+> page actually renders it. Notably removed:
+> - `masjid-real/` — a real client's floor plans and rack architecture; publicly downloadable, never linked
+> - `brochure-front.png` / `brochure-back.png` / `catalog-masjid-grid.png` — print collateral, never linked
+> - `masjid-why-specialized.png`, `masjid-brands-real.png`, `masjid-process.png`, `masjid-zone-control*.png`
+>   — superseded by live HTML/CSS sections
+> - `brand-*.svg` at the `public/` root — eight zero-byte stubs; the real logos live in `brand-logos/`
+> - old pre-`-new` photo variants, `logo.png`, `equipment-*.svg`, `realistic-zone-control.svg`
 
 ---
 
 ## Navigation
 
-**Header nav:** Home · Masjid Sound Solutions · Commercial Audio · Residential Audio · Event Rental Services · About + "Request a Quote" CTA → `/contact`
+**Header nav:** Home · **Services** (dropdown → the four division pages) · About · phone link `+1 724 831 0196` · "Request a Quote" CTA → `/contact`. Below 1080px the dropdown is hidden and the four service links render flat via `.nav-mobile-services`.
 
-**Footer divisions column:** links to all four division pages + `/services` (All Services)
+**Footer divisions column:** maps over the same `serviceLinks` array the nav uses (single source of truth for division names) + `/services` (All Services)
+
+**Footer social:** Instagram and Facebook only. LinkedIn was removed — `linkedin.com/company/azaudiosolutions` returns 404. Restore the footer link *and* the `sameAs` entry in `index.html` together, once the page exists.
 
 > There is no Packages page — it was removed as no longer relevant.
 
@@ -146,7 +178,8 @@ Key component classes in the Masjid page:
 - `.process-timeline` / `.process-step` / `.process-step-badge` / `.process-step-vline` / `.process-step-circle` / `.process-step-body` / `.process-commitment` — 7-step horizontal timeline with numbered badges, lucide icon circles, and a gold connecting line.
 - `.zone-control-grid` / `.zone-option-card` / `.zone-option-header` / `.phone-mockup` / `.phone-zone-row` / `.phone-nav` / `.wall-mockup` / `.wall-zone-led` / `.wall-knob` / `.wall-mute-btn` / `.zone-option-features` — two-card zone control options section (phone mockup + wall panel mockup).
 - `.signal-flow-diagram` / `.signal-sources` / `.signal-zones-output` / `.signal-node` / `.signal-node-icon` / `.signal-arrow` / `.signal-arrow-col` / `.signal-zone-badge` / `.signal-zone-output-item` / `.signal-col-label` — horizontal audio signal flow diagram (Sources → Mixer → DSP → Amplifier → Zones).
-- `.sys-arch-grid` / `.sys-arch-components` / `.sys-arch-component` / `.sys-arch-badge` / `.sys-arch-comp-icon` / `.sys-rack-visual` / `.sys-rack-frame` / `.sys-rack-unit` / `.sys-rack-amp` / `.sys-rack-amp-zones` / `.sys-rack-amp-zone-more` / `.sys-arch-inputs` / `.sys-input-row` / `.sys-input-icon` / `.sys-input-arrow` — 3-column system architecture section (component list + CSS rack visual + audio inputs). Amplifier shown as multi-zone (not fixed at 4).
+- `.sys-arch-grid` / `.sys-arch-components` / `.sys-arch-component` / `.sys-arch-badge` / `.sys-arch-comp-icon` / `.sys-rack-visual` / `.sys-rack-frame` / `.sys-rack-unit` / `.sys-rack-amp` / `.sys-rack-amp-zones` / `.sys-rack-amp-zone-more` / `.sys-arch-inputs` / `.sys-input-row` / `.sys-input-icon` / `.sys-input-arrow` — 3-column system architecture section (component list + CSS rack visual + audio inputs).
+- **Zone count is never fixed at four.** This applies to *both* the System Architecture section and the Audio Signal Flow section (`MULTI-ZONE AMPLIFIER`, `ZONE OUTPUTS`, `.signal-zone-note`). The four named zones in the signal-flow diagram are an illustrative example and are labelled as such — if you touch one section, check the other.
 - `.stream-mockup-card` / `.stream-live-badge` / `.stream-live-dot` / `.stream-output-list` / `.stream-output-row` / `.stream-status-on` / `.stream-status-off` / `.stream-audio-wrap` / `.stream-audio-bars` / `.stream-audio-bar` / `.stream-camera-preview` / `.stream-camera-photo-wrap` / `.stream-camera-img` / `.stream-camera-caption` / `.stream-camera-badge` — dark broadcast panel mockup for the Livestreaming & Recording section; includes PTZ camera photo (`ptz-camera.png`) in a white inset card above the output rows.
 
 **MasjidSoundSolutionsPage section order (13 sections):** Hero → Key Benefits Strip → Why Specialized → Microphones → Multi-zone layout → Zone Control Options → Rack & Infrastructure → System Architecture Overview → Audio Signal Flow → Livestreaming & Recording → Process Timeline → Partner Brands → Final CTA
@@ -235,12 +268,14 @@ four divisions intact (Google had been showing "Masjid Sound Solutions" as the h
   `provider → @id` so search engines read AZ Audio Solutions as the parent and the four offerings as
   service divisions. These are the homepage defaults.
 - `src/components/Seo.jsx` (`RouteSeo`) — mounted once in `Layout`. On every client-side route change it
-  rewrites `document.title`, meta description, `<link rel="canonical">`, and OG/Twitter tags from a
+  rewrites `document.title`, meta description, `<link rel="canonical">`, `robots`, and OG/Twitter tags from a
   per-route `META` map. Division titles read **"… — A Division of AZ Audio Solutions"** to reinforce the
-  hierarchy. No per-page edits needed; it covers every route incl. `/services` and 404.
-- HomePage — exactly **one H1** ("AZ Audio Solutions") + subtitle; "About AZ Audio Solutions" section with
-  a visible parent → division hierarchy and internal links.
-- `public/robots.txt` and `public/sitemap.xml` already list all real routes.
+  hierarchy. Unknown paths fall through to a dedicated `NOT_FOUND` entry and get `robots: noindex, follow`
+  — Vercel's SPA rewrite answers every URL with HTTP 200, so without that they would be indexable
+  soft-404s carrying the homepage title. **When you add a route, add it to `META` *and* `sitemap.xml`.**
+- **Every route ships exactly one H1.** HomePage, the four division pages and 404 declare their own;
+  `/services`, `/about` and `/contact` get theirs via `<SectionHeading as='h1'>`.
+- `public/robots.txt` and `public/sitemap.xml` list all 8 real routes (incl. `/services`).
 
 **Canonical routes** (use the real paths — NOT `/commercial`, `/residential`, `/events`):
 `/` · `/masjid-sound-solutions` · `/commercial-audio` · `/residential-audio` · `/event-rental-services` ·

@@ -1,5 +1,4 @@
 import { Building2, PhoneCall, PenLine, HardHat, Gauge, ShieldCheck } from 'lucide-react'
-import { Link } from 'react-router-dom'
 import StandardDivisionPage from '../components/StandardDivisionPage'
 import SectionHeading from '../components/SectionHeading'
 
@@ -60,7 +59,7 @@ export default function CommercialAudioPage() {
     <>
       <StandardDivisionPage
         eyebrow='AZ Audio Division'
-        title='Commercial Audio'
+        title='Commercial Audio Solutions'
         text='Professional audio systems for offices, schools, retail spaces, and community centers — reliable, easy to operate, and built to last.'
         Icon={Building2}
         services={services}

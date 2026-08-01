@@ -10,13 +10,13 @@ const aboutDivisions = [
     text: 'Specialized audio design for prayer halls, khutba clarity, multi-zone coverage, and volunteer-friendly controls.'
   },
   {
-    title: 'Commercial Audio',
+    title: 'Commercial Audio Solutions',
     path: '/commercial-audio',
     Icon: Building2,
     text: 'Background music, paging, conference room, and multi-zone systems for offices, schools, and retail spaces.'
   },
   {
-    title: 'Residential Audio',
+    title: 'Residential Audio Solutions',
     path: '/residential-audio',
     Icon: Home,
     text: 'In-ceiling speakers, media rooms, multi-room audio, and smart home integration with a clean, professional finish.'
@@ -50,6 +50,7 @@ export default function AboutPage() {
       <section className='section page-top'>
         <div className='container'>
           <SectionHeading
+            as='h1'
             centered
             eyebrow='About AZ Audio Solutions'
             title='Professional audio for every space and every need'

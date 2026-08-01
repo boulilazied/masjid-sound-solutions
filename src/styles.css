@@ -293,6 +293,7 @@ img {
   text-align: center;
 }
 
+.section-heading h1,
 .section-heading h2 {
   margin: 0.35rem 0 0.8rem;
   font-size: clamp(2rem, 3.5vw, 3.2rem);
@@ -1068,7 +1069,7 @@ img {
   object-fit: contain;
 }
 
-.division-detail-card h3 {
+.division-detail-card h2 {
   margin: 0 0 0.6rem;
   font-size: clamp(1.8rem, 3vw, 2.7rem);
   letter-spacing: -0.04em;
@@ -1080,7 +1081,10 @@ img {
   line-height: 1.8;
 }
 
-.division-detail-card .button {
+.division-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
   margin-top: 1.2rem;
 }
 
@@ -2517,6 +2521,14 @@ img {
   white-space: nowrap;
 }
 
+.signal-zone-note {
+  margin: 0.35rem 0 0;
+  font-size: 11px;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--real-muted, #5f6b7a);
+}
+
 @media (max-width: 1080px) {
   .signal-flow-diagram {
     flex-wrap: wrap;
@@ -3445,55 +3457,6 @@ img {
 }
 .nav-phone:hover { color: var(--primary); }
 
-/* ─── Testimonials ───────────────────────────────── */
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-top: 2.5rem;
-}
-
-.testimonial-card {
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 2rem 1.75rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.testimonial-stars {
-  color: var(--primary);
-  font-size: 1rem;
-  letter-spacing: 2px;
-}
-
-.testimonial-quote {
-  font-size: 0.97rem;
-  line-height: 1.75;
-  color: var(--text);
-  margin: 0;
-  flex: 1;
-}
-
-.testimonial-author {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding-top: 0.75rem;
-  border-top: 1px solid var(--border);
-}
-
-.testimonial-author strong {
-  font-size: 0.9rem;
-  color: var(--text);
-}
-
-.testimonial-author span {
-  font-size: 0.82rem;
-  color: var(--muted);
-}
 
 /* ─── Footer social icons ────────────────────────── */
 .footer-social {
@@ -3528,14 +3491,9 @@ img {
 
 /* ─── Responsive overrides ───────────────────────── */
 @media (max-width: 1080px) {
-  .testimonials-grid { grid-template-columns: 1fr 1fr; }
   .nav-dropdown-wrap { display: none; }
   .nav-mobile-services { display: contents; }
   .nav-phone { display: none; }
-}
-
-@media (max-width: 640px) {
-  .testimonials-grid { grid-template-columns: 1fr; }
 }
 
 /* SEO additions — hero subtitle + brand-hierarchy list (neutral, reuses existing tokens) */

@@ -37,7 +37,7 @@ const processSteps = [
   { n: '4', title: 'Installation',      text: 'Professional installation with minimal disruption to daily prayers. Clean cable runs and organized rack build.', Icon: HardHat },
   { n: '5', title: 'Testing & Tuning',  text: 'On-site DSP tuning, zone coverage verification, and a full staff walkthrough before we hand over the system.', Icon: Gauge },
   { n: '6', title: 'Training',          text: 'Hands-on session with the imam and authorized staff on system operation, zone control, and daily use.', Icon: GraduationCap },
-  { n: '7', title: 'Support & Warranty',text: 'Remote and on-site support, firmware updates, and a full warranty to keep your system performing long-term.', Icon: ShieldCheck },
+  { n: '7', title: 'Support & Warranty',text: 'Remote and on-site support, firmware updates, and full manufacturer warranty coverage on every component we supply.', Icon: ShieldCheck },
 ]
 
 const brands = [
@@ -71,7 +71,7 @@ export default function MasjidSoundSolutionsPage() {
           <div className='clean-hero-panel'>
             <img src='/az-masjid-audio-logo-clean.png' alt='AZ Masjid Audio' className='clean-masjid-logo' />
             <div className='real-eyebrow'>Professional masjid audio systems</div>
-            <h1>Trusted solutions for sacred spaces.</h1>
+            <h1>Masjid sound systems built for sacred spaces.</h1>
             <p>
               We help masjids create an environment where every word is heard, every message is understood,
               and every worshipper feels connected.
@@ -403,20 +403,23 @@ export default function MasjidSoundSolutionsPage() {
 
             <div className='signal-node'>
               <div className='signal-node-icon'><Zap size={28} strokeWidth={1.5} /></div>
-              <strong>4-CH AMPLIFIER</strong>
+              <strong>MULTI-ZONE AMPLIFIER</strong>
               <span>Independent power<br />for each zone</span>
             </div>
 
             <div className='signal-arrow-col'><div className='signal-arrow' /></div>
 
+            {/* Zone count is never fixed at four — the example below is illustrative
+                and must stay consistent with the System Architecture section. */}
             <div className='signal-zones-output'>
-              <div className='signal-col-label'>4 ZONES OUTPUT</div>
+              <div className='signal-col-label'>ZONE OUTPUTS</div>
               {['Musalla', 'Support Areas', 'Basement', 'Outdoor'].map((name, i) => (
                 <div key={name} className='signal-zone-output-item'>
                   <div className='signal-zone-badge'>{i + 1}</div>
                   <span>{name}</span>
                 </div>
               ))}
+              <p className='signal-zone-note'>Example layout — zones scale to your masjid</p>
             </div>
 
           </div>
@@ -529,7 +532,7 @@ export default function MasjidSoundSolutionsPage() {
       <section className='clean-section brands-clean-section'>
         <div className='container'>
           <div className='clean-section-intro centered'>
-            <div className='real-eyebrow'>Partnering with industry leaders</div>
+            <div className='real-eyebrow'>Equipment we build with</div>
             <h2>Designed with trusted AV brands</h2>
             <p>Real products, real support, and serviceable systems built with proven AV ecosystems.</p>
           </div>

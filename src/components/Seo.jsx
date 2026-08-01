@@ -30,9 +30,9 @@ const META = {
       'Residential Audio Solutions by AZ Audio Solutions: clean home audio, in-ceiling speakers, media-room sound, multi-room audio and smart control integration.',
   },
   '/event-rental-services': {
-    title: 'Event Audio Solutions — A Division of AZ Audio Solutions',
+    title: 'Event Rental Services — A Division of AZ Audio Solutions',
     description:
-      'Event Audio Solutions by AZ Audio Solutions: portable PA systems, wireless microphones, mixers, speakers and temporary audio support for events and gatherings.',
+      'Event Rental Services by AZ Audio Solutions: portable PA systems, wireless microphones, mixers, speakers and temporary audio support for events and gatherings.',
   },
   '/services': {
     title: 'Audio Services — AZ Audio Solutions',
@@ -49,6 +49,16 @@ const META = {
     description:
       'Contact AZ Audio Solutions for professional audio system design, installation and support for masjids, commercial facilities, events and residential projects across the USA and Canada.',
   },
+}
+
+// Unknown routes render the NotFound component, but Vercel's SPA rewrite still
+// answers them with HTTP 200. Without this entry they would inherit the homepage
+// title and description and become indexable soft-404s, so they get their own
+// metadata plus noindex.
+const NOT_FOUND = {
+  title: 'Page Not Found — AZ Audio Solutions',
+  description:
+    'This page does not exist. Browse AZ Audio Solutions for masjid, commercial, residential and event audio system design, installation and support.',
 }
 
 function upsertMeta(attr, key, content) {
@@ -79,12 +89,18 @@ export default function RouteSeo() {
   const { pathname } = useLocation()
 
   useEffect(() => {
-    const meta = META[pathname] || META['/']
+    const known = Object.prototype.hasOwnProperty.call(META, pathname)
+    const meta = known ? META[pathname] : NOT_FOUND
     const canonical = pathname === '/' ? `${SITE}/` : `${SITE}${pathname}`
 
     document.title = meta.title
     upsertMeta('name', 'description', meta.description)
     upsertCanonical(canonical)
+    upsertMeta(
+      'name',
+      'robots',
+      known ? 'index, follow, max-image-preview:large, max-snippet:-1' : 'noindex, follow'
+    )
 
     upsertMeta('property', 'og:type', 'website')
     upsertMeta('property', 'og:site_name', 'AZ Audio Solutions')

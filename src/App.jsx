@@ -15,9 +15,9 @@ function NotFound() {
     <section className='section page-top'>
       <div className='container'>
         <div className='eyebrow'>404</div>
-        <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.2rem)', margin: '0.5rem 0 1rem', letterSpacing: '-0.035em' }}>
+        <h1 style={{ fontSize: 'clamp(2rem, 4vw, 3.2rem)', margin: '0.5rem 0 1rem', letterSpacing: '-0.035em' }}>
           Page not found
-        </h2>
+        </h1>
         <p style={{ color: 'var(--muted)', marginBottom: '1.5rem' }}>
           The page you're looking for doesn't exist.
         </p>

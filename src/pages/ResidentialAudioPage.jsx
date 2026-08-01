@@ -59,7 +59,7 @@ export default function ResidentialAudioPage() {
     <>
       <StandardDivisionPage
         eyebrow='AZ Audio Division'
-        title='Residential Audio'
+        title='Residential Audio Solutions'
         text='Home audio installations that deliver clean, natural sound with discreet installation and simple everyday control.'
         Icon={Home}
         services={services}

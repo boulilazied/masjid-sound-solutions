@@ -2,10 +2,12 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 import RouteSeo from './Seo'
 
+// Canonical division names. These exact strings must match src/components/Seo.jsx,
+// the JSON-LD @graph in index.html, and every division card across the site.
 const serviceLinks = [
   { to: '/masjid-sound-solutions', label: 'Masjid Sound Solutions' },
-  { to: '/commercial-audio',       label: 'Commercial Audio' },
-  { to: '/residential-audio',      label: 'Residential Audio' },
+  { to: '/commercial-audio',       label: 'Commercial Audio Solutions' },
+  { to: '/residential-audio',      label: 'Residential Audio Solutions' },
   { to: '/event-rental-services',  label: 'Event Rental Services' },
 ]
 
@@ -152,22 +154,18 @@ export default function Layout({ children }) {
                   <path d='M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z'/>
                 </svg>
               </a>
-              <a href='https://www.linkedin.com/company/azaudiosolutions' target='_blank' rel='noreferrer' className='footer-social-link' aria-label='LinkedIn'>
-                <svg width='18' height='18' viewBox='0 0 24 24' fill='currentColor'>
-                  <path d='M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z'/>
-                  <circle cx='4' cy='4' r='2'/>
-                </svg>
-              </a>
+              {/* LinkedIn removed — linkedin.com/company/azaudiosolutions returns 404.
+                  Restore this link (and the matching sameAs entry in index.html)
+                  once the company page actually exists. */}
             </div>
           </div>
 
           <div>
             <div className='footer-heading'>Services</div>
             <ul className='footer-list'>
-              <li><Link to='/masjid-sound-solutions'>Masjid Sound Solutions</Link></li>
-              <li><Link to='/commercial-audio'>Commercial Audio</Link></li>
-              <li><Link to='/residential-audio'>Residential Audio</Link></li>
-              <li><Link to='/event-rental-services'>Event Rental Services</Link></li>
+              {serviceLinks.map((s) => (
+                <li key={s.to}><Link to={s.to}>{s.label}</Link></li>
+              ))}
               <li><Link to='/services'>All Services</Link></li>
             </ul>
           </div>
