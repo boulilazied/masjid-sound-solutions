@@ -8,6 +8,7 @@ import MasjidSoundSolutionsPage from './pages/MasjidSoundSolutionsPage'
 import CommercialAudioPage from './pages/CommercialAudioPage'
 import ResidentialAudioPage from './pages/ResidentialAudioPage'
 import EventRentalServicesPage from './pages/EventRentalServicesPage'
+import ConnectedHomePage from './pages/ConnectedHomePage'
 import { Link } from 'react-router-dom'
 
 function NotFound() {
@@ -37,6 +38,7 @@ export default function App() {
         <Route path='/commercial-audio' element={<CommercialAudioPage />} />
         <Route path='/residential-audio' element={<ResidentialAudioPage />} />
         <Route path='/event-rental-services' element={<EventRentalServicesPage />} />
+        <Route path='/connected-home' element={<ConnectedHomePage />} />
         <Route path='/about' element={<AboutPage />} />
         <Route path='/contact' element={<ContactPage />} />
         <Route path='*' element={<NotFound />} />

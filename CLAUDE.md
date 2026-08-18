@@ -4,7 +4,7 @@
 
 **Company:** AZ Audio Solutions  
 **Rebranded from:** Masjid Sound Solutions (scope expanded beyond masjids — some legacy naming remains in the codebase)  
-**Four divisions (canonical names — use these exact strings everywhere):** Masjid Sound Solutions · Commercial Audio Solutions · Residential Audio Solutions · Event Rental Services  
+**Five divisions (canonical names — use these exact strings everywhere):** Masjid Sound Solutions · Commercial Audio Solutions · Residential Audio Solutions · Connected Home Solutions · Event Rental Services  
 **Contact:** contact@azaudios.com · WhatsApp +1 724 831 0196 · +1 724 427 5661 · USA and Canada
 
 ---
@@ -72,6 +72,7 @@ When in doubt, ask the owner for the underlying fact rather than writing somethi
 | `/masjid-sound-solutions` | MasjidSoundSolutionsPage |
 | `/commercial-audio` | CommercialAudioPage |
 | `/residential-audio` | ResidentialAudioPage |
+| `/connected-home` | ConnectedHomePage |
 | `/event-rental-services` | EventRentalServicesPage |
 | `/about` | AboutPage |
 | `/contact` | ContactPage |
@@ -89,11 +90,20 @@ src/
   App.jsx                         — router root, NotFound component
   styles.css                      — single CSS file (~3,500 lines)
   pages/
-    HomePage.jsx                  — hero (H1 "AZ Audio Solutions", slogan "Premium Quality. Affordable Cost."), stats strip, divisions grid, About AZ Audio Solutions + brand-hierarchy section, how-it-works, credentials, equipment-standards brand grid, commitments, CTA band
+    HomePage.jsx                  — cinematic photo hero (H1 "AZ Audio Solutions", slogan "Premium
+                                    Quality. Affordable Cost.", division chips), stats strip, divisions
+                                    grid, About + brand-hierarchy diagram, how-it-works gold timeline,
+                                    "Our Work" photo band, credentials, equipment-standards brand grid,
+                                    commitments, CTA band
     ServicesPage.jsx              — all four divisions via <DivisionPage>
     MasjidSoundSolutionsPage.jsx  — rich 13-section standalone page, lucide-react icons
     CommercialAudioPage.jsx       — full content via <StandardDivisionPage>
-    ResidentialAudioPage.jsx      — full content via <StandardDivisionPage>
+    ResidentialAudioPage.jsx      — full content via <StandardDivisionPage> + cross-link section to /connected-home
+    ConnectedHomePage.jsx         — smart-home division page, laid out to echo the printed flyers: masthead with
+                                    shield emblem, gold rule, Basic/Silver/Gold tier switcher driving a 12-tile
+                                    numbered product grid + installed-price block, benefits bar, comparison table,
+                                    add-ons, process, audio cross-link, CTA. Contents/prices/photography all come
+                                    from the flyers.
     EventRentalServicesPage.jsx   — rich 9-section standalone page (matches masjid page quality)
     AboutPage.jsx                 — company overview, all 4 divisions grid, team section (reuses `.hp-cred-grid`), values panel
     ContactPage.jsx               — SectionHeading + QuoteForm + contact card
@@ -121,6 +131,12 @@ public/
   masjid-rack-room-new.png        — equipment rack section image
   masjid-multi-zone-layout.png    — zone layout diagram
   ptz-camera.png                  — PTZ camera product photo (Livestreaming & Recording section)
+  home/                           — home page imagery, re-encoded from existing assets (provenance below)
+    hero-prayer.jpg               — full-bleed hero photograph (from masjid-prayer-wide-new.png)
+    work-mics.jpg / work-rack.jpg / work-app.jpg / work-home.jpg — "Our Work" band
+  masjid-app-zones.jpg            — real AtlasIED Atmosphere app screenshot (front panel)
+  masjid-app-volume.jpg           — real Atmosphere app screenshot (zone source + volume) — MasjidSoundSolutionsPage
+  smart-home/                     — 13 product shots + hero-home.jpg, all cropped from the smart-home flyers
   brand-logos/                    — SVG logos for the partner brands section
     jbl.svg                       — real Simple Icons path (actual JBL mark)
     sennheiser.svg                — real Simple Icons path (actual Sennheiser mark)
@@ -133,6 +149,23 @@ public/
     atlasied.svg                  — two-line wordmark: ATLAS (#0058A5) / IED (#666)
 ```
 
+> **Image provenance.** Everything under `public/smart-home/` was cropped out of the three
+> Basic/Silver/Gold flyer JPEGs in `D:\work\masjidSoundSolutions\homes\` — product photos lifted from
+> the tile grid, `hero-home.jpg` from the Silver flyer's left panel. The extraction script lives in the
+> session scratchpad, not the repo; if the flyers are reissued, re-crop rather than hand-editing. Two
+> traps when re-cropping: the tile caption text sits just below each product photo (crop too low and it
+> bleeds in), and the flyer art has a **near-white backdrop rectangle** behind each product — pixels
+> >= 246 are lifted to pure white so it does not read as a grey plate against the white tile.
+>
+> `public/home/` holds optimized JPEG re-encodings of photography already published elsewhere on the
+> site — `hero-prayer.jpg` from `masjid-prayer-wide-new.png`, the work-band shots from the masjid
+> photos and `smart-home/hero-home.jpg`, plus `work-app.jpg` from `ima4.png` in the assets folder.
+> The originals are multi-MB PNGs and the hero is above the fold, so it must stay a compressed JPEG.
+>
+> `masjid-app-zones.jpg` / `masjid-app-volume.jpg` are real screenshots from an installed Atmosphere
+> system. **The Safari toolbar was cropped off deliberately** — it showed the client's device IP
+> (`10.0.0.240`). Keep it cropped on any replacement.
+>
 > `public/` was pruned from 57 files (47 MB) to 19 files (9.7 MB) — every unreferenced asset was
 > deleted. **Do not restore any of them.** Anything in `public/` is served publicly at
 > `azaudios.com/<filename>` whether or not the site links to it, so nothing goes in here unless a
@@ -148,7 +181,7 @@ public/
 
 ## Navigation
 
-**Header nav:** Home · **Services** (dropdown → the four division pages) · About · phone link `+1 724 831 0196` · "Request a Quote" CTA → `/contact`. Below 1080px the dropdown is hidden and the four service links render flat via `.nav-mobile-services`.
+**Header nav:** Home · **Services** (dropdown → the five division pages) · About · phone link `+1 724 831 0196` · "Request a Quote" CTA → `/contact`. The phone link is hidden below 1080px. The dropdown is kept down to **760px** — below that `.main-nav` becomes a column behind the hamburger and the five service links render flat via `.nav-mobile-services`. Do not raise that 760px back to 1080px: five flat links do not fit in a horizontal row, and doing so pushes the header into horizontal overflow.
 
 **Footer divisions column:** maps over the same `serviceLinks` array the nav uses (single source of truth for division names) + `/services` (All Services)
 
@@ -191,7 +224,64 @@ Key component classes in the Masjid page:
 
 Responsive breakpoints: **1080px, 980px, 760px, 640px**
 
+**Connected Home page classes** (`.smarthome-page` root):
+- `[data-tier="basic|silver|gold"]` on the root drives `--tier` / `--tier-bright` / `--tier-panel`,
+  which recolour the masthead, gold rule, tile badges, price block and table highlight together.
+  React state sets the attribute; there is no per-tier stylesheet.
+- `.sh-masthead` / `.sh-masthead-photo` / `.sh-masthead-wedge` / `.sh-masthead-panel` — the flyer
+  masthead. The diagonal is two stacked `clip-path` polygons: the wedge paints `--tier`, the panel
+  sits on top inset ~7px so the difference reads as a gold hairline. Both clips are dropped below 860px.
+- `.sh-goldband` — the "A complete, fully-integrated smart home solution" rule
+- `.sh-tier-tabs` / `.sh-tier-tab` — package switcher
+- `.sh-tiles` / `.sh-tile` / `.sh-tile-badge` / `.sh-tile-media` / `.sh-tile-icon` — numbered product
+  grid, 4 → 3 → 2 columns. `.sh-tile h3` carries a `min-height` so captions align across a row.
+- `.sh-price-block` / `.sh-price-label` / `.sh-price-amount` / `.sh-price-tagline` / `.sh-price-cta`
+- `.sh-benefits` / `.sh-benefits-row` / `.sh-benefit` — dark benefits bar
+- The page re-declares the `--real-*` tokens on its root. They are otherwise only defined on
+  `.masjid-clean-page`, and the shared `.clean-section` / `.real-eyebrow` / `.real-button` /
+  `.why-card` / `.process-timeline` / `.final-consultation` components read them. **`.event-rental-page`
+  does not declare them** — that page renders those components with unresolved custom properties.
+- `.sh-table-wrap` / `.sh-table` / `.sh-th-featured` / `.sh-td-featured` / `.sh-cell-yes` / `.sh-cell-no`
+  / `.sh-cell-spec` / `.sh-table-note` — package comparison table; the wrapper scrolls on its own below ~700px
+- `.sh-crosslink` / `.sh-crosslink-icon` / `.sh-crosslink-copy` / `.sh-crosslink-cta` — Residential Audio band
+- `.smarthome-page .process-timeline` is 6 columns and **outranks** the generic `.process-timeline`
+  responsive rules — its 1080px/640px step-downs are declared explicitly. Same trap as `.event-rental-page`.
+- This page uses its own `.sh-benefits` bar rather than the shared `.masjid-benefits-strip`, which
+  does not wrap and clips its last item between 761px and 1080px. That pre-existing clipping still
+  affects the masjid and event-rental pages.
+
+**Five-division grid layout:** `.division-tabs` and `.about-div-grid` run on a 6-column track above
+1080px with each card spanning 2, so five cards render 3 + 2-centered via `:nth-child(4)`/`:nth-child(5)`.
+`.hero-div-chip--featured` spans the full row so the other four form a 2×2. **These rules hardcode five
+items** — update them if the division count changes.
+
+**Home page classes:**
+- `.hp-hero` / `.hp-hero-media` / `.hp-hero-scrim` / `.hp-hero-inner` / `.hp-hero-eyebrow` /
+  `.hp-hero-slogan` / `.hp-hero-lead` / `.hp-hero-actions` / `.hp-hero-chips` / `.hp-hero-chip` —
+  full-bleed photo hero. `.hp-hero-media` is scaled 1.04 and clipped by the section's
+  `overflow:hidden`, so it reports as overflowing in element-geometry audits while
+  `body.scrollWidth` stays correct. `.hp-hero-scrim` stacks three gradients — do not reduce it to
+  one, the chips need the bottom scrim to stay legible over the photo.
+- `.hp-btn` / `.hp-btn-gold` / `.hp-btn-ghost` — hero buttons, separate from the global `.button`
+- `.hp-tree` / `.hp-tree-parent` / `.hp-tree-stem` / `.hp-tree-branches` / `.hp-tree-node` — brand
+  hierarchy diagram. Connector rule and stubs are dropped below 1080px once the row wraps.
+  **The "A service division of AZ Audio Solutions for ..." phrasing is SEO-load-bearing — keep it.**
+  Descriptors are stored already-lowercased in the `hierarchy` array; do not `.toLowerCase()` at
+  render time, it mangles "PA".
+- `.hp-work-grid` / `.hp-work-card` — "Our Work" photo band
+- `.hp-timeline` — 4-column variant of the shared `.process-timeline`
+
 **Do not re-add:**
+- `.hero` / `.hero-grid` / `.hero-copy` / `.hero-text` / `.hero-subtitle` / `.hero-metrics` /
+  `.hero-visual-wrap` / `.hero-visual-card` / `.hero-logo` / `.hero-logo-wide` / `.visual-kicker` /
+  `.hero-div-preview-grid` / `.hero-div-chip*` — the old light split hero, replaced by `.hp-hero`
+  on 2026-08-18 and deleted. `.hero-actions` survives and is still used by `StandardDivisionPage`.
+- `.az-division-hierarchy` — five identical bordered rows, replaced by the `.hp-tree` diagram.
+- `.phone-mockup` / `.phone-camera-dot` / `.phone-screen-header` / `.phone-zone-*` / `.phone-nav*` —
+  a CSS-drawn fake phone showing invented zone names and volume percentages in the Zone Control
+  section. Replaced on 2026-08-18 by `.zone-phone-shots` / `.zone-phone`, holding two real Atmosphere
+  app screenshots. Real product evidence beats a mockup, and the mockup's four named zones conflicted
+  with the "zone count is never fixed at four" rule above.
 - `.masjid-premium-page` — deleted, was design iteration 1, never used
 - `.masjid-real-page` bulk — deleted, was design iteration 2, replaced by `.masjid-clean-page`
 - A second `:root` block — was merged into the single canonical `:root`
@@ -229,6 +319,7 @@ Required: `name`, `email`, `message`. All others optional.
 
 | Page | Status |
 |---|---|
+| ConnectedHomePage | **Complete** — 9-section standalone page: hero, benefits strip, 12-component grid, Basic/Silver/Gold package cards, comparison table, optional add-ons, 6-step process, residential-audio cross-link, CTA |
 | MasjidSoundSolutionsPage | **Complete** — 13-section standalone page: hero, key benefits strip, why-grid, mic section, zone layout, zone control options, rack, system architecture, signal flow, livestreaming & recording (with PTZ camera), process timeline, brands, CTA |
 | CommercialAudioPage | **Complete** — full content via `StandardDivisionPage` (6 services, 5 why-us points) |
 | ResidentialAudioPage | **Complete** — full content via `StandardDivisionPage` (6 services, 5 why-us points) |
@@ -275,11 +366,11 @@ four divisions intact (Google had been showing "Masjid Sound Solutions" as the h
   soft-404s carrying the homepage title. **When you add a route, add it to `META` *and* `sitemap.xml`.**
 - **Every route ships exactly one H1.** HomePage, the four division pages and 404 declare their own;
   `/services`, `/about` and `/contact` get theirs via `<SectionHeading as='h1'>`.
-- `public/robots.txt` and `public/sitemap.xml` list all 8 real routes (incl. `/services`).
+- `public/robots.txt` and `public/sitemap.xml` list all 9 real routes (incl. `/services`).
 
-**Canonical routes** (use the real paths — NOT `/commercial`, `/residential`, `/events`):
-`/` · `/masjid-sound-solutions` · `/commercial-audio` · `/residential-audio` · `/event-rental-services` ·
-`/services` · `/about` · `/contact`.
+**Canonical routes** (use the real paths — NOT `/commercial`, `/residential`, `/events`, `/smart-home`):
+`/` · `/masjid-sound-solutions` · `/commercial-audio` · `/residential-audio` · `/connected-home` ·
+`/event-rental-services` · `/services` · `/about` · `/contact`.
 
 **Off-page (not code):** see [`MARKETING-SEO.md`](MARKETING-SEO.md) — Google Business Profile kit, NAP
 brand-consistency checklist, short bios, and Search Console steps. Brand ranking for "azaudios" / "AZ Audio"

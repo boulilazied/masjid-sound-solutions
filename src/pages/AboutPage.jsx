@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Volume2, Building2, Home, Mic2, GraduationCap, BookOpen } from 'lucide-react'
+import { Volume2, Building2, Home, HouseWifi, Mic2, GraduationCap, BookOpen } from 'lucide-react'
 import SectionHeading from '../components/SectionHeading'
 
 const aboutDivisions = [
@@ -20,6 +20,12 @@ const aboutDivisions = [
     path: '/residential-audio',
     Icon: Home,
     text: 'In-ceiling speakers, media rooms, multi-room audio, and smart home integration with a clean, professional finish.'
+  },
+  {
+    title: 'Connected Home Solutions',
+    path: '/connected-home',
+    Icon: HouseWifi,
+    text: 'Fully integrated smart home systems — security cameras, smart locks, alarm sensors, lighting, climate and motorized curtains, all in one app.'
   },
   {
     title: 'Event Rental Services',
@@ -54,7 +60,7 @@ export default function AboutPage() {
             centered
             eyebrow='About AZ Audio Solutions'
             title='Professional audio for every space and every need'
-            text='AZ Audio Solutions is a USA and Canada-based audio company organized into four specialized divisions. We started with a deep focus on masjid audio and expanded to serve commercial buildings, homes, and events under one trusted brand.'
+            text='AZ Audio Solutions is a USA and Canada-based company organized into five specialized divisions. We started with a deep focus on masjid audio and expanded to serve commercial buildings, homes, connected homes, and events under one trusted brand.'
           />
         </div>
       </section>
@@ -63,8 +69,8 @@ export default function AboutPage() {
         <div className='container'>
           <SectionHeading
             centered
-            eyebrow='Our Four Divisions'
-            title='One company, four specialized services'
+            eyebrow='Our Five Divisions'
+            title='One company, five specialized services'
             text='Each division is built around a distinct space and customer type — so you get focused expertise, not a generic contractor.'
           />
           <div className='about-div-grid'>

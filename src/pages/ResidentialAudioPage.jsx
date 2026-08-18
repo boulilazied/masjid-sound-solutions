@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { Home, PhoneCall, PenLine, HardHat, Gauge, ShieldCheck } from 'lucide-react'
 import StandardDivisionPage from '../components/StandardDivisionPage'
 import SectionHeading from '../components/SectionHeading'
@@ -21,7 +22,7 @@ const services = [
   },
   {
     title: 'Smart Home Integration',
-    text: 'Connects with your existing smart home ecosystem for voice control, automation, and unified scene management.'
+    text: 'Connects with your existing smart home ecosystem for voice control, automation, and unified scene management — or pair it with a full Connected Home package.'
   },
   {
     title: 'Clean Installation & Calibration',
@@ -84,6 +85,21 @@ export default function ResidentialAudioPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Cross-link: Connected Home Solutions */}
+      <section className='section'>
+        <div className='container'>
+          <SectionHeading
+            centered
+            eyebrow='Also available'
+            title='Want the rest of the home connected too?'
+            text='Our Connected Home Solutions division installs fully integrated smart home systems — security cameras, smart locks and video doorbells, lighting, climate, alarm sensors and motorized curtains — designed to run alongside your audio on the same app.'
+          />
+          <p style={{ textAlign: 'center' }}>
+            <Link to='/connected-home' className='button button-primary'>See Connected Home Packages</Link>
+          </p>
         </div>
       </section>
 

@@ -10,9 +10,9 @@ const OG_IMAGE = `${SITE}/logo-az.png`
 //   AZ Audio Solutions = parent company, each division = "A Division of AZ Audio Solutions".
 const META = {
   '/': {
-    title: 'AZ Audio Solutions | Professional Audio Systems for Masjids, Commercial, Residential & Events',
+    title: 'AZ Audio Solutions | Professional Audio Systems & Smart Home Solutions for Masjids, Commercial, Residential & Events',
     description:
-      'AZ Audio Solutions provides professional audio system design, installation, DSP tuning, acoustic optimization, multi-zone audio control, and support for masjids, commercial facilities, event venues, and residential projects throughout the USA and Canada.',
+      'AZ Audio Solutions provides professional audio system design, installation, DSP tuning, acoustic optimization, multi-zone audio control, and fully integrated connected home systems for masjids, commercial facilities, event venues, and residential projects throughout the USA and Canada.',
   },
   '/masjid-sound-solutions': {
     title: 'Masjid Sound Solutions — A Division of AZ Audio Solutions',
@@ -29,6 +29,11 @@ const META = {
     description:
       'Residential Audio Solutions by AZ Audio Solutions: clean home audio, in-ceiling speakers, media-room sound, multi-room audio and smart control integration.',
   },
+  '/connected-home': {
+    title: 'Connected Home Solutions — A Division of AZ Audio Solutions',
+    description:
+      'Connected Home Solutions by AZ Audio Solutions: fully integrated smart home packages — security cameras, smart locks and video doorbells, lighting, thermostats, alarm systems, motorized curtains and UPS backup, professionally installed and programmed. Basic, Silver and Gold packages from $6,500.',
+  },
   '/event-rental-services': {
     title: 'Event Rental Services — A Division of AZ Audio Solutions',
     description:
@@ -37,7 +42,7 @@ const META = {
   '/services': {
     title: 'Audio Services — AZ Audio Solutions',
     description:
-      'Explore the four service divisions of AZ Audio Solutions: masjid, commercial, residential and event audio system design, installation and tuning.',
+      'Explore the five service divisions of AZ Audio Solutions: masjid, commercial, residential and event audio system design and installation, plus fully integrated connected home packages.',
   },
   '/about': {
     title: 'About AZ Audio Solutions',
@@ -58,7 +63,7 @@ const META = {
 const NOT_FOUND = {
   title: 'Page Not Found — AZ Audio Solutions',
   description:
-    'This page does not exist. Browse AZ Audio Solutions for masjid, commercial, residential and event audio system design, installation and support.',
+    'This page does not exist. Browse AZ Audio Solutions for masjid, commercial, residential and event audio system design, connected home installations, and support.',
 }
 
 function upsertMeta(attr, key, content) {

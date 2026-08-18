@@ -1,4 +1,4 @@
-import { Building2, Home, Mic2 } from 'lucide-react'
+import { Building2, Home, HouseWifi, Mic2 } from 'lucide-react'
 import DivisionPage from '../components/DivisionPage'
 
 const divisions = [
@@ -42,6 +42,19 @@ const divisions = [
     ]
   },
   {
+    title: 'Connected Home Solutions',
+    path: '/connected-home',
+    subtitle: 'Fully integrated smart home security, comfort and control',
+    Icon: HouseWifi,
+    points: [
+      'Security camera systems with 24/7 recording',
+      'Smart door locks, video doorbells and alarm sensors',
+      'Smart lighting, thermostats and motorized curtains',
+      'Central hub integration — one app for the whole home',
+      'Basic, Silver and Gold packages at a fixed installed price'
+    ]
+  },
+  {
     title: 'Event Rental Services',
     path: '/event-rental-services',
     subtitle: 'Temporary audio systems for events and gatherings',
@@ -60,8 +73,8 @@ export default function ServicesPage() {
   return (
     <DivisionPage
       eyebrow='Services'
-      title='Four audio divisions under AZ Audio Solutions'
-      text='Each section is built around a different customer need: masjids, commercial buildings, homes, and events.'
+      title='Five service divisions under AZ Audio Solutions'
+      text='Each section is built around a different customer need: masjids, commercial buildings, homes, connected homes, and events.'
       divisions={divisions}
     />
   )

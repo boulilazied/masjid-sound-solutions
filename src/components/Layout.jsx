@@ -8,6 +8,7 @@ const serviceLinks = [
   { to: '/masjid-sound-solutions', label: 'Masjid Sound Solutions' },
   { to: '/commercial-audio',       label: 'Commercial Audio Solutions' },
   { to: '/residential-audio',      label: 'Residential Audio Solutions' },
+  { to: '/connected-home',         label: 'Connected Home Solutions' },
   { to: '/event-rental-services',  label: 'Event Rental Services' },
 ]
 
@@ -139,7 +140,7 @@ export default function Layout({ children }) {
           <div>
             <img src='/logo-az-transparent.png' alt='AZ Audio Solutions logo' className='footer-logo' />
             <p className='footer-copy'>
-              Professional audio solutions for masjids, commercial spaces, homes, and events across the USA and Canada.
+              Professional audio and smart home solutions for masjids, commercial spaces, homes, and events across the USA and Canada.
             </p>
             <div className='footer-social'>
               <a href='https://www.instagram.com/azaudiosolutions' target='_blank' rel='noreferrer' className='footer-social-link' aria-label='Instagram'>

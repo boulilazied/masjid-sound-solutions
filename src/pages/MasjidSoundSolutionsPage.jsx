@@ -184,32 +184,33 @@ export default function MasjidSoundSolutionsPage() {
                   <span>iOS / Android</span>
                 </div>
               </div>
-              <div className='phone-mockup'>
-                <div className='phone-camera-dot' />
-                <div className='phone-screen-header'>Zones</div>
-                {[
-                  { name: 'Zone 1 — Musalla', pct: 70 },
-                  { name: 'Zone 2 — Support Area', pct: 20 },
-                  { name: 'Zone 3 — Basement', pct: 0 },
-                  { name: 'Zone 4 — Outdoor', pct: 70 },
-                ].map(z => (
-                  <div key={z.name} className='phone-zone-row'>
-                    <span className='phone-zone-name'>{z.name}</span>
-                    <div className='phone-zone-track'>
-                      <div className='phone-zone-fill' style={{ width: `${z.pct}%` }} />
-                    </div>
-                    <span className='phone-zone-val'>{z.pct}%</span>
-                  </div>
-                ))}
-                <div className='phone-nav'>
-                  <span>HOME</span>
-                  <span className='phone-nav-active'>ZONES</span>
-                  <span>SOURCES</span>
-                  <span>SETTINGS</span>
-                </div>
+              {/* Real screenshots from an installed AtlasIED Atmosphere system.
+                  The device IP was cropped out of the browser bar before export. */}
+              <div className='zone-phone-shots'>
+                <figure className='zone-phone'>
+                  <img
+                    src='/masjid-app-zones.jpg'
+                    alt='Atmosphere app front panel on a phone, showing Zone Control, Source Control and Schedule'
+                    loading='lazy'
+                    width='620'
+                    height='1080'
+                  />
+                  <figcaption>Zone &amp; source menu</figcaption>
+                </figure>
+                <figure className='zone-phone'>
+                  <img
+                    src='/masjid-app-volume.jpg'
+                    alt='Atmosphere app zone screen on a phone, showing the selected microphone source and a volume slider'
+                    loading='lazy'
+                    width='620'
+                    height='1080'
+                  />
+                  <figcaption>Per-zone source &amp; volume</figcaption>
+                </figure>
               </div>
+
               <ul className='zone-option-features'>
-                <li>Real-time per-zone volume and mute control</li>
+                <li>Real-time per-zone source selection and volume control</li>
                 <li>Preset recall for salat, khutba, and events</li>
                 <li>Works over local Wi-Fi — no internet needed</li>
                 <li>Multiple authorized users supported</li>
