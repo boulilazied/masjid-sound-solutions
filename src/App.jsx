@@ -9,6 +9,7 @@ import CommercialAudioPage from './pages/CommercialAudioPage'
 import ResidentialAudioPage from './pages/ResidentialAudioPage'
 import EventRentalServicesPage from './pages/EventRentalServicesPage'
 import ConnectedHomePage from './pages/ConnectedHomePage'
+import AmjaPage from './pages/AmjaPage'
 import { Link } from 'react-router-dom'
 
 function NotFound() {
@@ -41,6 +42,8 @@ export default function App() {
         <Route path='/connected-home' element={<ConnectedHomePage />} />
         <Route path='/about' element={<AboutPage />} />
         <Route path='/contact' element={<ContactPage />} />
+        {/* Conference QR landing — home page plus the lead-capture modal. */}
+        <Route path='/amja' element={<AmjaPage />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </Layout>

@@ -76,6 +76,7 @@ When in doubt, ask the owner for the underlying fact rather than writing somethi
 | `/event-rental-services` | EventRentalServicesPage |
 | `/about` | AboutPage |
 | `/contact` | ContactPage |
+| `/amja` | AmjaPage → renders MasjidSoundSolutionsPage (campaign alias, noindex, canonical → `/masjid-sound-solutions`) |
 | `*` | NotFound (inline in App.jsx) |
 
 ---
@@ -315,6 +316,58 @@ Required: `name`, `email`, `message`. All others optional.
 
 ---
 
+## Print-collateral lead capture (`/api/lead`)
+
+Two-step modal (`src/components/LeadCaptureModal.jsx`) that captures leads from
+the printed AMJA collateral. Setup docs: `GOOGLE-SHEET-SETUP.md`.
+
+**Every printed QR code encodes `https://azaudios.com/masjid-sound-solutions`**
+— verified by decoding `AMJA_ads.png`, `flyer1.png` and `QR_code.png` in the
+sibling working folder. That is why the modal is mounted on
+`MasjidSoundSolutionsPage`, not on a dedicated landing route. The print also
+promises **"FREE AUDIO CONSULTATION — Scan to schedule"**, so the modal leads
+with the consultation and treats the guide PDF as the bonus. Do not reverse
+that emphasis: the landing page has to deliver what the flyer promised.
+
+`/amja` is an alias for future print runs that want isolated attribution.
+
+**Open behaviour:** immediate when the URL carries `?src=` or the path is
+`/amja` (i.e. scan traffic); for organic visitors it waits for 14 s or 30%
+scroll, so the division page is readable first. Dismissal is remembered per
+session (`sessionStorage`), and a gold pill re-opens it.
+
+**Fields sent:**
+```js
+{ name, masjid, city, email, phone, message, smsConsent,
+  needs: [], timeline, event, source, clientId, submittedAt }
+```
+Required: `name`, `masjid`, `city`, `email`. `event` is `'AMJA'` for print
+traffic and `'Website'` otherwise; `source` is the `?src=` value, else
+`masjid-page` / `amja-qr`.
+
+**Per submission `api/lead.js` does three independent things** (Promise.allSettled):
+1. appends a row to the Google Sheet (skipped unless `LEAD_SHEET_WEBHOOK_URL` is set)
+2. emails the internal notification to `EMAIL_TO`
+3. emails the visitor a confirmation with `public/guides/masjid-sound-guide.pdf` attached
+
+**The capture contract — do not weaken it.** It returns 200 only when the lead
+reached the Sheet *or* the inbox, and 500 when it reached neither. The browser
+keeps failed leads in `localStorage` and retries them on next load or `online`,
+so a 200 tells the client it is safe to forget the lead. A skipped Sheet (no
+webhook configured) must **not** count as a capture — that combination returning
+200 would silently lose leads whenever Gmail is down. `npm run test:lead`
+covers this; run it after touching `api/lead.js`.
+
+Duplicate protection: the client generates a `clientId` per lead, the flush
+claims its batch before sending and guards against concurrent runs, and both the
+Apps Script and the local dev mirror skip a `clientId` they have already stored.
+
+**Collateral generators** (committed output, re-runnable):
+- `npm run build:guide` → `public/guides/masjid-sound-guide.pdf` (content lives in the `GUIDE` object in `scripts/build-guide-pdf.mjs`)
+- `npm run build:marketing` → `marketing/amja/` QR codes (SVG + PNG, error correction H) and `booth-card.pdf`
+
+---
+
 ## Division page status
 
 | Page | Status |
@@ -338,6 +391,10 @@ Required: `name`, `email`, `message`. All others optional.
 - `EMAIL_USER` — Gmail address used to send (e.g. `azaudiosolutions@gmail.com`)
 - `EMAIL_PASSWORD` — Gmail App Password (16-char, no spaces — generated at myaccount.google.com → Security → App passwords). **Not** the regular Gmail password.
 - `EMAIL_TO` — recipient address (defaults to `contact@azaudios.com` if not set)
+- `LEAD_SHEET_WEBHOOK_URL` — *optional.* Apps Script Web App URL for the lead Sheet (see `GOOGLE-SHEET-SETUP.md`). Omit and `/api/lead` skips the Sheet and only emails.
+- `SITE_ORIGIN` — *optional.* Fallback origin used to fetch the guide PDF if it is not on the function's disk. Defaults to `https://azaudios.com`.
+
+`vercel.json` also declares `functions["api/lead.js"].includeFiles = "public/guides/**"` so the guide PDF ships with the function and can be attached without a network round-trip.
 
 **Quote form flow (production):**  
 Browser POST `/api/quote` → `api/quote.js` serverless function → Gmail SMTP port 465 (SSL) via nodemailer → email delivered to `EMAIL_TO`  
@@ -396,3 +453,6 @@ per route) is the biggest available win — a build change, not a metadata tweak
 - Local form submissions write to `server/submissions/quote-requests.json` (gitignored). Production submissions go to email via Gmail SMTP — no local file is written on Vercel.
 - `api/quote.js` has no persistent storage — if email sending fails silently, the submission is lost. Add a database if submission logging is needed.
 - `nodemon --watch server` is intentional — do not remove the flag or nodemon will watch the whole project and restart on every file save.
+- `server/index.js` reads **`API_PORT`**, not `PORT`. It runs alongside Vite under `npm run dev`, and tooling that injects a generic `PORT` (IDE run configs, preview harnesses) would otherwise make Express bind Vite's port, leaving the `/api` proxy connecting to nothing. Keep it in sync with the proxy target in `vite.config.js` (3001).
+- `server/index.js` mirrors `/api/lead` by writing to `server/submissions/leads.json` (gitignored). It sends no email and touches no Sheet, so local testing never mails a real address.
+- The lead modal is mounted inside `MasjidSoundSolutionsPage`, not in `Layout`. Moving it to `Layout` would show it on every page of the site.

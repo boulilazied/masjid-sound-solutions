@@ -4515,3 +4515,483 @@ img {
     flex-shrink: 0;
   }
 }
+
+/* ==========================================================================
+   Print-collateral lead capture modal
+   Mounted on /masjid-sound-solutions (where every printed QR lands) and on the
+   /amja alias. Styled to match the printed AMJA banner and flyer rather than
+   the site chrome: black ground, gold rules, serif headline, gold pill chips.
+   A scan should feel like the flyer continued, not like a different brand.
+   ========================================================================== */
+
+.lead-overlay {
+  --lead-black: #08090b;
+  --lead-black-soft: #101216;
+  --lead-gold: #d4af37;
+  --lead-gold-bright: #f4dd8f;
+  --lead-gold-deep: #a67c1a;
+  --lead-ink: #f4f1e8;
+  --lead-ink-muted: #a49d8c;
+  --lead-hairline: rgba(212, 175, 55, 0.26);
+
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  background: rgba(4, 5, 7, 0.88);
+  backdrop-filter: blur(4px);
+  animation: lead-fade 0.24s ease;
+}
+
+@keyframes lead-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.lead-modal {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  max-height: calc(100vh - 2.5rem);
+  overflow-y: auto;
+  background: var(--lead-black);
+  color: var(--lead-ink);
+  border: 1px solid var(--lead-hairline);
+  border-radius: 20px;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.6),
+    0 30px 80px rgba(0, 0, 0, 0.65);
+  animation: lead-rise 0.28s ease;
+}
+
+@keyframes lead-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* The gold hairline across the top echoes the rules framing the print pieces. */
+.lead-modal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: 20px 20px 0 0;
+  background: linear-gradient(
+    90deg,
+    var(--lead-gold-deep),
+    var(--lead-gold-bright) 45%,
+    var(--lead-gold-deep)
+  );
+}
+
+.lead-close {
+  position: absolute;
+  top: 0.95rem;
+  right: 0.95rem;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--lead-hairline);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--lead-gold);
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease;
+}
+
+.lead-close:hover {
+  background: rgba(212, 175, 55, 0.16);
+  color: var(--lead-gold-bright);
+}
+
+.lead-head {
+  padding: 2rem 1.75rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.lead-eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--lead-gold);
+}
+
+/* Serif headline, matching the "Hear every Ayah" lockup on the flyer. */
+.lead-head h2 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", "Noto Serif", serif;
+  font-weight: 400;
+  font-size: clamp(1.5rem, 4.2vw, 1.95rem);
+  line-height: 1.22;
+  letter-spacing: -0.005em;
+  color: #ffffff;
+  padding-right: 2rem;
+}
+
+.lead-sub {
+  margin: 0.85rem 0 0;
+  font-size: 0.93rem;
+  line-height: 1.6;
+  color: var(--lead-ink-muted);
+}
+
+.lead-progress {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 1.35rem;
+}
+
+.lead-progress span {
+  height: 2px;
+  flex: 1;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.12);
+  transition: background 0.24s ease;
+}
+
+.lead-progress span.is-active {
+  background: linear-gradient(90deg, var(--lead-gold-deep), var(--lead-gold-bright));
+}
+
+.lead-body {
+  display: grid;
+  gap: 1.4rem;
+  padding: 1.6rem 1.75rem 1.8rem;
+}
+
+.lead-fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* Gold uppercase section labels, as used throughout the flyer. */
+.lead-fieldset legend {
+  padding: 0 0 0.8rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--lead-gold);
+}
+
+.lead-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.lead-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: 99px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.03);
+  color: #ded8ca;
+  font-size: 0.86rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: left;
+  transition:
+    background 0.16s ease,
+    border-color 0.16s ease,
+    color 0.16s ease;
+}
+
+.lead-chip:hover {
+  border-color: var(--lead-hairline);
+  background: rgba(212, 175, 55, 0.1);
+  color: #ffffff;
+}
+
+.lead-chip.is-active {
+  background: linear-gradient(140deg, var(--lead-gold-bright), var(--lead-gold) 55%, var(--lead-gold-deep));
+  border-color: var(--lead-gold);
+  color: #14100a;
+}
+
+.lead-actions {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.lead-actions-row {
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.lead-next {
+  width: 100%;
+}
+
+/* Buttons: gold fill for the commit action, gold outline for the secondary. */
+.lead-gold-button {
+  background: linear-gradient(140deg, var(--lead-gold-bright), var(--lead-gold) 55%, var(--lead-gold-deep));
+  color: #14100a;
+  border-color: var(--lead-gold);
+  font-weight: 800;
+}
+
+.lead-gold-button:hover {
+  background: linear-gradient(140deg, #ffeaa8, var(--lead-gold-bright) 55%, var(--lead-gold));
+  color: #14100a;
+}
+
+.lead-gold-button:disabled {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.34);
+  cursor: not-allowed;
+  transform: none;
+}
+
+.lead-ghost-button {
+  background: transparent;
+  color: var(--lead-gold);
+  border-color: var(--lead-hairline);
+  font-weight: 700;
+}
+
+.lead-ghost-button:hover {
+  background: rgba(212, 175, 55, 0.12);
+  color: var(--lead-gold-bright);
+}
+
+.lead-note {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #8a8474;
+}
+
+.lead-error {
+  margin: 0;
+  padding: 0.75rem 0.95rem;
+  border-radius: 10px;
+  background: rgba(180, 42, 42, 0.14);
+  border: 1px solid rgba(226, 92, 92, 0.42);
+  color: #f0b4b4;
+  font-size: 0.87rem;
+  font-weight: 600;
+}
+
+.lead-form {
+  gap: 1.15rem;
+}
+
+.lead-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+}
+
+.lead-span-2 {
+  grid-column: 1 / -1;
+}
+
+.lead-grid label {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.lead-grid span {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--lead-gold);
+}
+
+.lead-grid span em {
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #7d7767;
+}
+
+.lead-grid input,
+.lead-grid textarea {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  padding: 0.75rem 0.85rem;
+  font: inherit;
+  color: #ffffff;
+  background: var(--lead-black-soft);
+  resize: vertical;
+}
+
+.lead-grid input:focus,
+.lead-grid textarea:focus {
+  outline: none;
+  border-color: var(--lead-gold);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.18);
+}
+
+.lead-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--lead-ink-muted);
+}
+
+.lead-consent input {
+  margin-top: 0.15rem;
+  width: 17px;
+  height: 17px;
+  accent-color: var(--lead-gold);
+  flex-shrink: 0;
+}
+
+.lead-spin {
+  animation: lead-rotate 0.9s linear infinite;
+}
+
+@keyframes lead-rotate {
+  to { transform: rotate(360deg); }
+}
+
+/* Confirmation state */
+
+.lead-done {
+  padding-top: 2.4rem;
+  text-align: center;
+  justify-items: center;
+  gap: 0.9rem;
+}
+
+.lead-done-icon {
+  display: grid;
+  place-items: center;
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  border: 1px solid var(--lead-hairline);
+  background: rgba(212, 175, 55, 0.12);
+  color: var(--lead-gold);
+}
+
+.lead-done h2 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", "Noto Serif", serif;
+  font-weight: 400;
+  font-size: 1.6rem;
+  color: #ffffff;
+}
+
+.lead-done p {
+  margin: 0;
+  color: var(--lead-ink-muted);
+  line-height: 1.65;
+  font-size: 0.94rem;
+}
+
+.lead-done strong {
+  color: #ffffff;
+  font-weight: 700;
+  word-break: break-word;
+}
+
+.lead-done-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+  width: 100%;
+  margin-top: 0.4rem;
+}
+
+.lead-text-button {
+  color: #8a8474;
+  font-weight: 600;
+  font-size: 0.86rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.lead-text-button:hover {
+  color: var(--lead-gold);
+}
+
+/* Persistent way back in after the modal is dismissed. */
+
+.lead-reopen {
+  position: fixed;
+  bottom: 1.1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 110;
+  padding: 0.8rem 1.35rem;
+  border-radius: 99px;
+  border: 1px solid #d4af37;
+  background: linear-gradient(140deg, #f4dd8f, #d4af37 55%, #a67c1a);
+  color: #14100a;
+  font-weight: 800;
+  font-size: 0.88rem;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4);
+  transition: filter 0.18s ease;
+}
+
+.lead-reopen:hover {
+  filter: brightness(1.08);
+}
+
+@media (max-width: 640px) {
+  .lead-overlay {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .lead-modal {
+    max-width: none;
+    max-height: 94vh;
+    border-radius: 20px 20px 0 0;
+    border-bottom: 0;
+  }
+
+  .lead-modal::before {
+    border-radius: 20px 20px 0 0;
+  }
+
+  .lead-head {
+    padding: 1.7rem 1.25rem 1.35rem;
+  }
+
+  .lead-body {
+    padding: 1.4rem 1.25rem 1.7rem;
+  }
+
+  .lead-grid,
+  .lead-actions-row {
+    grid-template-columns: 1fr;
+  }
+
+  .lead-reopen {
+    bottom: 0.85rem;
+    width: calc(100% - 1.7rem);
+    max-width: 380px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lead-overlay,
+  .lead-modal,
+  .lead-spin {
+    animation: none;
+  }
+}

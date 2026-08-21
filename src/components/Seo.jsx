@@ -54,6 +54,18 @@ const META = {
     description:
       'Contact AZ Audio Solutions for professional audio system design, installation and support for masjids, commercial facilities, events and residential projects across the USA and Canada.',
   },
+  // Conference QR alias. Known (so it gets a real title instead of the
+  // soft-404 metadata) but deliberately noindex, with its canonical pointing at
+  // /masjid-sound-solutions — the page whose content it renders and the URL the
+  // printed collateral actually encodes. Campaign traffic should not compete
+  // with the division page in search results.
+  '/amja': {
+    title: 'Masjid Sound Solutions — A Division of AZ Audio Solutions',
+    description:
+      'Free audio consultation for your masjid: tell us about your space and we will send you the Masjid Sound Guide.',
+    robots: 'noindex, nofollow',
+    canonical: `${SITE}/masjid-sound-solutions`,
+  },
 }
 
 // Unknown routes render the NotFound component, but Vercel's SPA rewrite still
@@ -96,7 +108,10 @@ export default function RouteSeo() {
   useEffect(() => {
     const known = Object.prototype.hasOwnProperty.call(META, pathname)
     const meta = known ? META[pathname] : NOT_FOUND
-    const canonical = pathname === '/' ? `${SITE}/` : `${SITE}${pathname}`
+    const defaultCanonical = pathname === '/' ? `${SITE}/` : `${SITE}${pathname}`
+    // A route may override either value (campaign pages point their canonical
+    // at the page whose content they reuse, and opt out of indexing).
+    const canonical = meta.canonical || defaultCanonical
 
     document.title = meta.title
     upsertMeta('name', 'description', meta.description)
@@ -104,7 +119,8 @@ export default function RouteSeo() {
     upsertMeta(
       'name',
       'robots',
-      known ? 'index, follow, max-image-preview:large, max-snippet:-1' : 'noindex, follow'
+      meta.robots ||
+        (known ? 'index, follow, max-image-preview:large, max-snippet:-1' : 'noindex, follow')
     )
 
     upsertMeta('property', 'og:type', 'website')

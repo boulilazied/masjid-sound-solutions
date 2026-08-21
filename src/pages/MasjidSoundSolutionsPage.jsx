@@ -5,6 +5,7 @@ import {
   Smartphone, Mic, Music, Zap, Sliders, Globe, Video, Archive, Radio,
   Volume2, Wifi, Power, Camera
 } from 'lucide-react'
+import LeadCaptureModal from '../components/LeadCaptureModal'
 
 const keyBenefits = [
   { Icon: Volume2,     title: 'Clear & Intelligible Sound',   text: 'Optimal for Khutba, Adhan, Quran & Daily Salah' },
@@ -560,6 +561,15 @@ export default function MasjidSoundSolutionsPage() {
           <Link to='/contact' className='real-button real-button-gold'>Request Consultation</Link>
         </div>
       </section>
+
+      {/*
+        Every printed QR code (AMJA banner, flyers, business card) encodes
+        https://azaudios.com/masjid-sound-solutions and promises a free audio
+        consultation, so the capture modal has to live here. It opens
+        immediately for scan traffic (?src= present) and waits for scroll or a
+        delay for organic readers.
+      */}
+      <LeadCaptureModal />
     </div>
   )
 }

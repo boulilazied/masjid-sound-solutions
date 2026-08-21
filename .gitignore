@@ -37,6 +37,7 @@ Thumbs.db
 
 # form submissions (runtime data, may contain customer info)
 server/submissions/quote-requests.json
+server/submissions/leads.json
 
 # coverage
 coverage/

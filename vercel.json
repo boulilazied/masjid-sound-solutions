@@ -1,4 +1,9 @@
 {
+  "functions": {
+    "api/lead.js": {
+      "includeFiles": "public/guides/**"
+    }
+  },
   "rewrites": [
     {
       "source": "/((?!api/).*)",
