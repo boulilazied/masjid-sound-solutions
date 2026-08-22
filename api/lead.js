@@ -204,7 +204,7 @@ function confirmationEmail(lead, attached) {
           </p>
         </div>
         <p style="margin:0 0 16px">
-          We will review this and follow up within one business day. If you would rather talk sooner, call or WhatsApp us any time.
+          We will review this and follow up with you. If you would rather talk sooner, call or WhatsApp us any time.
         </p>
         <p style="margin:0 0 6px">
           <a href="tel:+17248310196" style="color:#8a6508;font-weight:700;text-decoration:none">+1 724 831 0196</a>
@@ -335,7 +335,7 @@ export default async function handler(req, res) {
             `What you told us: ${needsText}`,
             lead.timeline ? `Timeline: ${lead.timeline}` : '',
             '',
-            'We will follow up within one business day. To reach us sooner:',
+            'We will follow up with you. To reach us sooner:',
             '+1 724 831 0196  |  +1 724 427 5661  |  contact@azaudios.com',
             '',
             'Jazak Allah khair,',

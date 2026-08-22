@@ -367,8 +367,8 @@ export default function LeadCaptureModal() {
               {done.queued
                 ? 'Your details are saved and will send automatically as soon as you have a signal, so there is no need to fill this in again.'
                 : 'Your free consultation request is in.'}{' '}
-              We will reach out within one business day, and your copy of the Masjid Sound Guide is
-              on its way to <strong>{done.email}</strong>.
+              Your copy of the Masjid Sound Guide is on its way to <strong>{done.email}</strong>,
+              and we will be in touch about your consultation.
             </p>
             <div className='lead-done-actions'>
               <a className='button lead-gold-button' href='tel:+17248310196'>
@@ -409,7 +409,7 @@ export default function LeadCaptureModal() {
               <p className='lead-sub'>
                 {step === 1
                   ? 'Tell us about your masjid in two quick screens. We will schedule your free audio consultation and send you our Masjid Sound Guide.'
-                  : 'We will follow up within one business day and email your copy of the guide right away.'}
+                  : 'We will email your copy of the guide right away, then follow up about your consultation.'}
               </p>
               <div className='lead-progress' aria-hidden='true'>
                 <span className='is-active' />
@@ -564,7 +564,7 @@ export default function LeadCaptureModal() {
                   </label>
                   <label className='lead-span-2'>
                     <span>
-                      Anything we should know? <em>optional</em>
+                      Describe your project <em>optional</em>
                     </span>
                     <textarea
                       name='message'
