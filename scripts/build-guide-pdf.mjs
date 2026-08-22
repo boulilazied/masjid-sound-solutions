@@ -144,18 +144,48 @@ const doc = new PDFDocument({
   autoFirstPage: false,
 })
 
-doc.pipe(fs.createWriteStream(OUT_FILE))
+const outStream = fs.createWriteStream(OUT_FILE)
+doc.pipe(outStream)
 
 let pageIndex = 0
+let inFooter = false
 
-function newPage() {
-  doc.addPage()
+// Footer and page counter are driven off `pageAdded` rather than a manual call,
+// so a page pdfkit inserts on its own (text flowing past the bottom margin)
+// gets the same treatment as one we ask for. Without this the counter and the
+// footers silently desync from the real page list.
+doc.on('pageAdded', () => {
   pageIndex += 1
   drawFooter()
-  doc.y = PAGE.margin
+  doc.x = PAGE.margin
+  doc.y = doc.page.margins.top
+})
+
+// Counts only the pages this layout deliberately asks for. Every page in this
+// document is supposed to come from here, so comparing this to the page count
+// in the finished file detects pages pdfkit inserted on its own. (Do not use
+// pageIndex for that: the pageAdded handler increments it for unintended pages
+// too, so it always agrees with the file and would never catch anything.)
+let requestedPages = 0
+
+function newPage() {
+  requestedPages += 1
+  doc.addPage()
 }
 
 function drawFooter() {
+  // The footer sits *below* the bottom margin. Drawing text there is exactly
+  // what pdfkit treats as page overflow, so it would insert another page —
+  // which then draws another footer, and so on. Zeroing the bottom margin for
+  // the duration (and guarding against re-entry) keeps it on this page.
+  if (inFooter) return
+  inFooter = true
+
+  const savedBottom = doc.page.margins.bottom
+  const savedX = doc.x
+  const savedY = doc.y
+  doc.page.margins.bottom = 0
+
   const y = 792 - PAGE.margin + 4
   doc
     .save()
@@ -183,6 +213,11 @@ function drawFooter() {
       lineBreak: false,
     })
   doc.restore()
+
+  doc.page.margins.bottom = savedBottom
+  doc.x = savedX
+  doc.y = savedY
+  inFooter = false
 }
 
 // Reserve vertical space, breaking to a new page when the block will not fit.
@@ -194,7 +229,11 @@ function paragraph(text, options = {}) {
   const { size = 10, color = TEXT, font = 'Helvetica', leading = 4.4, gap = 9 } = options
   doc.font(font).fontSize(size).fillColor(color)
   const height = doc.heightOfString(text, { width: CONTENT_WIDTH, lineGap: leading })
-  ensure(Math.min(height, 90))
+  // Reserve the paragraph's real height. Under-reserving used to let pdfkit
+  // break the page itself mid-paragraph, which then collided with our own
+  // break and produced blank pages. Cap at one page's usable height so a
+  // paragraph taller than a page still just flows.
+  ensure(Math.min(height, PAGE_BOTTOM - PAGE.margin))
   doc.text(text, PAGE.margin, doc.y, { width: CONTENT_WIDTH, lineGap: leading, align: 'left' })
   doc.y += gap
 }
@@ -297,7 +336,9 @@ GUIDE.sections.forEach((section, index) => {
   // description of the symptom.
   doc.font('Helvetica-Oblique').fontSize(9.6).fillColor(TEXT)
   const whyHeight = doc.heightOfString(section.why, { width: CONTENT_WIDTH - 34, lineGap: 4 })
-  ensure(whyHeight + 34)
+  // Panel is whyHeight + 26, plus the 13pt gap after it and the label that
+  // follows — reserve all of it so the panel is never split across pages.
+  ensure(whyHeight + 44)
   const whyTop = doc.y
   doc
     .save()
@@ -377,10 +418,13 @@ GUIDE.checklist.items.forEach((item) => {
 // Closing + contact
 // ---------------------------------------------------------------------------
 doc.y += 10
-ensure(120)
-const closeTop = doc.y
+// Measure before reserving: the panel is closeHeight + 74 tall and the contact
+// line sits inside it, so a flat guess could push the panel past the margin and
+// trigger a page break we did not plan for.
 doc.font('Helvetica').fontSize(10).fillColor(TEXT)
 const closeHeight = doc.heightOfString(GUIDE.closing, { width: CONTENT_WIDTH - 34, lineGap: 4.4 })
+ensure(closeHeight + 82)
+const closeTop = doc.y
 doc
   .save()
   .roundedRect(PAGE.margin, closeTop, CONTENT_WIDTH, closeHeight + 74, 12)
@@ -413,9 +457,25 @@ doc
 
 doc.end()
 
-process.on('exit', () => {
-  if (fs.existsSync(OUT_FILE)) {
-    const kb = (fs.statSync(OUT_FILE).size / 1024).toFixed(1)
-    console.log(`Wrote ${path.relative(process.cwd(), OUT_FILE)} (${kb} KB, ${pageIndex} pages)`)
+// Wait for the real flush before measuring, and verify the page count.
+//
+// A mismatch here means pdfkit inserted pages we did not account for — which is
+// what happens when something draws past the bottom margin (the footer used to)
+// or a block reserves less height than it occupies. The symptom is blank pages
+// in the delivered PDF, so fail loudly rather than emailing that to people.
+outStream.on('finish', () => {
+  const kb = (fs.statSync(OUT_FILE).size / 1024).toFixed(1)
+  const raw = fs.readFileSync(OUT_FILE, 'latin1')
+  const actualPages = (raw.match(/\/Type\s*\/Page[^s]/g) || []).length
+
+  console.log(`Wrote ${path.relative(process.cwd(), OUT_FILE)} (${kb} KB, ${actualPages} pages)`)
+
+  if (actualPages !== requestedPages) {
+    console.error(
+      `\nERROR: this layout asked for ${requestedPages} pages but the PDF contains ${actualPages}.` +
+        `\n${actualPages - requestedPages} page(s) were inserted by pdfkit and are probably blank.` +
+        `\nSomething drew past the bottom margin, or a block reserved less height than it uses.`
+    )
+    process.exitCode = 1
   }
 })
