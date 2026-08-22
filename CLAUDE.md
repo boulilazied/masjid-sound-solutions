@@ -321,20 +321,29 @@ Required: `name`, `email`, `message`. All others optional.
 Two-step modal (`src/components/LeadCaptureModal.jsx`) that captures leads from
 the printed AMJA collateral. Setup docs: `GOOGLE-SHEET-SETUP.md`.
 
-**Every printed QR code encodes `https://azaudios.com/masjid-sound-solutions`**
-— verified by decoding `AMJA_ads.png`, `flyer1.png` and `QR_code.png` in the
-sibling working folder. That is why the modal is mounted on
-`MasjidSoundSolutionsPage`, not on a dedicated landing route. The print also
-promises **"FREE AUDIO CONSULTATION — Scan to schedule"**, so the modal leads
-with the consultation and treats the guide PDF as the bonus. Do not reverse
-that emphasis: the landing page has to deliver what the flyer promised.
+**The printed QR codes point at the site root, `azaudios.com`.** The modal is
+therefore mounted on **`HomePage`** and opens on arrival there — that is the
+page a scan lands on, and a scan landing on a page with no prompt is a wasted
+scan. It is also mounted on `MasjidSoundSolutionsPage` (earlier collateral in
+`toprint/` decodes to `/masjid-sound-solutions`, so those codes keep working)
+and reachable via the `/amja` alias.
 
-`/amja` is an alias for future print runs that want isolated attribution.
+The print promises **"FREE AUDIO CONSULTATION — Scan to schedule"**, so the
+modal leads with the consultation and treats the guide PDF as the bonus. Do not
+reverse that emphasis: the landing page has to deliver what the flyer promised.
 
-**Open behaviour:** immediate when the URL carries `?src=` or the path is
-`/amja` (i.e. scan traffic); for organic visitors it waits for 14 s or 30%
-scroll, so the division page is readable first. Dismissal is remembered per
-session (`sessionStorage`), and a gold pill re-opens it.
+**Open behaviour** — `AUTO_OPEN_PATHS` in the component:
+- `/` and `/amja`, or *any* path carrying `?src=` → opens on arrival
+- `/masjid-sound-solutions` without `?src=` → waits for 14 s or 30% scroll
+
+Because `/` opens for everyone, ordinary visitors to the home page see it too,
+not only scans. Dismissal is remembered per session (`sessionStorage`) and a
+gold pill re-opens it. To spare untagged visitors, remove `'/'` from
+`AUTO_OPEN_PATHS`; they then get the delay/scroll path instead.
+
+Attribution is deliberately separate from open behaviour: `event` is `'AMJA'`
+only when the URL carries `?src=` or the path is `/amja`, so an untagged home
+page visit is recorded as `'Website'` rather than inflating the campaign.
 
 **Fields sent:**
 ```js

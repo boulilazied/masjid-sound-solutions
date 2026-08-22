@@ -19,12 +19,12 @@ import { fileURLToPath } from 'url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-// Destination matches the QR already encoded in the printed pieces, so
-// reprints and existing stock send people to the same place. Only the ?src=
-// tag differs per placement.
+// The printed QR codes point at the site root, so these match it — existing
+// stock and any reprint send people to the same place. Only the ?src= tag
+// differs per placement. The home page opens the capture modal on arrival.
 const EVENT_SLUG = 'amja'
-const LANDING = 'https://azaudios.com/masjid-sound-solutions'
-const HUMAN_URL = 'azaudios.com/masjid-sound-solutions'
+const LANDING = 'https://azaudios.com'
+const HUMAN_URL = 'azaudios.com'
 
 // One code per placement. `src` lands in the lead record and the Google Sheet.
 const PLACEMENTS = [

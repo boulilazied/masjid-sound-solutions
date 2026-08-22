@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Building2, Home, HouseWifi, Mic2, ClipboardCheck, Receipt, Wrench, Headphones, GraduationCap, BookOpen, PhoneCall, PenLine, HardHat, Gauge } from 'lucide-react'
 import SectionHeading from '../components/SectionHeading'
 import MasjidIcon from '../components/MasjidIcon'
+import LeadCaptureModal from '../components/LeadCaptureModal'
 
 const divisions = [
   {
@@ -358,6 +359,15 @@ export default function HomePage() {
           <Link to='/contact' className='button button-primary button-light'>Request a Quote</Link>
         </div>
       </section>
+
+      {/*
+        The printed QR codes point at the site root, so the capture modal has to
+        be here and has to open on arrival — see AUTO_OPEN_PATHS in the
+        component. Note this means every visitor to the home page sees it, not
+        only scans; leads without a ?src= tag are recorded as 'Website' rather
+        than the campaign so attribution stays honest.
+      */}
+      <LeadCaptureModal />
     </>
   )
 }

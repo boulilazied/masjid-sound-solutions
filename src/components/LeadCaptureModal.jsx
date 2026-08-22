@@ -56,8 +56,21 @@ const TIMELINES = [
 const STORAGE_DISMISSED = 'az_lead_modal_dismissed'
 const STORAGE_PENDING = 'az_pending_leads'
 
-// Organic visitors to the masjid division page should get to read it before
-// anything covers it. Scans (which carry ?src= or land on /amja) open at once.
+// Routes that open the modal on arrival. The printed QR codes point at the site
+// root, so `/` has to be one of them — a scan that lands on a page with no
+// prompt wastes the scan. Anything not listed here (currently just
+// /masjid-sound-solutions reached without a ?src= tag) waits for intent below.
+const AUTO_OPEN_PATHS = ['/', '/amja']
+
+// Fallback attribution per route when the URL carries no ?src= tag.
+const PATH_SOURCES = {
+  '/': 'home-page',
+  '/amja': 'amja-qr',
+  '/masjid-sound-solutions': 'masjid-page'
+}
+
+// Used only for routes outside AUTO_OPEN_PATHS: let the reader get into the
+// page before anything covers it.
 const ORGANIC_DELAY_MS = 14000
 const ORGANIC_SCROLL_RATIO = 0.3
 
@@ -158,11 +171,15 @@ export default function LeadCaptureModal() {
   const firstFieldRef = useRef(null)
 
   const srcParam = new URLSearchParams(search).get('src')
-  const fromPrint = Boolean(srcParam) || pathname === '/amja'
+  // Whether to open on arrival. Separate from attribution below: the home page
+  // opens for everyone, but that does not make every visitor a scan.
+  const openOnArrival = Boolean(srcParam) || AUTO_OPEN_PATHS.includes(pathname)
   // Attribution: honour an explicit ?src=, otherwise record which page the
-  // visitor converted on. Only print traffic gets tagged with the campaign.
-  const source = srcParam || (pathname === '/amja' ? 'amja-qr' : 'masjid-page')
-  const campaign = fromPrint ? CAMPAIGN_LABEL : 'Website'
+  // visitor converted on. Only traffic we can actually attribute to the print
+  // run gets the campaign label — an untagged home page visit is just Website.
+  const source = srcParam || PATH_SOURCES[pathname] || 'direct'
+  const fromCampaign = Boolean(srcParam) || pathname === '/amja'
+  const campaign = fromCampaign ? CAMPAIGN_LABEL : 'Website'
 
   // Open on arrival for scans; wait for intent from organic readers. Also
   // retry any lead that failed to send earlier.
@@ -182,7 +199,7 @@ export default function LeadCaptureModal() {
     let onScroll = null
 
     if (!dismissed) {
-      if (fromPrint) {
+      if (openOnArrival) {
         setOpen(true)
       } else {
         timer = window.setTimeout(() => setOpen(true), ORGANIC_DELAY_MS)
@@ -201,7 +218,7 @@ export default function LeadCaptureModal() {
       if (timer) window.clearTimeout(timer)
       if (onScroll) window.removeEventListener('scroll', onScroll)
     }
-  }, [fromPrint])
+  }, [openOnArrival])
 
   // Lock background scroll and wire Escape while the dialog is up.
   useEffect(() => {
@@ -369,7 +386,9 @@ export default function LeadCaptureModal() {
           <>
             <div className='lead-head'>
               <p className='lead-eyebrow'>
-                {fromPrint ? `${CAMPAIGN_LABEL} · Free audio consultation` : 'Free audio consultation'}
+                {fromCampaign
+                  ? `${CAMPAIGN_LABEL} · Free audio consultation`
+                  : 'Free audio consultation'}
               </p>
               <h2 id='lead-modal-title'>
                 {step === 1 ? (
