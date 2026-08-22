@@ -4995,3 +4995,9 @@ img {
     animation: none;
   }
 }
+
+/* Required-field marker inside the capture modal (chip groups and inputs). */
+.lead-required {
+  color: #d4af37;
+  font-weight: 700;
+}

@@ -333,7 +333,12 @@ export default function LeadCaptureModal() {
     )
   }
 
-  const canAdvance = needs.length > 0 || timeline !== ''
+  // Both groups are required: the problem tells us what to quote, the timeline
+  // tells us how to prioritise the follow-up, and a lead missing either is much
+  // weaker. They are taps, so the extra requirement costs the visitor nothing.
+  const needsMissing = needs.length === 0
+  const timelineMissing = timeline === ''
+  const canAdvance = !needsMissing && !timelineMissing
 
   return (
     <div
@@ -398,7 +403,7 @@ export default function LeadCaptureModal() {
                     Reach every corner.
                   </>
                 ) : (
-                  'Where should we reach you?'
+                  'How can we reach you?'
                 )}
               </h2>
               <p className='lead-sub'>
@@ -415,7 +420,12 @@ export default function LeadCaptureModal() {
             {step === 1 ? (
               <div className='lead-body'>
                 <fieldset className='lead-fieldset'>
-                  <legend>What would you like to solve?</legend>
+                  <legend>
+                    What would you like to solve?{' '}
+                    <span className='lead-required' aria-label='required'>
+                      *
+                    </span>
+                  </legend>
                   <div className='lead-chips'>
                     {NEEDS.map((item) => {
                       const active = needs.includes(item)
@@ -436,7 +446,12 @@ export default function LeadCaptureModal() {
                 </fieldset>
 
                 <fieldset className='lead-fieldset'>
-                  <legend>Where are you in the process?</legend>
+                  <legend>
+                    Where are you in the process?{' '}
+                    <span className='lead-required' aria-label='required'>
+                      *
+                    </span>
+                  </legend>
                   <div className='lead-chips'>
                     {TIMELINES.map((item) => {
                       const active = timeline === item
@@ -466,7 +481,13 @@ export default function LeadCaptureModal() {
                     Continue <ArrowRight size={17} strokeWidth={2.4} />
                   </button>
                   <p className='lead-note'>
-                    {canAdvance ? 'One more screen.' : 'Pick at least one option to continue.'}
+                    {canAdvance
+                      ? 'One more screen.'
+                      : needsMissing && timelineMissing
+                        ? 'Both questions are required to continue.'
+                        : needsMissing
+                          ? 'Pick at least one thing to solve.'
+                          : 'Pick where you are in the process.'}
                   </p>
                 </div>
               </div>
@@ -474,7 +495,10 @@ export default function LeadCaptureModal() {
               <form className='lead-body lead-form' onSubmit={handleSubmit}>
                 <div className='lead-grid'>
                   <label>
-                    <span>Name</span>
+                    <span>
+                      Name{' '}
+                      <span className='lead-required' aria-hidden='true'>*</span>
+                    </span>
                     <input
                       ref={firstFieldRef}
                       name='name'
@@ -485,7 +509,10 @@ export default function LeadCaptureModal() {
                     />
                   </label>
                   <label>
-                    <span>Masjid / Organization</span>
+                    <span>
+                      Masjid / Organization{' '}
+                      <span className='lead-required' aria-hidden='true'>*</span>
+                    </span>
                     <input
                       name='masjid'
                       value={contact.masjid}
@@ -495,7 +522,10 @@ export default function LeadCaptureModal() {
                     />
                   </label>
                   <label>
-                    <span>City / State</span>
+                    <span>
+                      City / State{' '}
+                      <span className='lead-required' aria-hidden='true'>*</span>
+                    </span>
                     <input
                       name='city'
                       value={contact.city}
@@ -505,7 +535,10 @@ export default function LeadCaptureModal() {
                     />
                   </label>
                   <label>
-                    <span>Email</span>
+                    <span>
+                      Email{' '}
+                      <span className='lead-required' aria-hidden='true'>*</span>
+                    </span>
                     <input
                       name='email'
                       type='email'
