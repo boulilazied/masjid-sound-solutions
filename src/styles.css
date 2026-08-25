@@ -4933,8 +4933,8 @@ img {
    scan that feels trapped is a scan lost. */
 
 .lead-leave {
-  padding: 0 1.75rem 1.6rem;
-  text-align: center;
+  padding: 1.2rem 1.75rem 1.6rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 /* Persistent way back in after the modal is dismissed. */

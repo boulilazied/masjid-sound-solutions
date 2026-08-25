@@ -620,8 +620,12 @@ export default function LeadCaptureModal() {
             )}
 
             <div className='lead-leave'>
-              <button type='button' className='lead-text-button' onClick={close}>
-                No thanks, take me to the site
+              <button
+                type='button'
+                className='button lead-ghost-button lead-next'
+                onClick={close}
+              >
+                Continue to the site
               </button>
             </div>
           </>
