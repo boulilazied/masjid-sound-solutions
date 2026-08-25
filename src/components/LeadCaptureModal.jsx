@@ -618,6 +618,12 @@ export default function LeadCaptureModal() {
                 </p>
               </form>
             )}
+
+            <div className='lead-leave'>
+              <button type='button' className='lead-text-button' onClick={close}>
+                No thanks, take me to the site
+              </button>
+            </div>
           </>
         )}
       </div>

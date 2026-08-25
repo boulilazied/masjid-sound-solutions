@@ -4928,6 +4928,15 @@ img {
   color: var(--lead-gold);
 }
 
+/* Explicit way out of the modal. The X and Escape both close it, but a plain
+   worded button is the only exit a first-time visitor reliably finds - and a
+   scan that feels trapped is a scan lost. */
+
+.lead-leave {
+  padding: 0 1.75rem 1.6rem;
+  text-align: center;
+}
+
 /* Persistent way back in after the modal is dismissed. */
 
 .lead-reopen {
