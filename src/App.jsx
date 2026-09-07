@@ -42,7 +42,7 @@ export default function App() {
         <Route path='/connected-home' element={<ConnectedHomePage />} />
         <Route path='/about' element={<AboutPage />} />
         <Route path='/contact' element={<ContactPage />} />
-        {/* Conference QR landing — home page plus the lead-capture modal. */}
+        {/* Conference QR landing — renders the masjid division page. */}
         <Route path='/amja' element={<AmjaPage />} />
         <Route path='*' element={<NotFound />} />
       </Routes>

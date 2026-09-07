@@ -163,6 +163,14 @@ public/
 > photos and `smart-home/hero-home.jpg`, plus `work-app.jpg` from `ima4.png` in the assets folder.
 > The originals are multi-MB PNGs and the hero is above the fold, so it must stay a compressed JPEG.
 >
+> `public/amja/` holds four photos from the AMJA imams' conference, 28–29 August 2026 (iPhone 15 Plus).
+> The originals — one JPG and three **HEIC** — live in `D:\work\masjidSoundSolutions\website\public\`.
+> HEIC does not render in Chrome or Firefox, so they were converted (Python + `pillow-heif`, with
+> `ImageOps.exif_transpose` — without it the portrait-flagged shots come out rotated) and downscaled:
+> `conference-hall.jpg` to 1800px q73, the three booth shots to 1400px q80. Captions are deliberately
+> descriptive of what each photo shows and carry **no attendance or lead numbers** — see the claims
+> policy in the audit notes.
+>
 > `masjid-app-zones.jpg` / `masjid-app-volume.jpg` are real screenshots from an installed Atmosphere
 > system. **The Safari toolbar was cropped off deliberately** — it showed the client's device IP
 > (`10.0.0.240`). Keep it cropped on any replacement.
@@ -209,6 +217,7 @@ Key component classes in the Masjid page:
 - `.masjid-benefits-strip` / `.masjid-benefits-inner` / `.masjid-benefits-tag` / `.masjid-benefits-list` / `.masjid-benefit-item` — dark navy key benefits bar immediately after hero (6 items: sound, control, zones, reliability, scalability, quality).
 - `.why-grid` / `.why-card` / `.why-icon` — 6-card grid for the "Why Specialized" section (3-col → 2-col → 1-col at breakpoints). Cards use **lucide-react** components (not inline SVG paths).
 - `.brand-grid-clean` / `.clean-brand-tile` — 4-col partner brand logo grid using SVG files from `public/brand-logos/`.
+- `.amja-section` / `.amja-feature` / `.amja-grid` / `.amja-tile` — AMJA conference gallery sitting just before the closing consultation CTA: one 21:9 feature image (`object-position: center 60%` so the 4:3 original keeps the stage and the crowd) over a 3-across row of 4:3 tiles. Photo list is the `amjaPhotos` array in the page. 3 → 2 → 1 columns at 860px / 560px.
 - `.process-timeline` / `.process-step` / `.process-step-badge` / `.process-step-vline` / `.process-step-circle` / `.process-step-body` / `.process-commitment` — 7-step horizontal timeline with numbered badges, lucide icon circles, and a gold connecting line.
 - `.zone-control-grid` / `.zone-option-card` / `.zone-option-header` / `.phone-mockup` / `.phone-zone-row` / `.phone-nav` / `.wall-mockup` / `.wall-zone-led` / `.wall-knob` / `.wall-mute-btn` / `.zone-option-features` — two-card zone control options section (phone mockup + wall panel mockup).
 - `.signal-flow-diagram` / `.signal-sources` / `.signal-zones-output` / `.signal-node` / `.signal-node-icon` / `.signal-arrow` / `.signal-arrow-col` / `.signal-zone-badge` / `.signal-zone-output-item` / `.signal-col-label` — horizontal audio signal flow diagram (Sources → Mixer → DSP → Amplifier → Zones).
@@ -318,13 +327,21 @@ Required: `name`, `email`, `message`. All others optional.
 
 ## Print-collateral lead capture (`/api/lead`)
 
+> **RETIRED (2026-09-07).** The AMJA conference is over and the modal is
+> **unmounted** — no page renders `LeadCaptureModal` any more, so nothing pops
+> up on the live site. The component, its CSS (`.lead-modal` in `styles.css`)
+> and the whole `/api/lead` backend are all left intact and working; to bring
+> it back for the next event, re-add `<LeadCaptureModal />` to the page you
+> want it on and update `CAMPAIGN_LABEL` / `AUTO_OPEN_PATHS` in the component.
+> Everything below describes how it behaved when mounted.
+
 Two-step modal (`src/components/LeadCaptureModal.jsx`) that captures leads from
 the printed AMJA collateral. Setup docs: `GOOGLE-SHEET-SETUP.md`.
 
-**The printed QR codes point at the site root, `azaudios.com`.** The modal is
-therefore mounted on **`HomePage`** and opens on arrival there — that is the
+**The printed QR codes point at the site root, `azaudios.com`.** The modal was
+therefore mounted on **`HomePage`** and opened on arrival there — that is the
 page a scan lands on, and a scan landing on a page with no prompt is a wasted
-scan. It is also mounted on `MasjidSoundSolutionsPage` (earlier collateral in
+scan. It was also mounted on `MasjidSoundSolutionsPage` (earlier collateral in
 `toprint/` decodes to `/masjid-sound-solutions`, so those codes keep working)
 and reachable via the `/amja` alias.
 

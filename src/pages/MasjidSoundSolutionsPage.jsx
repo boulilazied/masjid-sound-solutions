@@ -5,7 +5,27 @@ import {
   Smartphone, Mic, Music, Zap, Sliders, Globe, Video, Archive, Radio,
   Volume2, Wifi, Power, Camera
 } from 'lucide-react'
-import LeadCaptureModal from '../components/LeadCaptureModal'
+
+// AMJA imams' conference, August 2026 — photos from our booth. Captions stay
+// descriptive of what the photo actually shows; no attendance or results
+// numbers, since we have none we can stand behind.
+const amjaPhotos = [
+  {
+    file: 'booth-team.jpg',
+    alt: 'The AZ Masjid Audio team standing at the booth beside the display banner',
+    caption: 'Our team at the AZ Masjid Audio booth.'
+  },
+  {
+    file: 'booth-visitors.jpg',
+    alt: 'Imams and masjid representatives with the AZ Audio team at the conference booth',
+    caption: 'Meeting imams and masjid representatives.'
+  },
+  {
+    file: 'booth-setup.jpg',
+    alt: 'The AZ Masjid Audio booth table set with literature and gift boxes before the session',
+    caption: 'Set up ahead of the opening session.'
+  }
+]
 
 const keyBenefits = [
   { Icon: Volume2,     title: 'Clear & Intelligible Sound',   text: 'Optimal for Khutba, Adhan, Quran & Daily Salah' },
@@ -548,6 +568,43 @@ export default function MasjidSoundSolutionsPage() {
         </div>
       </section>
 
+      <section className='clean-section clean-white amja-section'>
+        <div className='container'>
+          <div className='clean-section-intro centered'>
+            <div className='real-eyebrow'>AMJA Conference &middot; August 2026</div>
+            <h2>We brought masjid audio to the imams.</h2>
+            <p>
+              We exhibited at the AMJA imams&rsquo; conference &mdash; two days of conversations with
+              imams, board members, and masjid administrators about the sound in their prayer halls.
+            </p>
+          </div>
+
+          <figure className='amja-feature'>
+            <img
+              src='/amja/conference-hall.jpg'
+              alt='The AMJA conference hall during a session, with attendees seated at tables facing the stage'
+              loading='lazy'
+              decoding='async'
+            />
+            <figcaption>The conference hall in session.</figcaption>
+          </figure>
+
+          <div className='amja-grid'>
+            {amjaPhotos.map((photo) => (
+              <figure key={photo.file} className='amja-tile'>
+                <img
+                  src={`/amja/${photo.file}`}
+                  alt={photo.alt}
+                  loading='lazy'
+                  decoding='async'
+                />
+                <figcaption>{photo.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className='clean-section final-consultation'>
         <div className='container final-consultation-inner'>
           <div>
@@ -561,15 +618,6 @@ export default function MasjidSoundSolutionsPage() {
           <Link to='/contact' className='real-button real-button-gold'>Request Consultation</Link>
         </div>
       </section>
-
-      {/*
-        Every printed QR code (AMJA banner, flyers, business card) encodes
-        https://azaudios.com/masjid-sound-solutions and promises a free audio
-        consultation, so the capture modal has to live here. It opens
-        immediately for scan traffic (?src= present) and waits for scroll or a
-        delay for organic readers.
-      */}
-      <LeadCaptureModal />
     </div>
   )
 }

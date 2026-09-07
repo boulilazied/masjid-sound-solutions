@@ -1406,6 +1406,75 @@ img {
   object-fit: contain;
 }
 
+/* AMJA conference gallery (MasjidSoundSolutionsPage) --------------------- */
+.amja-feature {
+  margin: 0 0 1.25rem;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(189, 131, 37, 0.18);
+  box-shadow: 0 22px 55px rgba(35, 28, 18, 0.12);
+  background: #fff;
+}
+
+.amja-feature img {
+  display: block;
+  width: 100%;
+  /* Wide crop: the hall shot is the establishing image, not a portrait. */
+  aspect-ratio: 21 / 9;
+  object-fit: cover;
+  object-position: center 60%;
+}
+
+.amja-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.amja-tile {
+  margin: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(189, 131, 37, 0.18);
+  box-shadow: 0 18px 45px rgba(35, 28, 18, 0.08);
+  background: #fff;
+}
+
+.amja-tile img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.amja-feature figcaption,
+.amja-tile figcaption {
+  padding: 0.95rem 1.15rem 1.1rem;
+  color: var(--real-muted);
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 860px) {
+  .amja-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .amja-feature img {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (max-width: 560px) {
+  .amja-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .amja-feature img {
+    aspect-ratio: 4 / 3;
+  }
+}
+
 .why-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
