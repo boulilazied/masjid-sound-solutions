@@ -79,7 +79,7 @@ export default function EventRentalServicesPage() {
             </p>
             <div className='real-actions'>
               <Link to='/contact' className='real-button real-button-gold'>Request a Quote</Link>
-              <a href='https://wa.me/17248310196' className='real-button real-button-ghost' target='_blank' rel='noreferrer'>WhatsApp</a>
+              <a href='https://wa.me/17243211106' className='real-button real-button-ghost' target='_blank' rel='noreferrer'>WhatsApp</a>
             </div>
           </div>
         </div>

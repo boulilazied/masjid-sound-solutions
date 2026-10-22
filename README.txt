@@ -6,7 +6,7 @@ Updated in this version:
 - Email address set to contact@azaudios.com
 - Real backend form submission added with Express
 - WhatsApp buttons added for:
-  +1 724 831 0196
+  +1 724 321 1106
   +1 724 427 5661
 
 How to run locally:

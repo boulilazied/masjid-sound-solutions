@@ -19,7 +19,7 @@ happens **outside** the code: Google Business Profile, brand consistency, and ci
 | Additional categories | Sound system service · Audio visual equipment supplier · Home audio store · Audiovisual equipment rental service · Commercial sound system installer |
 | Type | Service-area business (hide address; list service areas) |
 | Service areas | Pittsburgh PA + region · United States · Canada |
-| Phone | +1 724 831 0196 |
+| Phone | +1 724 321 1106 |
 | Website | https://azaudios.com |
 | Email | contact@azaudios.com |
 | Attributes | Free consultation · Online estimates · Identifies as service-area business |
@@ -43,7 +43,7 @@ Event PA & microphone rental · DSP tuning · Acoustic analysis · Audio system 
 |---|---|
 | Name | `AZ Audio Solutions` |
 | Domain | `https://azaudios.com` |
-| Phone | `+1 724 831 0196` |
+| Phone | `+1 724 321 1106` |
 | City | `Pittsburgh, PA` |
 | Email | `contact@azaudios.com` |
 | Instagram | `instagram.com/azaudiosolutions` |

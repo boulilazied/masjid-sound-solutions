@@ -3,7 +3,7 @@ import {
   Mic2, AudioWaveform, SlidersHorizontal, Network, TrendingUp, CircleDollarSign,
   PhoneCall, PenLine, ClipboardList, HardHat, Gauge, GraduationCap, ShieldCheck, BadgeCheck,
   Smartphone, Mic, Music, Zap, Sliders, Globe, Video, Archive, Radio,
-  Volume2, Wifi, Power, Camera
+  Volume2, Wifi, Power, Camera, Cctv, DoorOpen, Car, HardDrive
 } from 'lucide-react'
 
 // AMJA imams' conference, August 2026 — photos from our booth. Captions stay
@@ -99,7 +99,7 @@ export default function MasjidSoundSolutionsPage() {
             </p>
             <div className='real-actions'>
               <Link to='/contact' className='real-button real-button-gold'>Request Consultation</Link>
-              <a href='https://wa.me/17248310196' className='real-button real-button-ghost'>WhatsApp</a>
+              <a href='https://wa.me/17243211106' className='real-button real-button-ghost'>WhatsApp</a>
             </div>
           </div>
         </div>
@@ -509,6 +509,57 @@ export default function MasjidSoundSolutionsPage() {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className='clean-section'>
+        <div className='container two-column feature-photo-section'>
+          <div className='clean-photo-card stream-mockup-card security-mockup-card'>
+            <div className='stream-live-badge'>
+              <span className='stream-live-dot' />
+              <span>REC</span>
+            </div>
+            <div className='stream-camera-preview'>
+              <div className='stream-camera-photo-wrap security-photo-wrap'>
+                <img src='/smart-home/cameras-8.jpg' alt='IP security cameras with a network video recorder' className='stream-camera-img security-camera-img' loading='lazy' />
+              </div>
+              <div className='stream-camera-caption'>
+                <strong>Recorded on site, viewable from your phone</strong>
+                <span className='stream-camera-badge'>24/7</span>
+              </div>
+            </div>
+            <div className='stream-output-list'>
+              {[
+                { Icon: DoorOpen, label: 'Main Entrance'    },
+                { Icon: DoorOpen, label: "Women's Entrance" },
+                { Icon: Car,      label: 'Parking Lot'      },
+                { Icon: Cctv,     label: 'Hallways'         },
+              ].map(({ Icon, label }) => (
+                <div key={label} className='stream-output-row'>
+                  <Icon size={14} strokeWidth={1.5} />
+                  <span>{label}</span>
+                  <span className='stream-status-on'>Recording</span>
+                </div>
+              ))}
+            </div>
+            <div className='security-example-note'>Example camera locations. Final placement is set during the site survey.</div>
+          </div>
+          <div className='feature-copy'>
+            <div className='real-eyebrow'>Security camera systems</div>
+            <h2>Protect your masjid, your parking lot and your families.</h2>
+            <p>
+              High-resolution IP cameras record around the clock to a recorder in your equipment rack.
+              They run on the same network and rack as your sound system, so one installer
+              designs, wires and supports both.
+            </p>
+            <ul className='real-check-list'>
+              <li>HD cameras for entrances, parking, hallways and outdoor areas</li>
+              <li>Cameras powered over the network cable: no outlet needed at each camera</li>
+              <li>24/7 recording on an on-site network video recorder</li>
+              <li>Live view and playback from your phone</li>
+              <li>Camera count and placement planned during the site survey</li>
+            </ul>
           </div>
         </div>
       </section>

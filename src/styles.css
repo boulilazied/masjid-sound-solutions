@@ -2607,6 +2607,38 @@ img {
   opacity: 0.85;
 }
 
+/* ── Security cameras card (reuses the stream mockup) ─────────────── */
+
+.security-mockup-card .stream-live-badge {
+  background: rgba(212, 160, 23, 0.14);
+  border-color: rgba(212, 160, 23, 0.4);
+  color: #f4c84a;
+}
+
+.security-mockup-card .stream-live-dot {
+  background: #ef4444;
+}
+
+.security-photo-wrap {
+  padding: 0.5rem 1.25rem;
+}
+
+/* The source photo has a faint rule near its top edge; cropping to a wider
+   frame and biasing the crop downward keeps it out of view. */
+.security-mockup-card .security-camera-img {
+  width: 100%;
+  max-height: none;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center 72%;
+}
+
+.security-example-note {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.4;
+}
+
 /* ── Key Benefits Strip (MasjidSoundSolutionsPage) ────────────────── */
 
 .masjid-benefits-strip {
@@ -5078,4 +5110,151 @@ img {
 .lead-required {
   color: #d4af37;
   font-weight: 700;
+}
+
+/* ── School Systems page (.school-page) ──────────────────────────────
+   Root also carries .masjid-clean-page so the shared --real-* tokens and
+   clean-section / why-icon / process-timeline components resolve. */
+
+.school-page .std-hero h1 {
+  max-width: 900px;
+}
+
+.school-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+
+.school-pillar {
+  position: relative;
+  padding: 1.75rem 1.5rem 1.5rem;
+  background: var(--real-cream);
+  border: 1px solid rgba(189, 131, 37, 0.28);
+  border-radius: 22px;
+}
+
+.school-pillar-num {
+  position: absolute;
+  top: 1.1rem;
+  right: 1.3rem;
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: rgba(189, 131, 37, 0.22);
+}
+
+.school-pillar h3 {
+  margin: 1rem 0 0.9rem;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.school-pillar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.school-pillar li {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 0.6rem;
+  align-items: start;
+  color: var(--real-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.school-pillar li svg {
+  margin-top: 3px;
+  color: var(--real-gold);
+}
+
+.school-backbone {
+  background: #0d1a3a;
+  color: #fff;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.school-backbone-inner {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding-top: 1.4rem;
+  padding-bottom: 1.4rem;
+}
+
+.school-backbone-tag {
+  flex-shrink: 0;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--real-gold-soft);
+}
+
+.school-backbone-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.school-backbone-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid rgba(231, 189, 94, 0.45);
+  border-radius: 999px;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.school-backbone-item svg {
+  color: var(--real-gold-soft);
+}
+
+/* Five steps. This selector outranks the generic .process-timeline
+   breakpoints, so the step-downs are declared explicitly below. */
+.school-page .process-timeline {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.school-brand-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1080px) {
+  .school-pillars {
+    grid-template-columns: 1fr;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .school-page .process-timeline {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .school-backbone-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .school-page .process-timeline {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .school-brand-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }

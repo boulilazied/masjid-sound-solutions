@@ -371,8 +371,8 @@ export default function LeadCaptureModal() {
               and we will be in touch about your consultation.
             </p>
             <div className='lead-done-actions'>
-              <a className='button lead-gold-button' href='tel:+17248310196'>
-                <PhoneCall size={17} strokeWidth={2.2} /> +1 724 831 0196
+              <a className='button lead-gold-button' href='tel:+17243211106'>
+                <PhoneCall size={17} strokeWidth={2.2} /> +1 724 321 1106
               </a>
               <a
                 className='button lead-ghost-button'

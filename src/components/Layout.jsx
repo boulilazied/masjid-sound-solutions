@@ -10,6 +10,8 @@ const serviceLinks = [
   { to: '/residential-audio',      label: 'Residential Audio Solutions' },
   { to: '/connected-home',         label: 'Connected Home Solutions' },
   { to: '/event-rental-services',  label: 'Event Rental Services' },
+  // Not a division: a cross-division offer for schools, listed with the services.
+  { to: '/school-systems',         label: 'School Communication Systems' },
 ]
 
 function HamburgerIcon() {
@@ -124,7 +126,7 @@ export default function Layout({ children }) {
             </NavLink>
 
             {/* Phone number — desktop header */}
-            <a href='tel:+17248310196' className='nav-phone'>+1 724 831 0196</a>
+            <a href='tel:+17243211106' className='nav-phone'>+1 724 321 1106</a>
 
             <Link to='/contact' className='button button-primary nav-cta'>
               Request a Quote
@@ -175,13 +177,13 @@ export default function Layout({ children }) {
             <div className='footer-heading'>Contact</div>
             <ul className='footer-list'>
               <li><a href='mailto:contact@azaudios.com'>contact@azaudios.com</a></li>
-              <li><a href='tel:+17248310196'>+1 724 831 0196</a></li>
+              <li><a href='tel:+17243211106'>+1 724 321 1106</a></li>
               <li><a href='tel:+17244275661'>+1 724 427 5661</a></li>
               <li>Pittsburgh, PA — USA &amp; Canada</li>
             </ul>
             <div className='footer-contact-links'>
               <a
-                href='https://wa.me/17248310196'
+                href='https://wa.me/17243211106'
                 target='_blank'
                 rel='noreferrer'
                 className='footer-wa-btn'

@@ -39,6 +39,11 @@ const META = {
     description:
       'Event Rental Services by AZ Audio Solutions: portable PA systems, wireless microphones, mixers, speakers and temporary audio support for events and gatherings.',
   },
+  '/school-systems': {
+    title: 'School Sound, Intercom & Security Systems — AZ Audio Solutions',
+    description:
+      'School communication systems by AZ Audio Solutions: multi-zone PA and automatic bells, classroom IP intercom with paging, and IP video security, designed, installed and programmed on one network with staff training.',
+  },
   '/services': {
     title: 'Audio Services — AZ Audio Solutions',
     description:

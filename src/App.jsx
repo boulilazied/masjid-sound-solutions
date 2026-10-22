@@ -10,6 +10,7 @@ import ResidentialAudioPage from './pages/ResidentialAudioPage'
 import EventRentalServicesPage from './pages/EventRentalServicesPage'
 import ConnectedHomePage from './pages/ConnectedHomePage'
 import AmjaPage from './pages/AmjaPage'
+import SchoolSystemsPage from './pages/SchoolSystemsPage'
 import { Link } from 'react-router-dom'
 
 function NotFound() {
@@ -40,6 +41,7 @@ export default function App() {
         <Route path='/residential-audio' element={<ResidentialAudioPage />} />
         <Route path='/event-rental-services' element={<EventRentalServicesPage />} />
         <Route path='/connected-home' element={<ConnectedHomePage />} />
+        <Route path='/school-systems' element={<SchoolSystemsPage />} />
         <Route path='/about' element={<AboutPage />} />
         <Route path='/contact' element={<ContactPage />} />
         {/* Conference QR landing — renders the masjid division page. */}

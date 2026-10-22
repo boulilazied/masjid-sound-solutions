@@ -207,7 +207,7 @@ function confirmationEmail(lead, attached) {
           We will review this and follow up with you. If you would rather talk sooner, call or WhatsApp us any time.
         </p>
         <p style="margin:0 0 6px">
-          <a href="tel:+17248310196" style="color:#8a6508;font-weight:700;text-decoration:none">+1 724 831 0196</a>
+          <a href="tel:+17243211106" style="color:#8a6508;font-weight:700;text-decoration:none">+1 724 321 1106</a>
           &nbsp;·&nbsp;
           <a href="tel:+17244275661" style="color:#8a6508;font-weight:700;text-decoration:none">+1 724 427 5661</a>
         </p>
@@ -336,7 +336,7 @@ export default async function handler(req, res) {
             lead.timeline ? `Timeline: ${lead.timeline}` : '',
             '',
             'We will follow up with you. To reach us sooner:',
-            '+1 724 831 0196  |  +1 724 427 5661  |  contact@azaudios.com',
+            '+1 724 321 1106  |  +1 724 427 5661  |  contact@azaudios.com',
             '',
             'Jazak Allah khair,',
             'AZ Audio Solutions',
@@ -370,7 +370,7 @@ export default async function handler(req, res) {
   if (!captured) {
     return res.status(500).json({
       ok: false,
-      error: 'Unable to send right now. Please try again, or WhatsApp us at +1 724 831 0196.',
+      error: 'Unable to send right now. Please try again, or WhatsApp us at +1 724 321 1106.',
     })
   }
 

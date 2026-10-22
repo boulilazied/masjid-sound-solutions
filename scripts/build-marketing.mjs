@@ -211,7 +211,7 @@ doc
   .font('Helvetica')
   .fontSize(11.5)
   .fillColor(WHITE)
-  .text('+1 724 831 0196   ·   +1 724 427 5661   ·   contact@azaudios.com', 0, footTop + 44, {
+  .text('+1 724 321 1106   ·   +1 724 427 5661   ·   contact@azaudios.com', 0, footTop + 44, {
     width: W,
     align: 'center',
   })

@@ -152,11 +152,11 @@ export default function QuoteForm() {
         <div className='whatsapp-links'>
           <a
             className='button button-secondary'
-            href='https://wa.me/17248310196'
+            href='https://wa.me/17243211106'
             target='_blank'
             rel='noreferrer'
           >
-            WhatsApp +1 724 831 0196
+            WhatsApp +1 724 321 1106
           </a>
           <a
             className='button button-secondary'

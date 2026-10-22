@@ -5,7 +5,7 @@
 **Company:** AZ Audio Solutions  
 **Rebranded from:** Masjid Sound Solutions (scope expanded beyond masjids — some legacy naming remains in the codebase)  
 **Five divisions (canonical names — use these exact strings everywhere):** Masjid Sound Solutions · Commercial Audio Solutions · Residential Audio Solutions · Connected Home Solutions · Event Rental Services  
-**Contact:** contact@azaudios.com · WhatsApp +1 724 831 0196 · +1 724 427 5661 · USA and Canada
+**Contact:** contact@azaudios.com · WhatsApp +1 724 321 1106 · +1 724 427 5661 · USA and Canada
 
 ---
 
@@ -74,6 +74,7 @@ When in doubt, ask the owner for the underlying fact rather than writing somethi
 | `/residential-audio` | ResidentialAudioPage |
 | `/connected-home` | ConnectedHomePage |
 | `/event-rental-services` | EventRentalServicesPage |
+| `/school-systems` | SchoolSystemsPage (cross-division school offer, not a sixth division) |
 | `/about` | AboutPage |
 | `/contact` | ContactPage |
 | `/amja` | AmjaPage → renders MasjidSoundSolutionsPage (campaign alias, noindex, canonical → `/masjid-sound-solutions`) |
@@ -106,6 +107,9 @@ src/
                                     add-ons, process, audio cross-link, CTA. Contents/prices/photography all come
                                     from the flyers.
     EventRentalServicesPage.jsx   — rich 9-section standalone page (matches masjid page quality)
+    SchoolSystemsPage.jsx         — school offer (PA/bells, classroom intercom, video security, backbone,
+                                    5-step process, brands, CTA); content mirrors the printed school flyer.
+                                    Root is `.masjid-clean-page school-page` to reuse the --real-* tokens
     AboutPage.jsx                 — company overview, all 4 divisions grid, team section (reuses `.hp-cred-grid`), values panel
     ContactPage.jsx               — SectionHeading + QuoteForm + contact card
   components/
@@ -190,7 +194,7 @@ public/
 
 ## Navigation
 
-**Header nav:** Home · **Services** (dropdown → the five division pages) · About · phone link `+1 724 831 0196` · "Request a Quote" CTA → `/contact`. The phone link is hidden below 1080px. The dropdown is kept down to **760px** — below that `.main-nav` becomes a column behind the hamburger and the five service links render flat via `.nav-mobile-services`. Do not raise that 760px back to 1080px: five flat links do not fit in a horizontal row, and doing so pushes the header into horizontal overflow.
+**Header nav:** Home · **Services** (dropdown → the five division pages) · About · phone link `+1 724 321 1106` · "Request a Quote" CTA → `/contact`. The phone link is hidden below 1080px. The dropdown is kept down to **760px** — below that `.main-nav` becomes a column behind the hamburger and the five service links render flat via `.nav-mobile-services`. Do not raise that 760px back to 1080px: five flat links do not fit in a horizontal row, and doing so pushes the header into horizontal overflow.
 
 **Footer divisions column:** maps over the same `serviceLinks` array the nav uses (single source of truth for division names) + `/services` (All Services)
 
@@ -223,9 +227,10 @@ Key component classes in the Masjid page:
 - `.signal-flow-diagram` / `.signal-sources` / `.signal-zones-output` / `.signal-node` / `.signal-node-icon` / `.signal-arrow` / `.signal-arrow-col` / `.signal-zone-badge` / `.signal-zone-output-item` / `.signal-col-label` — horizontal audio signal flow diagram (Sources → Mixer → DSP → Amplifier → Zones).
 - `.sys-arch-grid` / `.sys-arch-components` / `.sys-arch-component` / `.sys-arch-badge` / `.sys-arch-comp-icon` / `.sys-rack-visual` / `.sys-rack-frame` / `.sys-rack-unit` / `.sys-rack-amp` / `.sys-rack-amp-zones` / `.sys-rack-amp-zone-more` / `.sys-arch-inputs` / `.sys-input-row` / `.sys-input-icon` / `.sys-input-arrow` — 3-column system architecture section (component list + CSS rack visual + audio inputs).
 - **Zone count is never fixed at four.** This applies to *both* the System Architecture section and the Audio Signal Flow section (`MULTI-ZONE AMPLIFIER`, `ZONE OUTPUTS`, `.signal-zone-note`). The four named zones in the signal-flow diagram are an illustrative example and are labelled as such — if you touch one section, check the other.
+- `.security-mockup-card` / `.security-photo-wrap` / `.security-camera-img` / `.security-example-note` — Security Camera Systems section; reuses the stream mockup classes, mirrored (card left). Photo is `smart-home/cameras-8.jpg`, cropped by `object-position` to hide a faint rule near its top edge. Camera locations in the card are labelled as examples.
 - `.stream-mockup-card` / `.stream-live-badge` / `.stream-live-dot` / `.stream-output-list` / `.stream-output-row` / `.stream-status-on` / `.stream-status-off` / `.stream-audio-wrap` / `.stream-audio-bars` / `.stream-audio-bar` / `.stream-camera-preview` / `.stream-camera-photo-wrap` / `.stream-camera-img` / `.stream-camera-caption` / `.stream-camera-badge` — dark broadcast panel mockup for the Livestreaming & Recording section; includes PTZ camera photo (`ptz-camera.png`) in a white inset card above the output rows.
 
-**MasjidSoundSolutionsPage section order (13 sections):** Hero → Key Benefits Strip → Why Specialized → Microphones → Multi-zone layout → Zone Control Options → Rack & Infrastructure → System Architecture Overview → Audio Signal Flow → Livestreaming & Recording → Process Timeline → Partner Brands → Final CTA
+**MasjidSoundSolutionsPage section order (14 sections):** Hero → Key Benefits Strip → Why Specialized → Microphones → Multi-zone layout → Zone Control Options → Rack & Infrastructure → System Architecture Overview → Audio Signal Flow → Livestreaming & Recording → Security Camera Systems → Process Timeline → Partner Brands → Final CTA
 
 **StandardDivisionPage** classes:
 - `.std-hero` / `.std-hero-inner` / `.std-hero-icon` — dark gradient hero with gold icon box
@@ -259,6 +264,8 @@ Responsive breakpoints: **1080px, 980px, 760px, 640px**
 - This page uses its own `.sh-benefits` bar rather than the shared `.masjid-benefits-strip`, which
   does not wrap and clips its last item between 761px and 1080px. That pre-existing clipping still
   affects the masjid and event-rental pages.
+
+**School Systems page** (`.school-page`): `.school-pillars` / `.school-pillar` (3 numbered cards → 1 col at 1080px), `.school-backbone` (dark chip band), `.school-brand-grid`. `.school-page .process-timeline` is 5 columns and outranks the generic breakpoints, so its 1080px/640px step-downs are declared explicitly. The nav/footer list it via `serviceLinks` but it is **not** a division: do not add it to the five-division grids, JSON-LD services or `/services`.
 
 **Five-division grid layout:** `.division-tabs` and `.about-div-grid` run on a 6-column track above
 1080px with each card spanning 2, so five cards render 3 + 2-centered via `:nth-child(4)`/`:nth-child(5)`.
@@ -449,11 +456,11 @@ four divisions intact (Google had been showing "Masjid Sound Solutions" as the h
   soft-404s carrying the homepage title. **When you add a route, add it to `META` *and* `sitemap.xml`.**
 - **Every route ships exactly one H1.** HomePage, the four division pages and 404 declare their own;
   `/services`, `/about` and `/contact` get theirs via `<SectionHeading as='h1'>`.
-- `public/robots.txt` and `public/sitemap.xml` list all 9 real routes (incl. `/services`).
+- `public/robots.txt` and `public/sitemap.xml` list all 10 real routes (incl. `/services` and `/school-systems`).
 
 **Canonical routes** (use the real paths — NOT `/commercial`, `/residential`, `/events`, `/smart-home`):
 `/` · `/masjid-sound-solutions` · `/commercial-audio` · `/residential-audio` · `/connected-home` ·
-`/event-rental-services` · `/services` · `/about` · `/contact`.
+`/event-rental-services` · `/school-systems` · `/services` · `/about` · `/contact`.
 
 **Off-page (not code):** see [`MARKETING-SEO.md`](MARKETING-SEO.md) — Google Business Profile kit, NAP
 brand-consistency checklist, short bios, and Search Console steps. Brand ranking for "azaudios" / "AZ Audio"

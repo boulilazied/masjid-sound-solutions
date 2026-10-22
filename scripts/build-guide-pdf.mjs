@@ -123,7 +123,7 @@ const CONTACT = {
   division: 'Masjid Sound Solutions — a division of AZ Audio Solutions',
   site: 'azaudios.com',
   email: 'contact@azaudios.com',
-  phones: ['+1 724 831 0196', '+1 724 427 5661'],
+  phones: ['+1 724 321 1106', '+1 724 427 5661'],
 }
 
 const PAGE = { size: 'LETTER', margin: 58 }

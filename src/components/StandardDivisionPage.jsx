@@ -15,7 +15,7 @@ export default function StandardDivisionPage({ eyebrow, title, text, Icon, servi
           <p>{text}</p>
           <div className='hero-actions'>
             <Link to='/contact' className='button button-primary'>Request a Quote</Link>
-            <a href='https://wa.me/17248310196' className='button button-ghost-light' target='_blank' rel='noreferrer'>WhatsApp Us</a>
+            <a href='https://wa.me/17243211106' className='button button-ghost-light' target='_blank' rel='noreferrer'>WhatsApp Us</a>
           </div>
         </div>
       </section>

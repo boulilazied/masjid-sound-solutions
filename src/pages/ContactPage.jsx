@@ -21,13 +21,13 @@ export default function ContactPage() {
               <strong>WhatsApp</strong>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '0.25rem' }}>
                 <a
-                  href='https://wa.me/17248310196'
+                  href='https://wa.me/17243211106'
                   target='_blank'
                   rel='noreferrer'
                   className='button button-secondary'
                   style={{ fontSize: '0.88rem', padding: '0.55rem 0.9rem' }}
                 >
-                  +1 724 831 0196
+                  +1 724 321 1106
                 </a>
                 <a
                   href='https://wa.me/17244275661'
