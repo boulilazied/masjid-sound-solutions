@@ -8,7 +8,8 @@ const OG_IMAGE = `${SITE}/logo-az.png`
 // Per-route SEO metadata.
 // Titles intentionally reinforce the brand hierarchy:
 //   AZ Audio Solutions = parent company, each division = "A Division of AZ Audio Solutions".
-const META = {
+// Also read at build time by scripts/prerender.mjs, which writes it into each route's HTML.
+export const META = {
   '/': {
     title: 'AZ Audio Solutions | Professional Audio Systems & Smart Home Solutions for Masjids, Commercial, Residential & Events',
     description:
@@ -28,6 +29,7 @@ const META = {
     title: 'Home Security & Smart Living — A Division of AZ Audio Solutions',
     description:
       'Home Security & Smart Living by AZ Audio Solutions: professionally installed cameras, alarm sensors, smart locks, video doorbells, lighting, climate and garage control, with optional whole-home audio. Essential, Plus and Complete packages from $6,500.',
+    image: `${SITE}/home-offer/share-home.jpg`,
   },
   '/event-rental-services': {
     title: 'Event Rental Services — A Division of AZ Audio Solutions',
@@ -106,38 +108,46 @@ function upsertCanonical(href) {
 // Single component, mounted once in Layout. Updates <title>, meta description,
 // canonical and Open Graph / Twitter tags on every client-side route change so
 // each route exposes correct, crawlable metadata in this Vite SPA.
+// Resolved head values for a path: shared by the client effect below and the build-time prerender.
+export function resolveMeta(pathname) {
+  const known = Object.prototype.hasOwnProperty.call(META, pathname)
+  const meta = known ? META[pathname] : NOT_FOUND
+  const defaultCanonical = pathname === '/' ? `${SITE}/` : `${SITE}${pathname}`
+  return {
+    title: meta.title,
+    description: meta.description,
+    // A route may override either value (campaign pages point their canonical
+    // at the page whose content they reuse, and opt out of indexing).
+    canonical: meta.canonical || defaultCanonical,
+    robots:
+      meta.robots ||
+      (known ? 'index, follow, max-image-preview:large, max-snippet:-1' : 'noindex, follow'),
+    image: meta.image || OG_IMAGE,
+  }
+}
+
 export default function RouteSeo() {
   const { pathname } = useLocation()
 
   useEffect(() => {
-    const known = Object.prototype.hasOwnProperty.call(META, pathname)
-    const meta = known ? META[pathname] : NOT_FOUND
-    const defaultCanonical = pathname === '/' ? `${SITE}/` : `${SITE}${pathname}`
-    // A route may override either value (campaign pages point their canonical
-    // at the page whose content they reuse, and opt out of indexing).
-    const canonical = meta.canonical || defaultCanonical
+    const meta = resolveMeta(pathname)
 
     document.title = meta.title
     upsertMeta('name', 'description', meta.description)
-    upsertCanonical(canonical)
-    upsertMeta(
-      'name',
-      'robots',
-      meta.robots ||
-        (known ? 'index, follow, max-image-preview:large, max-snippet:-1' : 'noindex, follow')
-    )
+    upsertCanonical(meta.canonical)
+    upsertMeta('name', 'robots', meta.robots)
 
     upsertMeta('property', 'og:type', 'website')
     upsertMeta('property', 'og:site_name', 'AZ Audio Solutions')
     upsertMeta('property', 'og:title', meta.title)
     upsertMeta('property', 'og:description', meta.description)
-    upsertMeta('property', 'og:url', canonical)
-    upsertMeta('property', 'og:image', OG_IMAGE)
+    upsertMeta('property', 'og:url', meta.canonical)
+    upsertMeta('property', 'og:image', meta.image)
 
     upsertMeta('name', 'twitter:card', 'summary_large_image')
     upsertMeta('name', 'twitter:title', meta.title)
     upsertMeta('name', 'twitter:description', meta.description)
-    upsertMeta('name', 'twitter:image', OG_IMAGE)
+    upsertMeta('name', 'twitter:image', meta.image)
   }, [pathname])
 
   return null

@@ -1,4 +1,5 @@
 {
+  "buildCommand": "npm run build",
   "functions": {
     "api/lead.js": {
       "includeFiles": "public/guides/**"
@@ -12,9 +13,20 @@
     }
   ],
   "rewrites": [
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/masjid-sound-solutions", "destination": "/masjid-sound-solutions.html" },
+    { "source": "/commercial-audio", "destination": "/commercial-audio.html" },
+    { "source": "/connected-home", "destination": "/connected-home.html" },
+    { "source": "/event-rental-services", "destination": "/event-rental-services.html" },
+    { "source": "/school-systems", "destination": "/school-systems.html" },
+    { "source": "/services", "destination": "/services.html" },
+    { "source": "/about", "destination": "/about.html" },
+    { "source": "/privacy", "destination": "/privacy.html" },
+    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/amja", "destination": "/amja.html" },
     {
       "source": "/((?!api/).*)",
-      "destination": "/index.html"
+      "destination": "/spa.html"
     }
   ]
 }

@@ -245,7 +245,7 @@ export default function ConnectedHomePage() {
                   <tr key={row.label}>
                     <th scope='row'>{row.label}</th>
                     {TIER_ORDER.map((k) => (
-                      <td key={k}>
+                      <td key={k} data-label={TIERS[k].short}>
                         <Cell value={row[k]} />
                       </td>
                     ))}

@@ -68,7 +68,7 @@ export default function Layout({ children }) {
       <header className='site-header'>
         <div className='container header-inner'>
           <Link to='/' className='brand'>
-            <img src='/logo-az.png' alt='AZ Audio Solutions logo' className='brand-logo brand-logo-wide' />
+            <img src='/logo-az-header.webp' alt='AZ Audio Solutions logo' width='214' height='136' className='brand-logo brand-logo-wide' />
           </Link>
 
           <button
@@ -140,7 +140,7 @@ export default function Layout({ children }) {
       <footer className='site-footer'>
         <div className='container footer-grid'>
           <div>
-            <img src='/logo-az-transparent.png' alt='AZ Audio Solutions logo' className='footer-logo' />
+            <img src='/logo-az-footer.webp' alt='AZ Audio Solutions logo' width='460' height='307' loading='lazy' className='footer-logo' />
             <p className='footer-copy'>
               Professional audio and smart home solutions for masjids, commercial spaces, homes, and events across the USA and Canada.
             </p>
