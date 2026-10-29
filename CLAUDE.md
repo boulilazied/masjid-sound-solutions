@@ -4,7 +4,7 @@
 
 **Company:** AZ Audio Solutions  
 **Rebranded from:** Masjid Sound Solutions (scope expanded beyond masjids — some legacy naming remains in the codebase)  
-**Five divisions (canonical names — use these exact strings everywhere):** Masjid Sound Solutions · Commercial Audio Solutions · Residential Audio Solutions · Connected Home Solutions · Event Rental Services  
+**Four divisions (canonical names — use these exact strings everywhere):** Masjid Sound Solutions · Commercial Audio Solutions · Home Security & Smart Living · Event Rental Services. Residential Audio Solutions was retired 2026-10-28 and folded into Home Security & Smart Living as optional audio upgrades; `/residential-audio` 308-redirects to `/connected-home` (vercel.json).  
 **Contact:** contact@azaudios.com · WhatsApp +1 724 321 1106 · +1 724 427 5661 · USA and Canada
 
 ---
@@ -71,8 +71,8 @@ When in doubt, ask the owner for the underlying fact rather than writing somethi
 | `/services` | ServicesPage |
 | `/masjid-sound-solutions` | MasjidSoundSolutionsPage |
 | `/commercial-audio` | CommercialAudioPage |
-| `/residential-audio` | ResidentialAudioPage |
-| `/connected-home` | ConnectedHomePage |
+| `/residential-audio` | permanent redirect to `/connected-home` (vercel.json; `<Navigate>` fallback in App.jsx) |
+| `/connected-home` | ConnectedHomePage (Home Security & Smart Living) |
 | `/event-rental-services` | EventRentalServicesPage |
 | `/school-systems` | SchoolSystemsPage (cross-division school offer, not a sixth division) |
 | `/about` | AboutPage |
@@ -194,7 +194,7 @@ public/
 
 ## Navigation
 
-**Header nav:** Home · **Services** (dropdown → the five division pages) · About · phone link `+1 724 321 1106` · "Request a Quote" CTA → `/contact`. The phone link is hidden below 1080px. The dropdown is kept down to **760px** — below that `.main-nav` becomes a column behind the hamburger and the five service links render flat via `.nav-mobile-services`. Do not raise that 760px back to 1080px: five flat links do not fit in a horizontal row, and doing so pushes the header into horizontal overflow.
+**Header nav:** Home · **Services** (dropdown → the four division pages plus School Communication Systems) · About · phone link `+1 724 321 1106` · "Request a Quote" CTA → `/contact`. The phone link is hidden below 1080px. The dropdown is kept down to **760px** — below that `.main-nav` becomes a column behind the hamburger and the five service links (four divisions + School Communication Systems) render flat via `.nav-mobile-services`. Do not raise that 760px back to 1080px: five flat links do not fit in a horizontal row, and doing so pushes the header into horizontal overflow.
 
 **Footer divisions column:** maps over the same `serviceLinks` array the nav uses (single source of truth for division names) + `/services` (All Services)
 
@@ -258,19 +258,15 @@ Responsive breakpoints: **1080px, 980px, 760px, 640px**
   does not declare them** — that page renders those components with unresolved custom properties.
 - `.sh-table-wrap` / `.sh-table` / `.sh-th-featured` / `.sh-td-featured` / `.sh-cell-yes` / `.sh-cell-no`
   / `.sh-cell-spec` / `.sh-table-note` — package comparison table; the wrapper scrolls on its own below ~700px
-- `.sh-crosslink` / `.sh-crosslink-icon` / `.sh-crosslink-copy` / `.sh-crosslink-cta` — Residential Audio band
 - `.smarthome-page .process-timeline` is 6 columns and **outranks** the generic `.process-timeline`
   responsive rules — its 1080px/640px step-downs are declared explicitly. Same trap as `.event-rental-page`.
 - This page uses its own `.sh-benefits` bar rather than the shared `.masjid-benefits-strip`, which
   does not wrap and clips its last item between 761px and 1080px. That pre-existing clipping still
   affects the masjid and event-rental pages.
 
-**School Systems page** (`.school-page`): `.school-pillars` / `.school-pillar` (3 numbered cards → 1 col at 1080px), `.school-backbone` (dark chip band), `.school-brand-grid`. `.school-page .process-timeline` is 5 columns and outranks the generic breakpoints, so its 1080px/640px step-downs are declared explicitly. The nav/footer list it via `serviceLinks` but it is **not** a division: do not add it to the five-division grids, JSON-LD services or `/services`.
+**School Systems page** (`.school-page`): `.school-pillars` / `.school-pillar` (3 numbered cards → 1 col at 1080px), `.school-backbone` (dark chip band), `.school-brand-grid`. `.school-page .process-timeline` is 5 columns and outranks the generic breakpoints, so its 1080px/640px step-downs are declared explicitly. The nav/footer list it via `serviceLinks` but it is **not** a division: do not add it to the four-division grids, JSON-LD services or `/services`.
 
-**Five-division grid layout:** `.division-tabs` and `.about-div-grid` run on a 6-column track above
-1080px with each card spanning 2, so five cards render 3 + 2-centered via `:nth-child(4)`/`:nth-child(5)`.
-`.hero-div-chip--featured` spans the full row so the other four form a 2×2. **These rules hardcode five
-items** — update them if the division count changes.
+**Four-division grid layout:** `.division-tabs` and `.about-div-grid` use their base 4-card grids (the old 6-column 3+2 override for five cards was removed 2026-10-28). If a fifth division is ever added, reintroduce a spanning layout.
 
 **Home page classes:**
 - `.hp-hero` / `.hp-hero-media` / `.hp-hero-scrim` / `.hp-hero-inner` / `.hp-hero-eyebrow` /
@@ -405,7 +401,7 @@ Apps Script and the local dev mirror skip a `clientId` they have already stored.
 
 | Page | Status |
 |---|---|
-| ConnectedHomePage | **Complete** — 9-section standalone page: hero, benefits strip, 12-component grid, Basic/Silver/Gold package cards, comparison table, optional add-ons, 6-step process, residential-audio cross-link, CTA |
+| ConnectedHomePage | **Complete** — 9-section standalone page: hero, five solution categories, Essential/Plus/Complete package tiles (from $6,500 / $8,500 / $12,500), comparison table, monitoring disclosure, optional upgrades incl. Audio & Entertainment, 6-step process, FAQ, CTA. Contents follow the 2026-10-28 house-offer brief, NOT the old Basic/Silver/Gold flyers; sensor/switch/curtain quantities are survey-confirmed allowances (no numbers given, do not invent). Do not claim monitoring, dispatch, insurance savings, response times, fire-code compliance or 'one app controls everything' until supplier, contract and fee are confirmed |
 | MasjidSoundSolutionsPage | **Complete** — 13-section standalone page: hero, key benefits strip, why-grid, mic section, zone layout, zone control options, rack, system architecture, signal flow, livestreaming & recording (with PTZ camera), process timeline, brands, CTA |
 | CommercialAudioPage | **Complete** — full content via `StandardDivisionPage` (6 services, 5 why-us points) |
 | ResidentialAudioPage | **Complete** — full content via `StandardDivisionPage` (6 services, 5 why-us points) |
@@ -459,7 +455,7 @@ four divisions intact (Google had been showing "Masjid Sound Solutions" as the h
 - `public/robots.txt` and `public/sitemap.xml` list all 10 real routes (incl. `/services` and `/school-systems`).
 
 **Canonical routes** (use the real paths — NOT `/commercial`, `/residential`, `/events`, `/smart-home`):
-`/` · `/masjid-sound-solutions` · `/commercial-audio` · `/residential-audio` · `/connected-home` ·
+`/` · `/masjid-sound-solutions` · `/commercial-audio` · `/connected-home` ·
 `/event-rental-services` · `/school-systems` · `/services` · `/about` · `/contact`.
 
 **Off-page (not code):** see [`MARKETING-SEO.md`](MARKETING-SEO.md) — Google Business Profile kit, NAP

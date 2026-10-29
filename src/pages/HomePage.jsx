@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Building2, Home, HouseWifi, Mic2, ClipboardCheck, Receipt, Wrench, Headphones, GraduationCap, BookOpen, PhoneCall, PenLine, HardHat, Gauge } from 'lucide-react'
+import { Building2, HouseWifi, Mic2, ClipboardCheck, Receipt, Wrench, Headphones, GraduationCap, BookOpen, PhoneCall, PenLine, HardHat, Gauge } from 'lucide-react'
 import SectionHeading from '../components/SectionHeading'
 import MasjidIcon from '../components/MasjidIcon'
 
@@ -18,16 +18,11 @@ const divisions = [
     text: 'Professional audio for offices, schools, retail, community centers, paging systems, background music, and conference spaces.'
   },
   {
-    title: 'Residential Audio Solutions',
-    path: '/residential-audio',
-    Icon: Home,
-    text: 'Clean home audio installations, in-ceiling speakers, media room sound, multi-room audio, and smart control integration.'
-  },
-  {
-    title: 'Connected Home Solutions',
+    title: 'Home Security & Smart Living',
     path: '/connected-home',
     Icon: HouseWifi,
-    text: 'Fully integrated smart home packages — security cameras, smart locks, video doorbells, lighting, thermostats, alarm systems, and one app for the whole home.'
+    text: 'Professionally installed cameras, alarm sensors, smart locks, video doorbells, lighting, climate, garage control, and optional whole-home audio — all designed around your home and made simple to use.',
+    cta: 'Explore Home Solutions →'
   },
   {
     title: 'Event Rental Services',
@@ -44,8 +39,7 @@ const divisions = [
 const hierarchy = [
   { path: '/masjid-sound-solutions', title: 'Masjid Sound Solutions',      Icon: MasjidIcon, text: 'masjid & prayer-hall audio' },
   { path: '/commercial-audio',       title: 'Commercial Audio Solutions',  Icon: Building2,  text: 'offices, schools & facilities' },
-  { path: '/residential-audio',      title: 'Residential Audio Solutions', Icon: Home,       text: 'home & multi-room audio' },
-  { path: '/connected-home',         title: 'Connected Home Solutions',    Icon: HouseWifi,  text: 'smart home security, comfort & control' },
+  { path: '/connected-home',         title: 'Home Security & Smart Living', Icon: HouseWifi, text: 'home security, smart control & optional audio' },
   { path: '/event-rental-services',  title: 'Event Rental Services',       Icon: Mic2,       text: 'events & PA rental support' },
 ]
 
@@ -59,7 +53,7 @@ const work = [
 // Every item here must be verifiable from how we actually operate — no project
 // counts, no client counts, no figures we cannot substantiate on request.
 const stats = [
-  { num: '5',    label: 'Service Divisions' },
+  { num: '4',    label: 'Service Divisions' },
   { num: 'Free', label: 'Initial Consultation' },
   { num: 'MSc',  label: 'Signal Processing Engineer' },
   { num: '100%', label: 'Itemized Proposals' },
@@ -161,7 +155,7 @@ export default function HomePage() {
             centered
             eyebrow='Our Services'
             title='Choose the audio service you need'
-            text='AZ Audio Solutions is organized into five clear divisions so each customer quickly finds the right service.'
+            text='AZ Audio Solutions is organized into four clear divisions so each customer quickly finds the right service.'
           />
           <div className='division-tabs'>
             {divisions.map((division, i) => (
@@ -172,7 +166,7 @@ export default function HomePage() {
                 </div>
                 <h3>{division.title}</h3>
                 <p>{division.text}</p>
-                <span className='division-tab-cta'>Learn more →</span>
+                <span className='division-tab-cta'>{division.cta || 'Learn more →'}</span>
               </Link>
             ))}
           </div>
@@ -192,7 +186,7 @@ export default function HomePage() {
             <div className='hp-tree-parent'>
               <span className='hp-tree-parent-tag'>Parent company</span>
               <strong>AZ Audio Solutions</strong>
-              <span className='hp-tree-parent-sub'>Five specialized service divisions</span>
+              <span className='hp-tree-parent-sub'>Four specialized service divisions</span>
             </div>
 
             <div className='hp-tree-stem' aria-hidden='true' />

@@ -1,5 +1,5 @@
 import { Building2, PhoneCall, PenLine, HardHat, Gauge, ShieldCheck } from 'lucide-react'
-import StandardDivisionPage from '../components/StandardDivisionPage'
+import ServiceExperience, { ExperienceClosing } from '../components/ServiceExperience'
 import SectionHeading from '../components/SectionHeading'
 
 const services = [
@@ -57,7 +57,8 @@ const brands = [
 export default function CommercialAudioPage() {
   return (
     <>
-      <StandardDivisionPage
+      <ServiceExperience
+        audience='business'
         eyebrow='AZ Audio Division'
         title='Commercial Audio Solutions'
         text='Professional audio systems for offices, schools, retail spaces, and community centers — reliable, easy to operate, and built to last.'
@@ -67,7 +68,7 @@ export default function CommercialAudioPage() {
       />
 
       {/* Process */}
-      <section className='section'>
+      <section className='section' id='process'>
         <div className='container'>
           <SectionHeading
             centered
@@ -90,7 +91,7 @@ export default function CommercialAudioPage() {
       {/* Brands */}
       <section className='section surface-muted'>
         <div className='container'>
-          <SectionHeading centered eyebrow='Trusted Brands' title='Built with proven AV equipment' />
+          <SectionHeading centered eyebrow='Equipment we build with' title='Built with proven AV equipment' />
           <div className='brand-grid-clean'>
             {brands.map((brand) => (
               <div key={brand.name} className='clean-brand-tile'>
@@ -100,6 +101,7 @@ export default function CommercialAudioPage() {
           </div>
         </div>
       </section>
+      <ExperienceClosing audience='business' />
     </>
   )
 }

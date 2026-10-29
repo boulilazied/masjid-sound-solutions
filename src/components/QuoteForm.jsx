@@ -118,7 +118,7 @@ export default function QuoteForm() {
             <option value='Upgrade existing system'>Upgrade existing system</option>
             <option value='Masjid audio design'>Masjid audio design</option>
             <option value='Commercial audio system'>Commercial audio system</option>
-            <option value='Residential / home audio'>Residential / home audio</option>
+            <option value='Home security & smart living'>Home security &amp; smart living</option>
             <option value='Event audio rental'>Event audio rental</option>
             <option value='Streaming / recording setup'>Streaming / recording setup</option>
             <option value='Troubleshooting / support'>Troubleshooting / support</option>

@@ -4,6 +4,13 @@
       "includeFiles": "public/guides/**"
     }
   },
+  "redirects": [
+    {
+      "source": "/residential-audio",
+      "destination": "/connected-home",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/((?!api/).*)",

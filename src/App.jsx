@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './components/Layout'
 import HomePage from './pages/HomePage'
 import ServicesPage from './pages/ServicesPage'
@@ -6,7 +6,6 @@ import AboutPage from './pages/AboutPage'
 import ContactPage from './pages/ContactPage'
 import MasjidSoundSolutionsPage from './pages/MasjidSoundSolutionsPage'
 import CommercialAudioPage from './pages/CommercialAudioPage'
-import ResidentialAudioPage from './pages/ResidentialAudioPage'
 import EventRentalServicesPage from './pages/EventRentalServicesPage'
 import ConnectedHomePage from './pages/ConnectedHomePage'
 import AmjaPage from './pages/AmjaPage'
@@ -38,7 +37,9 @@ export default function App() {
         <Route path='/services' element={<ServicesPage />} />
         <Route path='/masjid-sound-solutions' element={<MasjidSoundSolutionsPage />} />
         <Route path='/commercial-audio' element={<CommercialAudioPage />} />
-        <Route path='/residential-audio' element={<ResidentialAudioPage />} />
+        {/* Retired division. The permanent (308) redirect lives in vercel.json; this
+            covers the local dev server and any client-side navigation. */}
+        <Route path='/residential-audio' element={<Navigate to='/connected-home' replace />} />
         <Route path='/event-rental-services' element={<EventRentalServicesPage />} />
         <Route path='/connected-home' element={<ConnectedHomePage />} />
         <Route path='/school-systems' element={<SchoolSystemsPage />} />

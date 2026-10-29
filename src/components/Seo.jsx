@@ -24,15 +24,10 @@ const META = {
     description:
       'Commercial Audio Solutions by AZ Audio Solutions: professional sound for offices, schools, retail, community centers, paging and conferencing across the USA and Canada.',
   },
-  '/residential-audio': {
-    title: 'Residential Audio Solutions — A Division of AZ Audio Solutions',
-    description:
-      'Residential Audio Solutions by AZ Audio Solutions: clean home audio, in-ceiling speakers, media-room sound, multi-room audio and smart control integration.',
-  },
   '/connected-home': {
-    title: 'Connected Home Solutions — A Division of AZ Audio Solutions',
+    title: 'Home Security & Smart Living — A Division of AZ Audio Solutions',
     description:
-      'Connected Home Solutions by AZ Audio Solutions: fully integrated smart home packages — security cameras, smart locks and video doorbells, lighting, thermostats, alarm systems, motorized curtains and UPS backup, professionally installed and programmed. Basic, Silver and Gold packages from $6,500.',
+      'Home Security & Smart Living by AZ Audio Solutions: professionally installed cameras, alarm sensors, smart locks, video doorbells, lighting, climate and garage control, with optional whole-home audio. Essential, Plus and Complete packages from $6,500.',
   },
   '/event-rental-services': {
     title: 'Event Rental Services — A Division of AZ Audio Solutions',
@@ -47,7 +42,7 @@ const META = {
   '/services': {
     title: 'Audio Services — AZ Audio Solutions',
     description:
-      'Explore the five service divisions of AZ Audio Solutions: masjid, commercial, residential and event audio system design and installation, plus fully integrated connected home packages.',
+      'Explore the four service divisions of AZ Audio Solutions: masjid, commercial and event audio system design and installation, plus home security and smart living packages.',
   },
   '/about': {
     title: 'About AZ Audio Solutions',

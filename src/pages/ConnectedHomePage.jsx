@@ -1,189 +1,210 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { ExperienceFaq } from '../components/ServiceExperience'
 import {
-  Wrench, ShieldCheck, Lightbulb, Smartphone, Zap, Layers,
+  ShieldCheck, Lightbulb, Smartphone, Layers, Video, DoorOpen, Music,
   PhoneCall, MapPin, ClipboardList, HardHat, Settings2, Headphones,
-  Flame, Droplets, Plug, Fan, Sprout, Music, Check, Globe, Mail
+  Flame, Droplets, Plug, Wifi, BatteryCharging, Film, Speaker, Waves, HardDrive,
+  Check, Minus, Globe, Mail
 } from 'lucide-react'
 
-// Package contents, wording and prices come straight from the AZ Audio
-// Basic / Silver / Gold Smart Home Package flyers, and the product photography
-// in /public/smart-home is cropped from those same flyers. Do not add features
-// or differentiators that are not on the flyers — see the claims policy in
-// CLAUDE.md. If the flyers change, this file and those images change with them.
+// Package structure, wording and starting prices follow the October 2026 house-offer
+// brief (Home Security & Connected Living). The brief gives no device counts for
+// sensors, switches or curtain tracks, so those are written as survey-confirmed
+// allowances — do not invent numbers here. Monitoring, dispatch, insurance, response
+// times and "one app controls everything" must stay out of the copy until the supplier,
+// contract and recurring fee are confirmed (see the claims policy in CLAUDE.md).
 
-const TIER_ORDER = ['basic', 'silver', 'gold']
-
-// Tiles shared by all three packages, in flyer order.
-const shared = {
-  lights:   { img: 'light-switches', title: 'Smart Light Switches',      text: 'Control and dim your lights from anywhere and create the perfect ambiance.' },
-  thermo:   { img: 'thermostat',     title: 'Smart Thermostat',          text: 'Comfort and energy savings at your fingertips.' },
-  lock:     { img: 'lock-doorbell',  title: 'Smart Door Lock with Video Doorbell', text: 'See, speak to and unlock your door from anywhere.' },
-  garageCtl:{ img: 'garage-control', title: 'Smart Garage Control',      text: 'Works with your existing garage door opener.' },
-  hub:      { img: 'hub',            title: 'Central Smart Home Integration System', text: 'The hub that connects and automates your entire smart home.' },
-  alarm:    { img: 'alarm',          title: 'Smart Alarm System',        text: 'Protect your home with door/window sensors and motion detection.' },
-  curtains: { img: 'curtains',       title: 'Smart Motorized Curtain Tracks', text: 'Automate your curtains for convenience, privacy and elegant living.' },
-  ups:      { img: 'ups',            title: '1000W UPS Battery Backup',  text: 'Keep your essential systems running during power outages.' },
-  materials:{ img: 'materials',      title: 'Installation Materials',    text: 'High-quality components and materials for a reliable installation.' },
-  install:  { Icon: Wrench,          title: 'Professional Installation, Programming & System Integration', text: 'Expert setup, programming and seamless integration for optimal performance.' },
-}
-
-function tiles(cameras, opener) {
-  return [
-    shared.lights, cameras, shared.thermo, shared.lock,
-    opener, shared.garageCtl, shared.hub, shared.alarm,
-    shared.curtains, shared.ups, shared.materials, shared.install,
-  ]
-}
+const TIER_ORDER = ['essential', 'plus', 'complete']
 
 const TIERS = {
-  basic: {
-    name: 'Basic',
+  essential: {
+    name: 'Essential Home Security',
+    short: 'Essential',
     price: '$6,500',
-    headline: 'Security. Comfort. Convenience.',
-    sub: 'All in perfect harmony.',
-    tagline: 'Upgrade your home. Upgrade your lifestyle.',
-    tiles: tiles(
-      { img: 'cameras-8',     title: '8-Camera Security System', text: '24/7 protection for your home and property.' },
-      { img: 'garage-opener', title: 'Smart Garage Door Opener', text: 'Open, close and monitor your garage remotely.' },
-    ),
+    summary: 'A professionally installed security foundation.',
+    inherits: null,
+    tagline: 'Start with protection. Add comfort later.',
+    tiles: [
+      { img: 'alarm',        title: 'Alarm Control Panel or Central Hub', text: 'The core of your security system and the point every other device connects to.' },
+      { img: 'alarm',        title: 'Door/Window & Motion Sensors',       text: 'A starter sensor allowance for entry points and key rooms, confirmed at your home survey.' },
+      { img: 'cameras-8',    title: 'Up to 8 Security Cameras',           text: 'Indoor and outdoor coverage with a recorder, placed after we check sightlines.' },
+      { img: 'lock-doorbell',title: 'Video Doorbell',                     text: 'See and speak to visitors from your phone.' },
+      { img: 'lock-doorbell',title: 'One Smart Door Lock',                text: 'Lock and unlock your main entry from the app.' },
+      { Icon: Smartphone,    title: 'Mobile App Setup & Household Walkthrough', text: 'We set up the app and show everyone in your home how to use it.' },
+      { img: 'materials',    title: 'Installation Materials & Programming', text: 'Standard installation materials, cabling and system programming.' },
+    ],
   },
-  silver: {
-    name: 'Silver',
+  plus: {
+    name: 'Smart Home Plus',
+    short: 'Plus',
     price: '$8,500',
-    headline: 'More comfort. More security.',
-    sub: 'A smarter way to live.',
-    tagline: 'Upgrade your home. Simplify your life.',
-    tiles: tiles(
-      { img: 'cameras-8',         title: '8-Camera Security System', text: 'Complete coverage with high-definition cameras for 24/7 monitoring and peace of mind.' },
-      { img: 'garage-opener-cam', title: 'Smart Garage Door Opener', text: 'Open, close and monitor your garage remotely with built-in camera.' },
-    ),
+    summary: 'Everything in Essential Home Security, plus everyday automation.',
+    inherits: 'Essential Home Security',
+    tagline: 'Security that also runs your daily routine.',
+    tiles: [
+      { img: 'thermostat',     title: 'Smart Thermostat',          text: 'Temperature control from your phone, with schedules.' },
+      { img: 'light-switches', title: 'Smart Light Switches',      text: 'A defined switch allowance, confirmed at your home survey.' },
+      { img: 'garage-control', title: 'Garage-Door Control',       text: 'Open, close and check your garage door from the app.' },
+      { Icon: Droplets,        title: 'Safety or Water-Leak Sensors', text: 'A selected sensor allowance, confirmed at your home survey.' },
+      { Icon: Layers,          title: 'Custom Schedules & Scenes', text: 'Lighting, climate and security routines set up around your household.' },
+      { img: 'hub',            title: 'System Integration & Programming', text: 'The devices configured to work together.' },
+    ],
   },
-  gold: {
-    name: 'Gold',
+  complete: {
+    name: 'Complete Connected Home',
+    short: 'Complete',
     price: '$12,500',
-    headline: 'Security. Comfort. Convenience.',
-    sub: 'All in perfect harmony.',
-    tagline: 'Designed for your home. Built for your lifestyle.',
-    tiles: tiles(
-      { img: 'cameras-16',        title: '16-Camera Security System', text: 'Complete coverage with high-definition cameras for 24/7 monitoring and peace of mind.' },
-      { img: 'garage-opener-cam', title: 'Smart Garage Door Opener', text: 'Open, close and monitor your garage door remotely with built-in camera.' },
-    ),
+    summary: 'For larger homes or wider property coverage.',
+    inherits: 'Smart Home Plus',
+    tagline: 'Wider coverage, more automation, and a full handover.',
+    tiles: [
+      { img: 'cameras-16',        title: 'Up to 16 Security Cameras',  text: 'Wider property coverage with a recorder.' },
+      { img: 'garage-opener-cam', title: 'Garage Control with Compatible Camera Option', text: 'Garage control, with a camera option where compatible.' },
+      { img: 'light-switches',    title: 'Expanded Lighting & Sensor Allowance', text: 'A larger switch and sensor allowance, confirmed at your home survey.' },
+      { img: 'curtains',          title: 'Motorized Curtains',          text: 'A defined motorized-curtain allowance, confirmed at your home survey.' },
+      { img: 'ups',               title: '1000W UPS Battery Backup',    text: 'Backup power for selected core equipment.' },
+      { img: 'hub',               title: 'Advanced Scenes, Integration & Full Household Handover', text: 'Deeper programming and a complete walkthrough for your household.' },
+    ],
   },
 }
 
-const benefits = [
-  { Icon: ShieldCheck, title: '360° Security',       text: 'Protect your home inside and out, day and night.' },
-  { Icon: Lightbulb,   title: 'Smart Comfort',       text: 'Lighting, climate, curtains and more — automated for your lifestyle.' },
-  { Icon: Smartphone,  title: 'Control Anywhere',    text: 'Manage your home from your phone, anytime, anywhere.' },
-  { Icon: Zap,         title: 'Power Protection',    text: 'Stay connected and protected during outages.' },
-  { Icon: Layers,      title: 'One Seamless System', text: 'All devices work together beautifully — configured just for you.' },
-]
-
+// false renders as a dash. Strings are shown as written.
 const comparison = [
-  { label: 'Smart light switches',                      basic: true, silver: true, gold: true },
-  { label: 'Camera security system',                    basic: '8 cameras', silver: '8 cameras', gold: '16 cameras' },
-  { label: 'Smart thermostat',                          basic: true, silver: true, gold: true },
-  { label: 'Smart door lock with video doorbell',       basic: true, silver: true, gold: true },
-  { label: 'Smart garage door opener',                  basic: 'Standard', silver: 'Built-in camera', gold: 'Built-in camera' },
-  { label: 'Smart garage control (existing opener)',    basic: true, silver: true, gold: true },
-  { label: 'Central smart home integration system',     basic: true, silver: true, gold: true },
-  { label: 'Smart alarm system (door/window + motion)', basic: true, silver: true, gold: true },
-  { label: 'Smart motorized curtain tracks',            basic: true, silver: true, gold: true },
-  { label: '1000W UPS battery backup',                  basic: true, silver: true, gold: true },
-  { label: 'Installation materials',                    basic: true, silver: true, gold: true },
-  { label: 'Professional installation & programming',   basic: true, silver: true, gold: true },
+  { label: 'Alarm control panel or central hub',  essential: true, plus: true, complete: true },
+  { label: 'Door/window & motion sensors',        essential: 'Starter allowance', plus: 'Starter allowance', complete: 'Expanded allowance' },
+  { label: 'Security cameras with recorder',      essential: 'Up to 8', plus: 'Up to 8', complete: 'Up to 16' },
+  { label: 'Video doorbell',                      essential: true, plus: true, complete: true },
+  { label: 'Smart door lock',                     essential: 'One lock', plus: 'One lock', complete: 'One lock' },
+  { label: 'Mobile app setup & walkthrough',      essential: true, plus: true, complete: true },
+  { label: 'Smart thermostat',                    essential: false, plus: true, complete: true },
+  { label: 'Smart light switches',                essential: false, plus: 'Defined allowance', complete: 'Expanded allowance' },
+  { label: 'Garage-door control',                 essential: false, plus: true, complete: 'With compatible camera option' },
+  { label: 'Safety or water-leak sensors',        essential: false, plus: 'Selected allowance', complete: 'Expanded allowance' },
+  { label: 'Custom schedules & scenes',           essential: false, plus: true, complete: 'Advanced' },
+  { label: 'Motorized curtains',                  essential: false, plus: false, complete: 'Defined allowance' },
+  { label: '1000W UPS battery backup',            essential: false, plus: false, complete: 'Selected core equipment' },
+  { label: 'Installation materials & programming',essential: 'Standard', plus: 'Plus integration', complete: 'Full handover' },
 ]
 
-// NOTE 1 on every flyer — available at additional cost.
-const addOns = [
-  { Icon: Flame,    title: 'Smoke & CO Detectors',       text: 'Smart smoke and carbon monoxide detection with phone alerts.' },
-  { Icon: Droplets, title: 'Water-Leak Sensors',         text: 'Early leak detection under sinks, near heaters and in basements.' },
-  { Icon: Plug,     title: 'Smart Plugs & Outlets',      text: 'Bring individual appliances and fixtures under app control.' },
-  { Icon: Fan,      title: 'Smart Ceiling-Fan Controls', text: 'Speed and direction control from your phone or a wall switch.' },
-  { Icon: Sprout,   title: 'Smart Irrigation',           text: 'Weather-aware watering schedules for lawns and gardens.' },
-  { Icon: Music,    title: 'Whole-Home Audio',           text: 'Multi-room audio designed and installed by our Residential Audio division.' },
+const categories = [
+  { Icon: ShieldCheck, title: 'Security & Alarm',           text: 'Control panel, door and window sensors, motion detection, audible alerts, phone notifications, and optional professional monitoring when available.' },
+  { Icon: Video,       title: 'Cameras & Video Doorbell',   text: 'Indoor and outdoor camera coverage, recorded video, remote viewing, activity alerts, and a video doorbell.' },
+  { Icon: DoorOpen,    title: 'Smart Entry',                text: 'Smart locks, garage-door control, visitor communication, and access management from your phone.' },
+  { Icon: Lightbulb,   title: 'Lighting & Comfort',         text: 'Smart switches, thermostat control, schedules, scenes, and compatible motorized curtains.' },
+  { Icon: Music,       title: 'Audio & Entertainment',      text: 'Optional home theater, whole-home audio, outdoor speakers, and media-room calibration — designed as part of the same home project.', href: '#audio-entertainment' },
+]
+
+const protections = [
+  { Icon: Video,       title: 'Cameras & phone alerts',     text: 'Live and recorded video and activity notifications on your phone. You see what happened; nobody is watching for you.' },
+  { Icon: ShieldCheck, title: 'Alarm system',               text: 'Sensors, a control panel and audible alerts on site. It sounds locally and notifies the people you choose.' },
+  { Icon: PhoneCall,   title: 'Professional emergency monitoring', text: 'A separate, optional service where an operator responds to alarms. Not part of the starting prices.' },
+]
+
+const optionalUpgrades = [
+  { Icon: Flame,     title: 'Smoke & CO Detectors',        text: 'Smart smoke and carbon-monoxide detection with phone alerts.' },
+  { Icon: Droplets,  title: 'Water-Leak Sensors',          text: 'Early leak detection under sinks, near heaters and in basements.' },
+  { Icon: HardDrive, title: 'More Cameras or Recording Storage', text: 'Additional camera positions or extended recording storage.' },
+  { Icon: Plug,      title: 'Plugs, Outlets, Fans & Irrigation', text: 'Smart plugs, outlets, ceiling-fan controls and irrigation scheduling.' },
+  { Icon: Wifi,      title: 'Network & Wi-Fi Improvements', text: 'Better coverage where cameras and devices need it.' },
+  { Icon: BatteryCharging, title: 'Additional Battery Backup', text: 'Extra backup power beyond the equipment included in your package.' },
+]
+
+const audioUpgrades = [
+  { Icon: Film,    title: 'Home Theater & Media-Room Audio', text: 'Surround sound, thoughtful speaker placement and calibration for your media room.' },
+  { Icon: Music,   title: 'Whole-Home Multi-Room Audio',     text: 'Music in the rooms you use, with independent source and volume per room.' },
+  { Icon: Waves,   title: 'Outdoor Patio & Pool Audio',      text: 'Weather-resistant speakers for patios, pools and gardens.' },
+  { Icon: Speaker, title: 'Media-Room Calibration',          text: 'Room-specific tuning so dialogue and music sound right in your space.' },
 ]
 
 const processSteps = [
-  { n: '1', title: 'Consultation', text: 'We discuss what you want your home to do — security, comfort, energy, or all three.', Icon: PhoneCall },
-  { n: '2', title: 'Site Survey',  text: 'We walk the property, check Wi-Fi coverage, wiring and camera sightlines.', Icon: MapPin },
-  { n: '3', title: 'Proposal',     text: 'An itemized package with exact device counts, placement plan and transparent pricing.', Icon: ClipboardList },
-  { n: '4', title: 'Installation', text: 'Clean, discreet installation with proper cabling, plates and cable management.', Icon: HardHat },
-  { n: '5', title: 'Programming',  text: 'Every device joined to one hub, scenes configured, app set up on your phones.', Icon: Settings2 },
-  { n: '6', title: 'Handover',     text: 'A full walkthrough with your household, plus ongoing support whenever you need it.', Icon: Headphones },
+  { n: '1', title: 'Consultation',        text: 'We learn your household’s security, comfort and entertainment priorities.', Icon: PhoneCall },
+  { n: '2', title: 'Home Survey',         text: 'We check entry points, camera sightlines, Wi-Fi, wiring routes, equipment location and installation conditions.', Icon: MapPin },
+  { n: '3', title: 'Itemized Proposal',   text: 'Exact quantities, package allowances, options, recurring fees and exclusions.', Icon: ClipboardList },
+  { n: '4', title: 'Installation',        text: 'Equipment installed and labeled with clean cable management.', Icon: HardHat },
+  { n: '5', title: 'Programming & Testing', text: 'Alerts, users, schedules, scenes, recording and access configured and tested.', Icon: Settings2 },
+  { n: '6', title: 'Household Handover',  text: 'App set up, household trained, and support information provided.', Icon: Headphones },
 ]
-
-// The shield-and-wifi emblem from the flyer masthead, drawn as SVG so it stays
-// crisp at any size.
-function ShieldMark({ size = 96 }) {
-  return (
-    <svg className='sh-shield' width={size} height={size} viewBox='0 0 64 64' fill='none' aria-hidden='true'>
-      <path
-        d='M32 3.5 L58 13 V31.5 C58 45.5 46.5 56.5 32 60.5 C17.5 56.5 6 45.5 6 31.5 V13 Z'
-        stroke='currentColor' strokeWidth='3.2' strokeLinejoin='round'
-      />
-      <path d='M20.5 28.5a16 16 0 0 1 23 0' stroke='currentColor' strokeWidth='3.2' strokeLinecap='round' />
-      <path d='M25.5 35.5a9 9 0 0 1 13 0' stroke='currentColor' strokeWidth='3.2' strokeLinecap='round' />
-      <circle cx='32' cy='43' r='2.6' fill='currentColor' />
-    </svg>
-  )
-}
 
 function Cell({ value }) {
   if (value === true) return <span className='sh-cell-yes'><Check size={17} strokeWidth={3} /><span className='sr-only'>Included</span></span>
+  if (value === false) return <span className='sh-cell-no'><Minus size={17} strokeWidth={2.5} aria-hidden='true' /><span className='sr-only'>Not included</span></span>
   return <span className='sh-cell-spec'>{value}</span>
 }
 
 export default function ConnectedHomePage() {
-  const [tierKey, setTierKey] = useState('gold')
+  const [tierKey, setTierKey] = useState('plus')
   const tier = TIERS[tierKey]
 
   return (
     <div className='smarthome-page' data-tier={tierKey}>
 
-      {/* Flyer masthead */}
-      <section className='sh-masthead'>
-        <div className='sh-masthead-photo' role='img' aria-label='Modern smart home lit at dusk' />
-        <div className='sh-masthead-wedge'>
-          <div className='sh-masthead-panel'>
-            <div className='sh-masthead-inner'>
-              <ShieldMark size={104} />
-              <div>
-                <h1>
-                  <span className='sh-masthead-tier'>{tier.name}</span>
-                  <span className='sh-masthead-title'>Smart Home Package</span>
-                </h1>
-                <p className='sh-masthead-lead'>{tier.headline}<br />{tier.sub}</p>
-              </div>
+      <section className='az-service-hero az-connected-hero'>
+        <div className='container az-service-hero-inner'>
+          <div className='az-service-hero-copy'>
+            <span className='eyebrow eyebrow-light'>Home Security &amp; Connected Living</span>
+            <h1>Protect your home. Control it from anywhere.</h1>
+            <p>Security cameras, smart entry, alarm sensors, lighting, climate, garage control, and optional whole-home audio — professionally designed, installed, and configured for your home.</p>
+            <div className='az-hero-actions'>
+              <Link to='/contact' className='button button-primary'>Book a Free Home Consultation</Link>
+              <a href='#compare' className='button button-secondary'>Compare Packages</a>
             </div>
+            <a href='tel:+17243211106' className='az-phone'><PhoneCall size={18} aria-hidden='true' />Call +1 724 321 1106</a>
+          </div>
+          <figure><img src='/smart-home/hero-home.jpg' alt='Modern home illuminated at dusk' fetchPriority='high' /><figcaption>Security, comfort, and everyday control — designed around your home.</figcaption></figure>
+        </div>
+      </section>
+      <div className='az-proof-strip'><div className='container'><span><Check size={17} aria-hidden='true' />Professional installation</span><span><Check size={17} aria-hidden='true' />One simple control experience</span><span><Check size={17} aria-hidden='true' />Itemized proposal</span><span><Check size={17} aria-hidden='true' />Local support</span></div></div>
+      <nav className='az-service-nav container' aria-label='Home security page sections'><a href='#solutions'>What we install</a><a href='#packages'>Packages</a><a href='#compare'>Compare</a><a href='#monitoring'>Monitoring</a><a href='#optional-upgrades'>Optional upgrades</a><a href='#home-process'>How it works</a></nav>
+
+      <section className='section' id='solutions'>
+        <div className='container'>
+          <div className='az-section-heading'>
+            <span className='eyebrow'>Protection, control and comfort</span>
+            <h2>One home project. Five ways to make it safer and easier.</h2>
+            <p>Start with the security of your home, then add the control and comfort that fit your household.</p>
+          </div>
+          <div className='why-grid'>
+            {categories.map((c) => (
+              <div key={c.title} className='why-card'>
+                <div className='why-icon'><c.Icon size={26} strokeWidth={1.5} /></div>
+                <h3>{c.title}</h3>
+                <p>{c.text}</p>
+                {c.href && <a className='az-text-link' href={c.href}>See audio options →</a>}
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <div className='sh-goldband'>
-        <div className='container'>A complete, fully-integrated smart home solution</div>
-      </div>
-
-      {/* Tier switcher + flyer tile grid + price */}
+      {/* Tier switcher + tile grid + price */}
       <section className='sh-packages' id='packages'>
         <div className='container'>
-          <div className='sh-tier-tabs' role='tablist' aria-label='Smart home packages'>
+          <div className='az-package-heading'>
+            <span className='eyebrow'>Find your fit</span>
+            <h2>Three packages. Three clear outcomes.</h2>
+            <p>Start with security, add everyday automation, or cover a larger property. Quantities marked as allowances are confirmed at your home survey and shown in your itemized proposal.</p>
+            <a className='az-text-link' href='#compare'>Compare all included features →</a>
+          </div>
+          <div className='sh-tier-tabs' role='group' aria-label='Home security packages'>
             {TIER_ORDER.map((key) => (
               <button
                 key={key}
-                role='tab'
                 type='button'
-                aria-selected={key === tierKey}
+                aria-pressed={key === tierKey}
                 className={`sh-tier-tab sh-tier-tab--${key}${key === tierKey ? ' is-active' : ''}`}
                 onClick={() => setTierKey(key)}
               >
-                <span className='sh-tier-tab-name'>{TIERS[key].name}</span>
-                <span className='sh-tier-tab-price'>{TIERS[key].price}</span>
+                <span className='sh-tier-tab-name'>{TIERS[key].short}</span>
+                <span className='sh-tier-tab-price'>from {TIERS[key].price}</span>
               </button>
             ))}
           </div>
 
+          <div className='az-package-summary' aria-live='polite'>
+            <p><strong>{tier.name} · from {tier.price}</strong><br />{tier.summary}{tier.inherits && ` Includes everything in ${tier.inherits}, plus:`}</p>
+            <a href='#compare'>See the differences</a>
+          </div>
           <div className='sh-tiles'>
             {tier.tiles.map((item, i) => (
               <article className='sh-tile' key={item.title}>
@@ -201,8 +222,8 @@ export default function ConnectedHomePage() {
 
           <div className='sh-price-block'>
             <div className='sh-price-main'>
-              <div className='sh-price-label'>Total installed package price</div>
-              <div className='sh-price-amount'>{tier.price}</div>
+              <div className='sh-price-label'>Starting price, standard installation</div>
+              <div className='sh-price-amount'>from {tier.price}</div>
               <div className='sh-price-tagline'>{tier.tagline}</div>
             </div>
             <div className='sh-price-side'>
@@ -211,31 +232,23 @@ export default function ConnectedHomePage() {
               <a className='sh-price-contact' href='mailto:contact@azaudios.com'><Mail size={15} strokeWidth={2} />contact@azaudios.com</a>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Benefits bar */}
-      <section className='sh-benefits'>
-        <div className='container sh-benefits-row'>
-          {benefits.map((b) => (
-            <div className='sh-benefit' key={b.title}>
-              <b.Icon size={26} strokeWidth={1.5} />
-              <strong>{b.title}</strong>
-              <p>{b.text}</p>
-            </div>
-          ))}
+          <p className='sh-fineprint'>
+            Starting prices assume standard installation conditions. Final device quantities, camera placement,
+            cable pathways, compatibility, recurring services, and pricing are confirmed after the home survey
+            and shown in an itemized proposal.
+          </p>
         </div>
       </section>
 
       {/* Comparison */}
-      <section className='clean-section clean-white'>
+      <section className='clean-section clean-white' id='compare'>
         <div className='container'>
           <div className='clean-section-intro centered'>
             <div className='real-eyebrow'>Compare</div>
             <h2>What each package includes.</h2>
             <p>
-              All three packages are fully integrated systems with professional installation. The
-              differences are in camera coverage and the garage door hardware.
+              Essential covers security. Plus adds everyday automation. Complete extends coverage
+              and adds curtains and backup power.
             </p>
           </div>
 
@@ -243,10 +256,10 @@ export default function ConnectedHomePage() {
             <table className='sh-table'>
               <thead>
                 <tr>
-                  <th scope='col'>Component</th>
+                  <th scope='col'>Feature</th>
                   {TIER_ORDER.map((k) => (
                     <th scope='col' key={k} className={k === tierKey ? 'sh-th-active' : undefined}>
-                      {TIERS[k].name}<span>{TIERS[k].price}</span>
+                      {TIERS[k].short}<span>from {TIERS[k].price}</span>
                     </th>
                   ))}
                 </tr>
@@ -265,22 +278,47 @@ export default function ConnectedHomePage() {
               </tbody>
             </table>
           </div>
+          <p className='sh-fineprint'>
+            An allowance is a starting quantity included in the package price. Anything beyond it, or
+            anything the survey shows is needed, is itemized in your proposal before work begins.
+          </p>
         </div>
       </section>
 
-      {/* Notes 1 and 2 from the flyers */}
-      <section className='clean-section clean-soft'>
+      {/* Monitoring disclosure */}
+      <section className='clean-section clean-soft' id='monitoring'>
         <div className='container'>
           <div className='clean-section-intro centered'>
-            <div className='real-eyebrow'>Optional extras</div>
-            <h2>Add what your home needs.</h2>
+            <div className='real-eyebrow'>Know what you are buying</div>
+            <h2>Cameras, alarms and monitoring are different services.</h2>
             <p>
-              These smart home features can be added to any package at additional cost — quoted
-              itemized, so you see exactly what each one adds.
+              Professional emergency monitoring is separate from camera viewing and phone alerts.
+              Monitoring availability, third-party agreements, and recurring fees are confirmed with
+              you before any monitoring is added to your proposal.
             </p>
           </div>
           <div className='why-grid'>
-            {addOns.map((item) => (
+            {protections.map((p) => (
+              <div key={p.title} className='why-card'>
+                <div className='why-icon'><p.Icon size={26} strokeWidth={1.5} /></div>
+                <h3>{p.title}</h3>
+                <p>{p.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Optional upgrades */}
+      <section className='clean-section clean-white' id='optional-upgrades'>
+        <div className='container'>
+          <div className='clean-section-intro centered'>
+            <div className='real-eyebrow'>Optional home upgrades</div>
+            <h2>Add what your home needs.</h2>
+            <p>Any of these can be added to a package. Each is quoted as its own line in your itemized proposal.</p>
+          </div>
+          <div className='why-grid'>
+            {optionalUpgrades.map((item) => (
               <div key={item.title} className='why-card'>
                 <div className='why-icon'><item.Icon size={26} strokeWidth={1.5} /></div>
                 <h3>{item.title}</h3>
@@ -289,21 +327,30 @@ export default function ConnectedHomePage() {
             ))}
           </div>
 
-          <p className='sh-fineprint'>
-            We can tailor the system and services to meet your home's specific needs, layout,
-            priorities and budget. Final equipment quantities and pricing may vary depending on site
-            conditions and the selected configuration.
-          </p>
+          <div className='clean-section-intro centered' id='audio-entertainment' style={{ marginTop: '3.5rem' }}>
+            <div className='real-eyebrow'>Audio &amp; Entertainment</div>
+            <h3 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', margin: '0.4rem 0 0.6rem' }}>Great sound, designed into the same project.</h3>
+            <p>Audio is where AZ Audio started. These options are designed alongside your security and comfort system, not as a separate job.</p>
+          </div>
+          <div className='why-grid'>
+            {audioUpgrades.map((item) => (
+              <div key={item.title} className='why-card'>
+                <div className='why-icon'><item.Icon size={26} strokeWidth={1.5} /></div>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Process */}
-      <section className='clean-section clean-white'>
+      <section className='clean-section clean-soft' id='home-process'>
         <div className='container'>
           <div className='clean-section-intro centered'>
             <div className='real-eyebrow'>How it works</div>
-            <h2>From first call to full handover.</h2>
-            <p>A defined six-step process — properly surveyed, cleanly installed, and programmed so it just works.</p>
+            <h2>From first call to household handover.</h2>
+            <p>Six steps: surveyed, itemized, cleanly installed, and tested before we hand it over.</p>
           </div>
           <div className='process-timeline'>
             {processSteps.map((step) => (
@@ -323,39 +370,25 @@ export default function ConnectedHomePage() {
         </div>
       </section>
 
-      {/* Residential audio cross-link */}
-      <section className='clean-section clean-soft'>
-        <div className='container'>
-          <div className='sh-crosslink'>
-            <div className='sh-crosslink-icon'><Music size={30} strokeWidth={1.4} /></div>
-            <div className='sh-crosslink-copy'>
-              <div className='real-eyebrow'>Pairs with</div>
-              <h2>Add whole-home audio to your connected home.</h2>
-              <p>
-                Audio is what we started with. In-ceiling speakers, media-room sound and multi-room
-                audio can be designed into the same system and controlled from the same app —
-                installed by our Residential Audio division.
-              </p>
-            </div>
-            <Link to='/residential-audio' className='real-button real-button-gold sh-crosslink-cta'>
-              Residential Audio Solutions
-            </Link>
-          </div>
-        </div>
-      </section>
+      <ExperienceFaq items={[
+        ['What does the starting price include?', 'The listed equipment and allowances, standard installation materials, professional installation, and programming, under standard installation conditions. Final quantities, camera placement, cable pathways, compatibility, recurring services and pricing are confirmed after the home survey.'],
+        ['What is an allowance?', 'A starting quantity included in the package price, such as door and window sensors or smart light switches. Your home survey confirms how many your home needs, and any additional quantity is itemized in your proposal.'],
+        ['Is professional emergency monitoring included?', 'No. Camera viewing, phone alerts and an on-site alarm are different from an operator responding to an alarm. Monitoring availability, third-party agreements and recurring fees are confirmed with you before it is added to a proposal.'],
+        ['Can I add home theater or whole-home audio?', 'Yes. Home theater, whole-home audio, outdoor speakers and media-room calibration are optional upgrades, designed as part of the same project and itemized in your proposal.'],
+      ]} />
 
       {/* Final CTA */}
       <section className='clean-section final-consultation'>
         <div className='container final-consultation-inner'>
           <div>
             <div className='real-eyebrow'>Ready to start?</div>
-            <h2>Book a free connected home consultation.</h2>
+            <h2>Book a free home consultation.</h2>
             <p>
-              Tell us about your home — size, layout, and what matters most to you. We'll recommend
-              the right package and send an itemized proposal with no obligation.
+              Tell us about your home and what matters most to you. We&rsquo;ll recommend a package
+              and send an itemized proposal with no obligation.
             </p>
           </div>
-          <Link to='/contact' className='real-button real-button-gold'>Request a Quote</Link>
+          <Link to='/contact' className='real-button real-button-gold'>Book a Free Home Consultation</Link>
         </div>
       </section>
 

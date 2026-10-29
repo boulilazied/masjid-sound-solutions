@@ -1,4 +1,4 @@
-import { Building2, Home, HouseWifi, Mic2 } from 'lucide-react'
+import { Building2, HouseWifi, Mic2 } from 'lucide-react'
 import DivisionPage from '../components/DivisionPage'
 
 const divisions = [
@@ -29,29 +29,16 @@ const divisions = [
     ]
   },
   {
-    title: 'Residential Audio Solutions',
-    path: '/residential-audio',
-    subtitle: 'Clean home audio installations and smart listening spaces',
-    Icon: Home,
-    points: [
-      'In-ceiling and in-wall speaker installation',
-      'Media room and family room sound systems',
-      'Multi-room home audio',
-      'Smart audio control integration',
-      'Clean wiring and discreet installation'
-    ]
-  },
-  {
-    title: 'Connected Home Solutions',
+    title: 'Home Security & Smart Living',
     path: '/connected-home',
-    subtitle: 'Fully integrated smart home security, comfort and control',
+    subtitle: 'Home security, smart control and optional whole-home audio',
     Icon: HouseWifi,
     points: [
-      'Security camera systems with 24/7 recording',
-      'Smart door locks, video doorbells and alarm sensors',
-      'Smart lighting, thermostats and motorized curtains',
-      'Central hub integration — one app for the whole home',
-      'Basic, Silver and Gold packages at a fixed installed price'
+      'Security cameras with recorder, video doorbell and alarm sensors',
+      'Smart locks and garage-door control',
+      'Smart lighting, thermostats and compatible motorized curtains',
+      'Optional home theater, whole-home and outdoor audio',
+      'Essential, Plus and Complete packages from $6,500'
     ]
   },
   {
@@ -73,8 +60,8 @@ export default function ServicesPage() {
   return (
     <DivisionPage
       eyebrow='Services'
-      title='Five service divisions under AZ Audio Solutions'
-      text='Each section is built around a different customer need: masjids, commercial buildings, homes, connected homes, and events.'
+      title='Four service divisions under AZ Audio Solutions'
+      text='Each section is built around a different customer need: masjids, commercial buildings, homes, and events.'
       divisions={divisions}
     />
   )

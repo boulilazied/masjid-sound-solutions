@@ -7,8 +7,7 @@ import RouteSeo from './Seo'
 const serviceLinks = [
   { to: '/masjid-sound-solutions', label: 'Masjid Sound Solutions' },
   { to: '/commercial-audio',       label: 'Commercial Audio Solutions' },
-  { to: '/residential-audio',      label: 'Residential Audio Solutions' },
-  { to: '/connected-home',         label: 'Connected Home Solutions' },
+  { to: '/connected-home',         label: 'Home Security & Smart Living' },
   { to: '/event-rental-services',  label: 'Event Rental Services' },
   // Not a division: a cross-division offer for schools, listed with the services.
   { to: '/school-systems',         label: 'School Communication Systems' },
