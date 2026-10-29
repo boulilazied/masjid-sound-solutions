@@ -1,6 +1,5 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ExperienceFaq } from '../components/ServiceExperience'
+import { ExperienceFaq, ExperienceStories } from '../components/ServiceExperience'
 import {
   ShieldCheck, Lightbulb, Smartphone, Layers, Video, DoorOpen, Music,
   PhoneCall, MapPin, ClipboardList, HardHat, Settings2, Headphones,
@@ -88,11 +87,24 @@ const comparison = [
 ]
 
 const categories = [
-  { Icon: ShieldCheck, title: 'Security & Alarm',           text: 'Control panel, door and window sensors, motion detection, audible alerts, phone notifications, and optional professional monitoring when available.' },
-  { Icon: Video,       title: 'Cameras & Video Doorbell',   text: 'Indoor and outdoor camera coverage, recorded video, remote viewing, activity alerts, and a video doorbell.' },
-  { Icon: DoorOpen,    title: 'Smart Entry',                text: 'Smart locks, garage-door control, visitor communication, and access management from your phone.' },
-  { Icon: Lightbulb,   title: 'Lighting & Comfort',         text: 'Smart switches, thermostat control, schedules, scenes, and compatible motorized curtains.' },
-  { Icon: Music,       title: 'Audio & Entertainment',      text: 'Optional home theater, whole-home audio, outdoor speakers, and media-room calibration — designed as part of the same home project.', href: '#audio-entertainment' },
+  { eyebrow: 'Security & Alarm', title: 'Know your home is protected.', text: 'Control panel, door and window sensors, motion detection, audible alerts, phone notifications, and optional professional monitoring when available.', image: '/smart-home/alarm.jpg', alt: 'Alarm control panel with door and window sensors', link: '#packages', action: 'See the packages' },
+  { eyebrow: 'Cameras & Video Doorbell', title: 'See what is happening, wherever you are.', text: 'Indoor and outdoor camera coverage, recorded video, remote viewing, activity alerts, and a video doorbell.', image: '/smart-home/cameras-8.jpg', alt: 'Security camera system', link: '#compare', action: 'Compare camera coverage' },
+  { eyebrow: 'Smart Entry', title: 'Answer the door without going to it.', text: 'Smart locks, garage-door control, visitor communication, and access management from your phone.', image: '/smart-home/lock-doorbell.jpg', alt: 'Smart door lock with video doorbell', link: '#packages', action: 'Find your package' },
+  { eyebrow: 'Lighting & Comfort', title: 'Set the scene for everyday living.', text: 'Smart switches, thermostat control, schedules, scenes, and compatible motorized curtains.', image: '/smart-home/light-switches.jpg', alt: 'Smart light switches', link: '#home-process', action: 'See how installation works' },
+  { eyebrow: 'Audio & Entertainment', title: 'Add great sound to the same project.', text: 'Optional home theater, whole-home audio, outdoor speakers, and media-room calibration — designed as part of the same home project.', image: '/home/work-app.jpg', alt: 'Room-by-room audio controls on a mobile device', link: '#audio-entertainment', action: 'See audio options' },
+]
+
+const everyday = [
+  { n: '01', title: 'Set schedules and scenes', text: 'Lighting, climate and security routines set up around how your household lives.' },
+  { n: '02', title: 'Get alerts on your phone', text: 'Activity notifications from your cameras, doorbell and alarm sensors, wherever you are.' },
+  { n: '03', title: 'Control it from the app', text: 'We set up the mobile app and walk everyone in your home through it.' },
+]
+
+const blocks = [
+  { img: 'alarm',         title: 'Alarm Control Panel & Sensors', href: '#packages' },
+  { img: 'cameras-8',     title: 'Security Cameras',              href: '#compare' },
+  { img: 'lock-doorbell', title: 'Video Doorbell & Smart Lock',   href: '#packages' },
+  { img: 'thermostat',    title: 'Thermostat & Lighting',         href: '#compare' },
 ]
 
 const protections = [
@@ -133,11 +145,8 @@ function Cell({ value }) {
 }
 
 export default function ConnectedHomePage() {
-  const [tierKey, setTierKey] = useState('plus')
-  const tier = TIERS[tierKey]
-
   return (
-    <div className='smarthome-page' data-tier={tierKey}>
+    <div className='smarthome-page'>
 
       <section className='az-service-hero az-connected-hero'>
         <div className='container az-service-hero-inner'>
@@ -154,8 +163,22 @@ export default function ConnectedHomePage() {
           <figure><img src='/smart-home/hero-home.jpg' alt='Modern home illuminated at dusk' fetchPriority='high' /><figcaption>Security, comfort, and everyday control — designed around your home.</figcaption></figure>
         </div>
       </section>
-      <div className='az-proof-strip'><div className='container'><span><Check size={17} aria-hidden='true' />Professional installation</span><span><Check size={17} aria-hidden='true' />One simple control experience</span><span><Check size={17} aria-hidden='true' />Itemized proposal</span><span><Check size={17} aria-hidden='true' />Local support</span></div></div>
+      <div className='az-proof-strip'><div className='container'><span><HardHat size={20} aria-hidden='true' />Professional installation</span><span><Smartphone size={20} aria-hidden='true' />One simple control experience</span><span><ClipboardList size={20} aria-hidden='true' />Itemized proposal</span><span><MapPin size={20} aria-hidden='true' />Local support</span></div></div>
       <nav className='az-service-nav container' aria-label='Home security page sections'><a href='#solutions'>What we install</a><a href='#packages'>Packages</a><a href='#compare'>Compare</a><a href='#monitoring'>Monitoring</a><a href='#optional-upgrades'>Optional upgrades</a><a href='#home-process'>How it works</a></nav>
+
+      <section className='section hs-everyday'>
+        <div className='container'>
+          <div className='az-section-heading'>
+            <span className='eyebrow'>Get more from your home</span>
+            <h2>Simple enough for the whole household.</h2>
+          </div>
+          <div className='az-benefit-grid'>
+            {everyday.map((e) => (
+              <article key={e.n}><span className='az-benefit-number'>{e.n}</span><h3>{e.title}</h3><p>{e.text}</p></article>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className='section' id='solutions'>
         <div className='container'>
@@ -164,14 +187,22 @@ export default function ConnectedHomePage() {
             <h2>One home project. Five ways to make it safer and easier.</h2>
             <p>Start with the security of your home, then add the control and comfort that fit your household.</p>
           </div>
-          <div className='why-grid'>
-            {categories.map((c) => (
-              <div key={c.title} className='why-card'>
-                <div className='why-icon'><c.Icon size={26} strokeWidth={1.5} /></div>
-                <h3>{c.title}</h3>
-                <p>{c.text}</p>
-                {c.href && <a className='az-text-link' href={c.href}>See audio options →</a>}
-              </div>
+        </div>
+        <ExperienceStories items={categories} />
+      </section>
+
+      <section className='section surface-muted hs-blocks-sec'>
+        <div className='container'>
+          <div className='az-section-heading'>
+            <span className='eyebrow'>Building blocks</span>
+            <h2>Start with the pieces that matter most.</h2>
+          </div>
+          <div className='hs-blocks'>
+            {blocks.map((b) => (
+              <a key={b.title} href={b.href} className='hs-block'>
+                <img src={`/smart-home/${b.img}.jpg`} alt='' loading='lazy' />
+                <span>{b.title}</span>
+              </a>
             ))}
           </div>
         </div>
@@ -186,51 +217,32 @@ export default function ConnectedHomePage() {
             <p>Start with security, add everyday automation, or cover a larger property. Quantities marked as allowances are confirmed at your home survey and shown in your itemized proposal.</p>
             <a className='az-text-link' href='#compare'>Compare all included features →</a>
           </div>
-          <div className='sh-tier-tabs' role='group' aria-label='Home security packages'>
-            {TIER_ORDER.map((key) => (
-              <button
-                key={key}
-                type='button'
-                aria-pressed={key === tierKey}
-                className={`sh-tier-tab sh-tier-tab--${key}${key === tierKey ? ' is-active' : ''}`}
-                onClick={() => setTierKey(key)}
-              >
-                <span className='sh-tier-tab-name'>{TIERS[key].short}</span>
-                <span className='sh-tier-tab-price'>from {TIERS[key].price}</span>
-              </button>
-            ))}
+          <div className='hs-pkgs'>
+            {TIER_ORDER.map((key) => {
+              const t = TIERS[key]
+              const hero = t.tiles[2] && t.tiles[2].img ? t.tiles[2].img : t.tiles[0].img
+              return (
+                <article className={`hs-pkg hs-pkg--${key}`} key={key}>
+                  <div className='hs-pkg-media'><img src={`/smart-home/${hero}.jpg`} alt='' loading='lazy' /></div>
+                  <div className='hs-pkg-head'>
+                    <h3>{t.name}</h3>
+                    <div className='hs-pkg-price'><span>from</span> {t.price}</div>
+                  </div>
+                  <p className='hs-pkg-sum'>{t.summary}</p>
+                  {t.inherits && <p className='hs-pkg-inherits'>Includes everything in {t.inherits}, plus:</p>}
+                  <ul className='hs-pkg-list'>
+                    {t.tiles.map((item) => <li key={item.title}><Check size={16} strokeWidth={3} aria-hidden='true' /><span>{item.title}</span></li>)}
+                  </ul>
+                  <Link to='/contact' className='button button-primary hs-pkg-cta'>Request this package</Link>
+                </article>
+              )
+            })}
           </div>
 
-          <div className='az-package-summary' aria-live='polite'>
-            <p><strong>{tier.name} · from {tier.price}</strong><br />{tier.summary}{tier.inherits && ` Includes everything in ${tier.inherits}, plus:`}</p>
-            <a href='#compare'>See the differences</a>
-          </div>
-          <div className='sh-tiles'>
-            {tier.tiles.map((item, i) => (
-              <article className='sh-tile' key={item.title}>
-                <span className='sh-tile-badge'>{i + 1}</span>
-                <div className='sh-tile-media'>
-                  {item.img
-                    ? <img src={`/smart-home/${item.img}.jpg`} alt={item.title} loading='lazy' width='480' height='480' />
-                    : <span className='sh-tile-icon'><item.Icon size={44} strokeWidth={1.4} /></span>}
-                </div>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </article>
-            ))}
-          </div>
-
-          <div className='sh-price-block'>
-            <div className='sh-price-main'>
-              <div className='sh-price-label'>Starting price, standard installation</div>
-              <div className='sh-price-amount'>from {tier.price}</div>
-              <div className='sh-price-tagline'>{tier.tagline}</div>
-            </div>
-            <div className='sh-price-side'>
-              <Link to='/contact' className='sh-price-cta'>Request this package</Link>
-              <a className='sh-price-contact' href='https://azaudios.com'><Globe size={15} strokeWidth={2} />AZaudios.com</a>
-              <a className='sh-price-contact' href='mailto:contact@azaudios.com'><Mail size={15} strokeWidth={2} />contact@azaudios.com</a>
-            </div>
+          <div className='sh-price-side hs-pkg-contact'>
+            <a className='hs-bigphone' href='tel:+17243211106'><PhoneCall size={20} aria-hidden='true' />Questions? Call +1 724 321 1106</a>
+            <a className='sh-price-contact' href='https://azaudios.com'><Globe size={15} strokeWidth={2} />AZaudios.com</a>
+            <a className='sh-price-contact' href='mailto:contact@azaudios.com'><Mail size={15} strokeWidth={2} />contact@azaudios.com</a>
           </div>
           <p className='sh-fineprint'>
             Starting prices assume standard installation conditions. Final device quantities, camera placement,
@@ -258,7 +270,7 @@ export default function ConnectedHomePage() {
                 <tr>
                   <th scope='col'>Feature</th>
                   {TIER_ORDER.map((k) => (
-                    <th scope='col' key={k} className={k === tierKey ? 'sh-th-active' : undefined}>
+                    <th scope='col' key={k}>
                       {TIERS[k].short}<span>from {TIERS[k].price}</span>
                     </th>
                   ))}
@@ -269,7 +281,7 @@ export default function ConnectedHomePage() {
                   <tr key={row.label}>
                     <th scope='row'>{row.label}</th>
                     {TIER_ORDER.map((k) => (
-                      <td key={k} className={k === tierKey ? 'sh-td-active' : undefined}>
+                      <td key={k}>
                         <Cell value={row[k]} />
                       </td>
                     ))}
@@ -388,7 +400,10 @@ export default function ConnectedHomePage() {
               and send an itemized proposal with no obligation.
             </p>
           </div>
-          <Link to='/contact' className='real-button real-button-gold'>Book a Free Home Consultation</Link>
+          <div className='hs-final-actions'>
+            <Link to='/contact' className='real-button real-button-gold'>Book a Free Home Consultation</Link>
+            <a className='hs-bigphone hs-bigphone--light' href='tel:+17243211106'><PhoneCall size={20} aria-hidden='true' />+1 724 321 1106</a>
+          </div>
         </div>
       </section>
 
