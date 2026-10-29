@@ -32,8 +32,6 @@ const divisions = [
   }
 ]
 
-// Real photography from systems we have installed. These same images are already
-// published on the division pages — no stock, no staged renders.
 // Short descriptors for the brand-hierarchy diagram. Kept next to `divisions`
 // so the two never drift apart.
 const hierarchy = [
@@ -43,11 +41,11 @@ const hierarchy = [
   { path: '/event-rental-services',  title: 'Event Rental Services',       Icon: Mic2,       text: 'events & PA rental support' },
 ]
 
+// Installation photography only. Illustrative home artwork is not customer proof.
 const work = [
   { img: '/home/work-mics.jpg', title: 'Khutba microphones',  text: 'Podium and wireless mics set for speech clarity in a live prayer hall.' },
   { img: '/home/work-rack.jpg', title: 'Equipment rack build', text: 'Organised, labelled rack with clean cable management and serviceable layout.' },
   { img: '/home/work-app.jpg',  title: 'Zone control in hand', text: 'Per-zone source and volume control from a phone on the local network.' },
-  { img: '/home/work-home.jpg', title: 'Connected home',       text: 'Cameras, locks, lighting and climate integrated into one system.' },
 ]
 
 // Every item here must be verifiable from how we actually operate — no project
@@ -105,10 +103,9 @@ const brands = [
 export default function HomePage() {
   return (
     <>
-      <section className='hp-hero'>
-        <div className='hp-hero-media' role='img' aria-label='Congregation in a prayer hall served by an AZ Audio system' />
-        <div className='hp-hero-scrim' />
-        <div className='container hp-hero-inner'>
+      <section className='hp-hero hp-hero-modern'>
+        <div className='container hp-modern-grid'>
+        <div className='hp-hero-inner'>
           <div className='hp-hero-eyebrow'>Professional Audio Systems · USA &amp; Canada</div>
           <h1>AZ Audio Solutions</h1>
           <p className='hp-hero-slogan'>Premium Quality. Affordable Cost.</p>
@@ -130,6 +127,12 @@ export default function HomePage() {
               </Link>
             ))}
           </div>
+        </div>
+        <figure className='hp-modern-visual'>
+          <img src='/home-offer/audio-installation-v1.webp' alt='Illustrative professional audio installation with digital mixer, equipment rack, microphones and installed speakers' width='1536' height='1024' fetchPriority='high' />
+          <figcaption>AI-generated illustration of an audio installation. Explore our services for your space.</figcaption>
+          <Link to='/connected-home' className='hp-home-offer-link'><HouseWifi size={20} aria-hidden='true' /><span>For your home<strong>Security, smart control &amp; optional home cinema →</strong></span></Link>
+        </figure>
         </div>
       </section>
 
@@ -246,7 +249,7 @@ export default function HomePage() {
             centered
             eyebrow='Our Work'
             title='Systems we have designed, installed and tuned'
-            text='Photographs from real installations — prayer hall microphones, rack builds, zone control and connected home systems.'
+            text='Photographs from real installations — prayer hall microphones, equipment racks and zone controls.'
           />
           <div className='hp-work-grid'>
             {work.map((w) => (

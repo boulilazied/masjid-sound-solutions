@@ -1,0 +1,15 @@
+{
+  "generator": "Built-in image_gen",
+  "date": "2026-10-29",
+  "assets": [
+    {
+      "path": "public/home-offer/automation-interior-v2.webp",
+      "prompt": "Create a replacement marketing illustration for AZ Audio Solutions Smart Home Plus package. Landscape 3:2, premium realistic editorial architectural photography, warm cream plaster and natural oak accents, matte-black hardware, coherent warm-neutral style. Clearly INSIDE a home: a smart thermostat and two light switches installed on an interior hallway partition wall well away from exterior doors, windows, sunlight, vents, and heat sources. Eye-level medium close view of the complete thermostat and switches. A softly blurred interior corridor continues behind to another interior doorway and a ceiling light. No garden, no outdoors visible, no entrance door, no exterior stone, no direct sun hitting thermostat, no couch or furniture focus. Soft indirect indoor lighting, subtle warm oak trim at the far edge, calm architectural composition. Thermostat and switches are the unmistakable subject and fully in frame with generous margins. No logos, no text except a small plausible 72 on the thermostat screen, no watermark, no brand promises. AI illustrative concept, not an exact product model or completed client installation."
+    },
+    {
+      "path": "public/home-offer/alarm-kit-v2.webp",
+      "prompt": "Use case: product-mockup. Generate a complete uncropped generic home alarm equipment illustration, landscape 3:2. Neatly arranged matte white and black alarm control keypad with clean non-branded screen, a two-piece door contact sensor, a motion detector, and a round indoor alarm siren on a warm ivory studio background. All items fully visible, centered, with generous empty margins on EVERY edge and clean natural soft shadows. No component can overlap another in a way that cuts off its shape. Premium realistic product photography, subtle warm gold-neutral lighting, no logos, no readable labels, no cut edges, no watermark. The complete outline of every object must fit inside the middle 70 percent of the image. Illustrative equipment, not an exact model or guaranteed package quantity."
+    }
+  ],
+  "note": "Replaces exterior-looking thermostat and cropped alarm source on connected-home page. Illustrative images, not exact models or installation proof."
+}

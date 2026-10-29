@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './components/Layout'
+import PrivacyPage from './pages/PrivacyPage'
 import HomePage from './pages/HomePage'
 import ServicesPage from './pages/ServicesPage'
 import AboutPage from './pages/AboutPage'
@@ -44,6 +45,7 @@ export default function App() {
         <Route path='/connected-home' element={<ConnectedHomePage />} />
         <Route path='/school-systems' element={<SchoolSystemsPage />} />
         <Route path='/about' element={<AboutPage />} />
+        <Route path='/privacy' element={<PrivacyPage />} />
         <Route path='/contact' element={<ContactPage />} />
         {/* Conference QR landing — renders the masjid division page. */}
         <Route path='/amja' element={<AmjaPage />} />

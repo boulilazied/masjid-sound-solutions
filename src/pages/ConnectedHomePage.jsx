@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { homeInquiryPath } from '../../shared/home-inquiry.js'
 import { ExperienceFaq, ExperienceStories } from '../components/ServiceExperience'
 import {
   ShieldCheck, Lightbulb, Smartphone, Layers, Video, DoorOpen, Music,
@@ -22,6 +23,7 @@ const TIERS = {
     short: 'Essential',
     price: '$6,500',
     summary: 'A professionally installed security foundation.',
+    offerImage: '/home-offer/entry-v1.webp',
     inherits: null,
     tagline: 'Start with protection. Add comfort later.',
     tiles: [
@@ -39,6 +41,7 @@ const TIERS = {
     short: 'Plus',
     price: '$8,500',
     summary: 'Everything in Essential Home Security, plus everyday automation.',
+    offerImage: '/home-offer/automation-interior-v2.webp',
     inherits: 'Essential Home Security',
     tagline: 'Security that also runs your daily routine.',
     tiles: [
@@ -55,6 +58,7 @@ const TIERS = {
     short: 'Complete',
     price: '$12,500',
     summary: 'For larger homes or wider property coverage.',
+    offerImage: '/home-offer/coverage-v1.webp',
     inherits: 'Smart Home Plus',
     tagline: 'Wider coverage, more automation, and a full handover.',
     tiles: [
@@ -87,11 +91,11 @@ const comparison = [
 ]
 
 const categories = [
-  { eyebrow: 'Security & Alarm', title: 'Know your home is protected.', text: 'Control panel, door and window sensors, motion detection, audible alerts, phone notifications, and optional professional monitoring when available.', image: '/smart-home/alarm.jpg', alt: 'Alarm control panel with door and window sensors', link: '#packages', action: 'See the packages' },
-  { eyebrow: 'Cameras & Video Doorbell', title: 'See what is happening, wherever you are.', text: 'Indoor and outdoor camera coverage, recorded video, remote viewing, activity alerts, and a video doorbell.', image: '/smart-home/cameras-8.jpg', alt: 'Security camera system', link: '#compare', action: 'Compare camera coverage' },
-  { eyebrow: 'Smart Entry', title: 'Answer the door without going to it.', text: 'Smart locks, garage-door control, visitor communication, and access management from your phone.', image: '/smart-home/lock-doorbell.jpg', alt: 'Smart door lock with video doorbell', link: '#packages', action: 'Find your package' },
-  { eyebrow: 'Lighting & Comfort', title: 'Set the scene for everyday living.', text: 'Smart switches, thermostat control, schedules, scenes, and compatible motorized curtains.', image: '/smart-home/light-switches.jpg', alt: 'Smart light switches', link: '#home-process', action: 'See how installation works' },
-  { eyebrow: 'Audio & Entertainment', title: 'Add great sound to the same project.', text: 'Optional home theater, whole-home audio, outdoor speakers, and media-room calibration — designed as part of the same home project.', image: '/home/work-app.jpg', alt: 'Room-by-room audio controls on a mobile device', link: '#audio-entertainment', action: 'See audio options' },
+  { eyebrow: 'Security & Alarm', title: 'Know your home is protected.', text: 'Control panel, door and window sensors, motion detection, audible alerts, phone notifications, and optional professional monitoring when available.', image: '/home-offer/alarm-kit-v2.webp', alt: 'Illustrative complete alarm panel and sensors', imageCaption: 'AI-generated equipment illustration. Models and quantities are confirmed in your proposal.', link: '#packages', action: 'See the packages' },
+  { eyebrow: 'Cameras & Video Doorbell', title: 'See what is happening, wherever you are.', text: 'Indoor and outdoor camera coverage, recorded video, remote viewing, activity alerts, and a video doorbell.', image: '/home-offer/coverage-v1.webp', alt: 'Illustrative outdoor security cameras installed below a soffit', imageCaption: 'AI-generated camera-installation illustration. Equipment and placement are confirmed after your survey.', link: '#compare', action: 'Compare camera coverage' },
+  { eyebrow: 'Smart Entry', title: 'Answer the door without going to it.', text: 'Smart locks, garage-door control, visitor communication, and access management from your phone.', image: '/home-offer/entry-v1.webp', alt: 'Illustrative installed smart lock and video doorbell, shown in full', imageCaption: 'AI-generated smart-entry illustration. Exact equipment is confirmed in your proposal.', link: '#packages', action: 'Find your package' },
+  { eyebrow: 'Lighting & Comfort', title: 'Set the scene for everyday living.', text: 'Smart switches, thermostat control, schedules, scenes, and compatible motorized curtains.', image: '/home-offer/automation-interior-v2.webp', alt: 'Illustrative thermostat and light switches on an interior hallway wall', imageCaption: 'AI-generated interior-control illustration. Equipment and compatibility are confirmed in your proposal.', link: '#home-process', action: 'See how installation works' },
+  { eyebrow: 'Optional Audio & Entertainment', title: 'Bring the cinema experience home.', text: 'Optional home theater, whole-home audio, outdoor speakers, and media-room calibration — designed as part of the same home project. Audio upgrades are quoted separately from the security packages.', image: '/home-offer/cinema-v1.webp', alt: 'Illustrative small home cinema with projection, installed speakers, acoustic treatment and an AV rack', imageCaption: 'AI-generated home-cinema illustration. Equipment and installation are quoted to your room.', link: '#audio-entertainment', action: 'See audio options' },
 ]
 
 const everyday = [
@@ -101,10 +105,10 @@ const everyday = [
 ]
 
 const blocks = [
-  { img: 'alarm',         title: 'Alarm Control Panel & Sensors', href: '#packages' },
-  { img: 'cameras-8',     title: 'Security Cameras',              href: '#compare' },
-  { img: 'lock-doorbell', title: 'Video Doorbell & Smart Lock',   href: '#packages' },
-  { img: 'thermostat',    title: 'Thermostat & Lighting',         href: '#compare' },
+  { image: '/home-offer/alarm-kit-v2.webp', title: 'Alarm Control Panel & Sensors', href: '#packages' },
+  { image: '/home-offer/coverage-v1.webp', title: 'Security Cameras',              href: '#compare' },
+  { image: '/home-offer/entry-v1.webp', title: 'Video Doorbell & Smart Lock', href: '#packages' },
+  { image: '/home-offer/automation-interior-v2.webp', title: 'Thermostat & Lighting',         href: '#compare' },
 ]
 
 const protections = [
@@ -155,58 +159,17 @@ export default function ConnectedHomePage() {
             <h1>Protect your home. Control it from anywhere.</h1>
             <p>Security cameras, smart entry, alarm sensors, lighting, climate, garage control, and optional whole-home audio — professionally designed, installed, and configured for your home.</p>
             <div className='az-hero-actions'>
-              <Link to='/contact' className='button button-primary'>Book a Free Home Consultation</Link>
-              <a href='#compare' className='button button-secondary'>Compare Packages</a>
+              <Link to={homeInquiryPath()} className='button button-primary'>Request a Free Home Consultation</Link>
+              <a href='#packages' className='button button-secondary'>Packages &amp; Prices</a>
             </div>
+            <p className='hs-service-area'>Based in Pittsburgh, PA. Tell us your city to confirm home-installation availability, travel requirements and on-site support before choosing a package.</p>
             <a href='tel:+17243211106' className='az-phone'><PhoneCall size={18} aria-hidden='true' />Call +1 724 321 1106</a>
           </div>
-          <figure><img src='/smart-home/hero-home.jpg' alt='Modern home illuminated at dusk' fetchPriority='high' /><figcaption>Security, comfort, and everyday control — designed around your home.</figcaption></figure>
+          <figure><img src='/home-offer/hero-v1.webp' alt='Illustrative stone-front home with warm entry lighting at dusk' width='1536' height='1024' fetchPriority='high' /><figcaption>AI-generated home illustration. Your installation is designed after a home survey.</figcaption></figure>
         </div>
       </section>
-      <div className='az-proof-strip'><div className='container'><span><HardHat size={20} aria-hidden='true' />Professional installation</span><span><Smartphone size={20} aria-hidden='true' />One simple control experience</span><span><ClipboardList size={20} aria-hidden='true' />Itemized proposal</span><span><MapPin size={20} aria-hidden='true' />Local support</span></div></div>
+      <div className='az-proof-strip'><div className='container'><span><HardHat size={20} aria-hidden='true' />Professional installation</span><span><Smartphone size={20} aria-hidden='true' />Household setup & training</span><span><ClipboardList size={20} aria-hidden='true' />Itemized proposal</span><span><MapPin size={20} aria-hidden='true' />Pittsburgh-based team</span></div></div>
       <nav className='az-service-nav container' aria-label='Home security page sections'><a href='#solutions'>What we install</a><a href='#packages'>Packages</a><a href='#compare'>Compare</a><a href='#monitoring'>Monitoring</a><a href='#optional-upgrades'>Optional upgrades</a><a href='#home-process'>How it works</a></nav>
-
-      <section className='section hs-everyday'>
-        <div className='container'>
-          <div className='az-section-heading'>
-            <span className='eyebrow'>Get more from your home</span>
-            <h2>Simple enough for the whole household.</h2>
-          </div>
-          <div className='az-benefit-grid'>
-            {everyday.map((e) => (
-              <article key={e.n}><span className='az-benefit-number'>{e.n}</span><h3>{e.title}</h3><p>{e.text}</p></article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className='section' id='solutions'>
-        <div className='container'>
-          <div className='az-section-heading'>
-            <span className='eyebrow'>Protection, control and comfort</span>
-            <h2>One home project. Five ways to make it safer and easier.</h2>
-            <p>Start with the security of your home, then add the control and comfort that fit your household.</p>
-          </div>
-        </div>
-        <ExperienceStories items={categories} />
-      </section>
-
-      <section className='section surface-muted hs-blocks-sec'>
-        <div className='container'>
-          <div className='az-section-heading'>
-            <span className='eyebrow'>Building blocks</span>
-            <h2>Start with the pieces that matter most.</h2>
-          </div>
-          <div className='hs-blocks'>
-            {blocks.map((b) => (
-              <a key={b.title} href={b.href} className='hs-block'>
-                <img src={`/smart-home/${b.img}.jpg`} alt='' loading='lazy' />
-                <span>{b.title}</span>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Tier switcher + tile grid + price */}
       <section className='sh-packages' id='packages'>
@@ -217,13 +180,13 @@ export default function ConnectedHomePage() {
             <p>Start with security, add everyday automation, or cover a larger property. Quantities marked as allowances are confirmed at your home survey and shown in your itemized proposal.</p>
             <a className='az-text-link' href='#compare'>Compare all included features →</a>
           </div>
+          <p className='hs-cost-note'>Starting prices cover an installation project, not a monitoring subscription. Professional emergency monitoring is separate and optional. <a href='#ownership-costs'>See ongoing costs and what your proposal will confirm.</a></p>
           <div className='hs-pkgs'>
             {TIER_ORDER.map((key) => {
               const t = TIERS[key]
-              const hero = t.tiles[2] && t.tiles[2].img ? t.tiles[2].img : t.tiles[0].img
               return (
                 <article className={`hs-pkg hs-pkg--${key}`} key={key}>
-                  <div className='hs-pkg-media'><img src={`/smart-home/${hero}.jpg`} alt='' loading='lazy' /></div>
+                  <div className='hs-pkg-media'><img src={t.offerImage} alt='' width='1536' height='1024' loading='lazy' /></div>
                   <div className='hs-pkg-head'>
                     <h3>{t.name}</h3>
                     <div className='hs-pkg-price'><span>from</span> {t.price}</div>
@@ -233,12 +196,13 @@ export default function ConnectedHomePage() {
                   <ul className='hs-pkg-list'>
                     {t.tiles.map((item) => <li key={item.title}><Check size={16} strokeWidth={3} aria-hidden='true' /><span>{item.title}</span></li>)}
                   </ul>
-                  <Link to='/contact' className='button button-primary hs-pkg-cta'>Request this package</Link>
+                  <Link to={homeInquiryPath(key)} className='button button-primary hs-pkg-cta' aria-label={`Request ${t.name}`}>Request this package</Link>
                 </article>
               )
             })}
           </div>
 
+          <p className='hs-image-disclosure'>Package images are AI-generated illustrations of the services, not completed AZ Audio installations or exact equipment models.</p>
           <div className='sh-price-side hs-pkg-contact'>
             <a className='hs-bigphone' href='tel:+17243211106'><PhoneCall size={20} aria-hidden='true' />Questions? Call +1 724 321 1106</a>
             <a className='sh-price-contact' href='https://azaudios.com'><Globe size={15} strokeWidth={2} />AZaudios.com</a>
@@ -294,6 +258,60 @@ export default function ConnectedHomePage() {
             An allowance is a starting quantity included in the package price. Anything beyond it, or
             anything the survey shows is needed, is itemized in your proposal before work begins.
           </p>
+        </div>
+      </section>
+
+      <section className='clean-section clean-soft' id='ownership-costs'>
+        <div className='container'>
+          <div className='clean-section-intro centered'><div className='real-eyebrow'>Plan the whole cost</div><h2>Installation and ongoing services, explained separately.</h2><p>Your proposal separates equipment and installation from any recurring services. Review both before you approve the project.</p></div>
+          <div className='hs-cost-grid'>
+            <article><h3>Equipment &amp; installation</h3><p>The starting prices cover the listed package scope under standard installation conditions. Your survey confirms device quantities, compatibility and cable routes; the proposal identifies additional work and exclusions.</p></article>
+            <article><h3>App, storage &amp; connectivity</h3><p>App subscriptions, cloud storage or connectivity charges depend on the selected equipment and service. Ask us to identify which services are required, which are optional, and their costs in your proposal.</p></article>
+            <article><h3>Optional emergency monitoring</h3><p>Not included in the starting prices. Availability, provider agreements and recurring fees must be confirmed separately. Cameras and phone alerts alone do not include an operator responding to alarms.</p><a className='az-text-link' href='#monitoring'>Understand monitoring →</a></article>
+          </div>
+          <p className='sh-fineprint'>No universal monthly fee is quoted here: it depends on your selected system and services. Request written details of recurring fees, terms, installation conditions and any travel charges for your address.</p>
+        </div>
+      </section>
+
+      <section className='section hs-everyday'>
+        <div className='container'>
+          <div className='az-section-heading'>
+            <span className='eyebrow'>Get more from your home</span>
+            <h2>Simple enough for the whole household.</h2>
+          </div>
+          <div className='az-benefit-grid'>
+            {everyday.map((e) => (
+              <article key={e.n}><span className='az-benefit-number'>{e.n}</span><h3>{e.title}</h3><p>{e.text}</p></article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className='section' id='solutions'>
+        <div className='container'>
+          <div className='az-section-heading'>
+            <span className='eyebrow'>Protection, control and comfort</span>
+            <h2>One home project. Five ways to make it safer and easier.</h2>
+            <p>Start with the security of your home, then add the control and comfort that fit your household.</p>
+          </div>
+        </div>
+        <ExperienceStories items={categories} />
+      </section>
+
+      <section className='section surface-muted hs-blocks-sec'>
+        <div className='container'>
+          <div className='az-section-heading'>
+            <span className='eyebrow'>Building blocks</span>
+            <h2>Start with the pieces that matter most.</h2>
+          </div>
+          <div className='hs-blocks'>
+            {blocks.map((b) => (
+              <a key={b.title} href={b.href} className='hs-block'>
+                <img src={b.image || `/smart-home/${b.img}.jpg`} alt='' loading='lazy' />
+                <span>{b.title}</span>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -384,6 +402,8 @@ export default function ConnectedHomePage() {
 
       <ExperienceFaq items={[
         ['What does the starting price include?', 'The listed equipment and allowances, standard installation materials, professional installation, and programming, under standard installation conditions. Final quantities, camera placement, cable pathways, compatibility, recurring services and pricing are confirmed after the home survey.'],
+        ['Will there be ongoing monthly costs?', 'It depends on the selected equipment and services. Professional monitoring is separate and optional. Ask us to identify any required or optional app, cloud-storage and connectivity fees, along with their terms, in your itemized proposal.'],
+        ['Where can you install a home system?', 'Our team is based in Pittsburgh, PA. Share your city and state or province so we can confirm residential installation availability, travel requirements and on-site support before you choose a package.'],
         ['What is an allowance?', 'A starting quantity included in the package price, such as door and window sensors or smart light switches. Your home survey confirms how many your home needs, and any additional quantity is itemized in your proposal.'],
         ['Is professional emergency monitoring included?', 'No. Camera viewing, phone alerts and an on-site alarm are different from an operator responding to an alarm. Monitoring availability, third-party agreements and recurring fees are confirmed with you before it is added to a proposal.'],
         ['Can I add home theater or whole-home audio?', 'Yes. Home theater, whole-home audio, outdoor speakers and media-room calibration are optional upgrades, designed as part of the same project and itemized in your proposal.'],
@@ -394,19 +414,20 @@ export default function ConnectedHomePage() {
         <div className='container final-consultation-inner'>
           <div>
             <div className='real-eyebrow'>Ready to start?</div>
-            <h2>Book a free home consultation.</h2>
+            <h2>Request a free home consultation.</h2>
             <p>
-              Tell us about your home and what matters most to you. We&rsquo;ll recommend a package
-              and send an itemized proposal with no obligation.
+              Tell us about your home and what matters most to you. We&rsquo;ll confirm availability
+              for your address, recommend a package and discuss the survey and proposal with no obligation.
             </p>
           </div>
           <div className='hs-final-actions'>
-            <Link to='/contact' className='real-button real-button-gold'>Book a Free Home Consultation</Link>
+            <Link to={homeInquiryPath()} className='real-button real-button-gold'>Request a Free Home Consultation</Link>
             <a className='hs-bigphone hs-bigphone--light' href='tel:+17243211106'><PhoneCall size={20} aria-hidden='true' />+1 724 321 1106</a>
           </div>
         </div>
       </section>
 
+      <nav className='hs-mobile-actions' aria-label='Home consultation actions'><a href='tel:+17243211106'>Call AZ Audio</a><Link to={homeInquiryPath()}>Request consultation</Link></nav>
     </div>
   )
 }

@@ -1,3 +1,4 @@
+import { HOME_SERVICE, validHomePackage } from '../shared/home-inquiry.js'
 import express from 'express'
 import cors from 'cors'
 import fs from 'fs'
@@ -44,7 +45,7 @@ app.get('/api/health', (_req, res) => {
 })
 
 app.post('/api/quote', (req, res) => {
-  const { name, masjid, email, phone, city, needs, message } = req.body || {}
+  const { name, masjid, email, phone, city, needs, message, homePackage } = req.body || {}
 
   if (!name || !email || !message) {
     return res.status(400).json({
@@ -62,6 +63,7 @@ app.post('/api/quote', (req, res) => {
     phone: phone || '',
     city: city || '',
     needs: needs || '',
+    homePackage: needs === HOME_SERVICE ? validHomePackage(homePackage) : '',
     message
   }
 

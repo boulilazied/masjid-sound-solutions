@@ -1,7 +1,11 @@
+import { useSearchParams } from 'react-router-dom'
+import { validHomePackage } from '../../shared/home-inquiry.js'
 import SectionHeading from '../components/SectionHeading'
 import QuoteForm from '../components/QuoteForm'
 
 export default function ContactPage() {
+  const [params] = useSearchParams()
+  const isHome = params.get('service') === 'connected-home' || Boolean(validHomePackage(params.get('package')))
   return (
     <section className='section page-top surface-muted'>
       <div className='container contact-grid'>
@@ -9,8 +13,8 @@ export default function ContactPage() {
           <SectionHeading
             as='h1'
             eyebrow='Contact'
-            title='Request a quote or schedule a consultation'
-            text='Share a few details about your project — masjid, commercial space, home, or event. Your request goes directly to our team.'
+            title={isHome ? 'Request your free home consultation' : 'Request a quote or schedule a consultation'}
+            text={isHome ? 'Tell us about your home. Our Pittsburgh-based team will confirm installation availability for your address, review your selected package and discuss the next step.' : 'Share a few details about your project — masjid, commercial space, home, or event. Your request goes directly to our team.'}
           />
           <div className='contact-card'>
             <div className='contact-item'>

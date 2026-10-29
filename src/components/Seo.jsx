@@ -49,6 +49,10 @@ const META = {
     description:
       'AZ Audio Solutions specializes in professional audio system design, installation, DSP tuning, acoustic optimization and multi-zone audio control for masjids, commercial facilities, events and residential clients across North America.',
   },
+  '/privacy': {
+    title: 'Privacy Notice — AZ Audio Solutions',
+    description: 'How AZ Audio Solutions handles website inquiries and how to contact us about your information.',
+  },
   '/contact': {
     title: 'Contact AZ Audio Solutions',
     description:

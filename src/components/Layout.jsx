@@ -46,6 +46,7 @@ export default function Layout({ children }) {
   useEffect(() => {
     setMenuOpen(false)
     setServicesOpen(false)
+    if (!location.hash) window.scrollTo(0, 0)
   }, [location.pathname])
 
   // Close dropdown when clicking outside
@@ -197,7 +198,7 @@ export default function Layout({ children }) {
         </div>
 
         <div className='container footer-bottom'>
-          © {new Date().getFullYear()} AZ Audio Solutions. All rights reserved.
+          © {new Date().getFullYear()} AZ Audio Solutions. All rights reserved. <Link to='/privacy'>Privacy notice</Link>
         </div>
       </footer>
     </div>

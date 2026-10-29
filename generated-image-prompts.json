@@ -1,0 +1,27 @@
+{
+  "generator": "Built-in image_gen tool",
+  "date": "2026-10-29",
+  "usage": "Illustrative marketing imagery only. Never customer installation evidence or exact product specifications.",
+  "assets": [
+    {
+      "path": "public/home-offer/audio-installation-v1.webp",
+      "usage": "Main homepage hero",
+      "prompt": "Use case: ads-marketing. Create a premium modern website homepage hero image for AZ Audio Solutions, whose services are professional installed sound, masjid/community hall audio, commercial audio, event PA, and smart home integration. Landscape 3:2 editorial photograph-style visualization. Main subject clearly AUDIO ENGINEERING AND INSTALLATION, not furniture or a crowd. Foreground: a sophisticated compact professional digital mixing console on a neat dark oak technical desk, crisp faders and knobs without readable text or logos, alongside a carefully built equipment rack with amplifier and DSP units and clean cabling. Behind it a tasteful modern community presentation room with a lectern microphone, discreet column loudspeakers and ceiling speakers visibly installed, charcoal acoustic wall panels, oak slats, soft gold indirect lighting. Frame from the technical control corner, rack and mixer on right foreground with the room visible behind. Professional, attainable, warm, refined and trustworthy. Palette deep navy, warm gold, cream and natural oak. No people, no sofas, no couches, no headphones, no concert lasers, no giant stage, no logos, no typography, no watermark, no floating interface. Natural equipment proportions and believable speaker placement. This will be visibly captioned as an AI-generated illustration, never a completed customer project."
+    },
+    {
+      "path": "public/home-offer/cinema-v1.webp",
+      "usage": "Optional home theater section; excluded from base security packages",
+      "prompt": "Use case: ads-marketing. Asset: landscape 3:2 editorial architectural visualization for AZ Audio Solutions OPTIONAL home theater installation service. Show a beautiful attainable SMALL dedicated home cinema room in an ordinary suburban home, not a commercial theater and not a furniture showroom. The audio/video INSTALLATION must be the main subject: large wall-mounted projection screen showing a subtle abstract cinematic landscape (no text), clearly visible left/center/right installed speakers around the screen, subtle rear surround speakers, ceiling mounted compact projector, a neat small AV equipment rack recessed along side wall with amplifier/receiver, well placed charcoal acoustic wall panels, concealed cable routes, elegant warm LED perimeter lighting with muted navy accents. Only two modest theater chairs at bottom edge seen partly from behind, occupying at most 10 percent of frame. Wide view from back corner focused on screen and equipment installation. Realistic room proportions, authentic technical placement, refined modern lighting, warm gold and deep navy palette. No sofas, no couches, no oversized mansion, no people, no logos, no text, no watermark, no floating graphics, no fake certification marks. This is an AI-generated illustrative concept, not a completed client project or exact package specification."
+    },
+    {
+      "path": "public/home-offer/hero-v1.webp",
+      "usage": "Connected-home hero",
+      "prompt": "Use case: ads-marketing. Create a beautiful modern website hero photograph-style architectural visualization for AZ Audio Solutions home security and smart living. Landscape 3:2 composition. An attainable, elegant two-story suburban Pennsylvania home at blue hour, natural stone, warm oak front door, discreet black video doorbell and small exterior camera, softly illuminated landscaping, large windows glowing warm amber, subtle navy twilight. Editorial architectural photography, realistic scale, refined and welcoming, not a sprawling billionaire mansion. Clean wide framing, no text, no logos, no watermark, no fake app screens, no security shield graphics, no glowing network lines. The image will be captioned AI-generated illustrative home, not a completed installation. Palette harmonizes with navy #101b2d, warm gold, cream. Crisp premium image with natural details."
+    },
+    {
+      "path": "public/home-offer/entry-v1.webp",
+      "usage": "Essential package illustrative entry scene",
+      "prompt": "Use case: ads-marketing. Generate a beautiful photo-style architectural detail illustration for a modern home security website. Landscape 3:2. A refined warm oak front door with a discreet unbranded matte black smart lock and separate video doorbell mounted on adjacent pale stone, soft afternoon sunlight, a blurred garden beyond, contemporary welcoming Pittsburgh suburban residence. Close editorial product-in-context photography, realistic construction, restrained warm gold highlights, deep navy shadows, premium tactile materials. No text or logos, no person, no labels, no watermark, no interface, no exaggerated futuristic hardware. It is an illustrative concept, not an actual installation or a particular supported product."
+    }
+  ]
+}

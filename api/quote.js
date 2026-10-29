@@ -1,3 +1,4 @@
+import { HOME_PACKAGES, HOME_SERVICE, validHomePackage } from '../shared/home-inquiry.js'
 import nodemailer from 'nodemailer'
 
 function escapeHtml(value = '') {
@@ -9,14 +10,15 @@ function escapeHtml(value = '') {
     .replaceAll("'", '&#039;')
 }
 
-function buildQuoteEmail({ name, masjid, email, phone, city, needs, message }) {
+function buildQuoteEmail({ name, masjid, email, phone, city, needs, message, homePackage }) {
   const rows = [
     ['Name', name],
     ['Organization / Masjid', masjid || '—'],
     ['Email', email],
     ['Phone', phone || '—'],
     ['City / State', city || '—'],
-    ['Project Type', needs || '—']
+    ['Project Type', needs || '—'],
+    ['Home Package', needs === HOME_SERVICE ? (HOME_PACKAGES[validHomePackage(homePackage)] || 'Not sure / custom scope') : '—']
   ]
 
   const tableRows = rows
@@ -54,7 +56,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ ok: false, error: 'Method not allowed' })
   }
 
-  const { name, masjid, email, phone, city, needs, message } = req.body || {}
+  const { name, masjid, email, phone, city, needs, message, homePackage } = req.body || {}
 
   if (!name || !email || !message) {
     return res.status(400).json({
@@ -91,7 +93,7 @@ export default async function handler(req, res) {
       to: emailTo,
       replyTo: email,
       subject: `New Quote Request — ${name}${masjid ? ` / ${masjid}` : ''}`,
-      html: buildQuoteEmail({ name, masjid, email, phone, city, needs, message }),
+      html: buildQuoteEmail({ name, masjid, email, phone, city, needs, message, homePackage }),
       text: [
         'New Quote Request',
         '',
@@ -101,6 +103,7 @@ export default async function handler(req, res) {
         `Phone: ${phone || '—'}`,
         `City / State: ${city || '—'}`,
         `Project Type: ${needs || '—'}`,
+        `Home Package: ${needs === HOME_SERVICE ? (HOME_PACKAGES[validHomePackage(homePackage)] || 'Not sure / custom scope') : '—'}`,
         '',
         'Project Details:',
         message

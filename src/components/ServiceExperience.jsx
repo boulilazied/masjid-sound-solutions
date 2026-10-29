@@ -29,7 +29,7 @@ const audiences = {
 export function ExperienceStories({ items }) {
   return <div className='az-stories container'>{items.map((item, index) => (
     <article className={`az-story${index % 2 ? ' az-story-reverse' : ''}`} key={item.title}>
-      <div className='az-story-image'><img src={item.image} alt={item.alt} loading='lazy' /></div>
+      <div className={`az-story-image${item.imageCaption ? ' az-story-photo' : ''}`}><img src={item.image} alt={item.alt} loading='lazy' />{item.imageCaption && <p className='az-story-caption'>{item.imageCaption}</p>}</div>
       <div className='az-story-copy'><span className='eyebrow'>{item.eyebrow || 'Designed around you'}</span><h2>{item.title}</h2><p>{item.text}</p><a className='az-text-link' href={item.link}>{item.action}<ArrowRight size={18} aria-hidden='true' /></a></div>
     </article>
   ))}</div>

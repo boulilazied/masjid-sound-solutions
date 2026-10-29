@@ -1,0 +1,17 @@
+{
+  "generator": "Built-in image_gen",
+  "reference_image": "public/home-offer/entry-v1.webp",
+  "assets": [
+    {
+      "path": "public/home-offer/automation-v1.webp",
+      "usage": "Smart Home Plus matching package illustration",
+      "prompt": "Use case: ads-marketing. Create a new companion image using the supplied image as a STYLE REFERENCE only. Match its warm late-afternoon golden light, pale limestone, natural oak, realistic editorial architectural photography, warm cream and matte-black hardware palette, shallow background detail, premium attainable suburban home, landscape 3:2, no text, logos, watermark, furniture focus, collages, white product backgrounds, floating devices, or app overlays. Show the complete main hardware with ample framing margin. Intended for a coordinated set of three package cards next to the supplied entry-door image. AI illustrative, not a customer project or exact equipment guarantee. Show a close architectural interior detail: a matte-black smart thermostat and a pair of smart lighting switches neatly installed on a pale limestone/plaster wall beside a warm oak doorway. The equipment is prominently visible, a garden window softly blurred at frame edge, no couch or furniture. Same golden lighting and material language as the reference entry."
+    },
+    {
+      "path": "public/home-offer/coverage-v1.webp",
+      "usage": "Complete Connected Home matching package illustration",
+      "prompt": "Use case: ads-marketing. Create a new companion image using the supplied image as a STYLE REFERENCE only. Match its warm late-afternoon golden light, pale limestone, natural oak, realistic editorial architectural photography, warm cream and matte-black hardware palette, shallow background detail, premium attainable suburban home, landscape 3:2, no text, logos, watermark, furniture focus, collages, white product backgrounds, floating devices, or app overlays. Show the complete main hardware with ample framing margin. Intended for a coordinated set of three package cards next to the supplied entry-door image. AI illustrative, not a customer project or exact equipment guarantee. Show a close architectural exterior detail: a discreet unbranded matte-black outdoor security camera installed under an oak soffit above pale limestone, a second camera farther along the same facade, warm entry lighting and a hint of garage door and garden softly blurred behind. Cameras clearly the main subject, entire foreground camera visible, realistic installation, same warm golden-hour light as the reference entry."
+    }
+  ],
+  "usage_note": "AI-generated service illustrations; not installation proof or exact equipment models."
+}
